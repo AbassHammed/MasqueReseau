@@ -115,130 +115,96 @@ namespace Reseau
 
         private void CheckFields()
         {
-            if (!verifyIp())
-            {
-                lblMsg.ForeColor = Color.Red;
-                lblMsg.Text = "Veuillez remplir les champs correctement";
-                btnValider.Enabled = false;
-            }
-            else if (!verifyMsq())
-            {
-                lblMsg.ForeColor = Color.Red;
-                lblMsg.Text = "Veuillez respecter les limites";
-                btnValider.Enabled = false;
-            }
+            if (!VerifyIp())
+                SetMessage("Veuillez remplir les champs correctement", Color.Red, false);
+            else if (!VerifyMsq())
+                SetMessage("Veuillez respecter les limites", Color.Red, false);
             else
-            {
-                lblMsg.ForeColor = Color.Green;
-                lblMsg.Text = "Tous les champs sont correctement remplis";
-                btnValider.Enabled = true;
-            }
-
-
+                SetMessage("Tous les champs sont correctement remplis", Color.Green, true);
         }
 
-        private void setValuesIp(bool DecEnable = true, bool BiEnable = true, bool HexEnable = true)
+        private void SetMessage(string message, Color color, bool isEnabled)
         {
-            txtDEC1.Enabled = DecEnable;
-            txtDEC2.Enabled = DecEnable;
-            txtDEC3.Enabled = DecEnable;
-            txtDEC4.Enabled = DecEnable;
-            txtBI1.Enabled = BiEnable;
-            txtBI2.Enabled = BiEnable;
-            txtBI3.Enabled = BiEnable;
-            txtBI4.Enabled = BiEnable;
-            txtHEX1.Enabled = HexEnable;
-            txtHEX2.Enabled = HexEnable;
-            txtHEX3.Enabled = HexEnable;
-            txtHEX4.Enabled = HexEnable;
+            lblMsg.ForeColor = color;
+            lblMsg.Text = message;
+            btnValider.Enabled = isEnabled;
         }
 
-        private void setValuesMsq(bool DecEnable = true, bool BiEnable = true, bool EnableCidr = true)
+        private void SetValuesIp(bool decEnable = true, bool biEnable = true, bool hexEnable = true)
         {
-            txtMsqDEC1.Enabled = DecEnable;
-            txtMsqDEC2.Enabled = DecEnable;
-            txtMsqDEC3.Enabled = DecEnable;
-            txtMsqDEC4.Enabled = DecEnable;
-            txtMsqBI1.Enabled = BiEnable;
-            txtMsqBI2.Enabled = BiEnable;
-            txtMsqBI3.Enabled = BiEnable;
-            txtMsqBI4.Enabled = BiEnable;
-            txtMsqCIDR.Enabled = EnableCidr;
+            SetControlState([txtDEC1, txtDEC2, txtDEC3, txtDEC4], decEnable);
+            SetControlState([txtBI1, txtBI2, txtBI3, txtBI4], biEnable);
+            SetControlState([txtHEX1, txtHEX2, txtHEX3, txtHEX4], hexEnable);
         }
 
-
-        private bool verifyIpDec()
+        private void SetValuesMsq(bool decEnable = true, bool biEnable = true, bool enableCidr = true)
         {
-            if (Utils.ChampsRemplis(txtDEC1) || Utils.ChampsRemplis(txtDEC2) || Utils.ChampsRemplis(txtDEC3) || Utils.ChampsRemplis(txtDEC4))
-                setValuesIp(DecEnable: true, BiEnable: false, HexEnable: false);
-            else
-                setValuesIp();
-
-
-            return Utils.ChampsEntiers(txtDEC1, txtDEC2, txtDEC3, txtDEC4) && Utils.ChampsRemplis(txtDEC1, txtDEC2, txtDEC3, txtDEC4) && Utils.ChampsDansLaLimite(255, txtDEC1, txtDEC2, txtDEC3, txtDEC4);
+            SetControlState([txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4], decEnable);
+            SetControlState([txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4], biEnable);
+            txtMsqCIDR.Enabled = enableCidr;
         }
 
-
-        private bool verifyIpBi()
+        private void SetControlState(Control[] controls, bool state)
         {
-            if (Utils.ChampsRemplis(txtBI1) || Utils.ChampsRemplis(txtBI2) || Utils.ChampsRemplis(txtBI3) || Utils.ChampsRemplis(txtBI4))
-                setValuesIp(BiEnable: true, DecEnable: false, HexEnable: false);
-            else
-                setValuesIp();
-
-            return Utils.ChampsBinaires(txtBI1, txtBI2, txtBI3, txtBI4) && Utils.ChampsRemplis(txtBI1, txtBI2, txtBI3, txtBI4);
+            foreach (var control in controls)
+                control.Enabled = state;
         }
 
-        private bool verifyIpHex()
+        private bool VerifyIp()
         {
-            if (Utils.ChampsRemplis(txtHEX1) || Utils.ChampsRemplis(txtHEX2) || Utils.ChampsRemplis(txtHEX3) || Utils.ChampsRemplis(txtHEX4))
-                setValuesIp(HexEnable: true, DecEnable: false, BiEnable: false);
-            else
-                setValuesIp();
+            bool decValid = VerifyIpDec();
+            bool biValid = VerifyIpBi();
+            bool hexValid = VerifyIpHex();
 
-            return Utils.ChampsHexadecimaux(txtHEX1, txtHEX2, txtHEX3, txtHEX4) && Utils.ChampsRemplis(txtHEX1, txtHEX2, txtHEX3, txtHEX4);
+            if (decValid) SetValuesIp(decEnable: true, biEnable: false, hexEnable: false);
+            else if (biValid) SetValuesIp(decEnable: false, biEnable: true, hexEnable: false);
+            else if (hexValid) SetValuesIp(decEnable: false, biEnable: false, hexEnable: true);
+            else SetValuesIp(decEnable: true, biEnable: true, hexEnable: true);
+
+            return decValid || biValid || hexValid;
         }
 
-
-        private bool verifyIp()
+        private bool VerifyMsq()
         {
-            return verifyIpDec() || verifyIpBi() || verifyIpHex();
+            bool decValid = VerifyMsqDec();
+            bool biValid = VerifyMsqBi();
+            bool cidrValid = VerifyMsqCidr();
+
+            if (decValid) SetValuesMsq(decEnable: true, biEnable: false, enableCidr: false);
+            else if (biValid) SetValuesMsq(decEnable: false, biEnable: true, enableCidr: false);
+            else if (cidrValid) SetValuesMsq(decEnable: false, biEnable: false, enableCidr: true);
+            else SetValuesMsq();
+
+            return decValid || biValid || cidrValid;
         }
 
-        private bool verifyMsqDec()
-        {
-            if (Utils.ChampsRemplis(txtMsqDEC1) || Utils.ChampsRemplis(txtMsqDEC2) || Utils.ChampsRemplis(txtMsqDEC3) || Utils.ChampsRemplis(txtMsqDEC4))
-                setValuesMsq(DecEnable: true, BiEnable: false, EnableCidr: false);
-            else
-                setValuesMsq();
+        private bool VerifyIpDec() =>
+            Utils.ChampsEntiers(txtDEC1, txtDEC2, txtDEC3, txtDEC4) &&
+            Utils.ChampsRemplis(txtDEC1, txtDEC2, txtDEC3, txtDEC4) &&
+            Utils.ChampsDansLaLimite(255, txtDEC1, txtDEC2, txtDEC3, txtDEC4);
 
-            return Utils.ChampsEntiers(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4) && Utils.ChampsRemplis(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4) && Utils.ChampsDansLaLimite(255, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4);
-        }
+        private bool VerifyIpBi() =>
+            Utils.ChampsBinaires(txtBI1, txtBI2, txtBI3, txtBI4) &&
+            Utils.ChampsRemplis(txtBI1, txtBI2, txtBI3, txtBI4);
 
-        private bool verifyMsqBi()
-        {
-            if (Utils.ChampsRemplis(txtMsqBI1) || Utils.ChampsRemplis(txtMsqBI2) || Utils.ChampsRemplis(txtMsqBI3) || Utils.ChampsRemplis(txtMsqBI4))
-                setValuesMsq(BiEnable: true, DecEnable: false, EnableCidr: false);
-            else
-                setValuesMsq();
+        private bool VerifyIpHex() =>
+            Utils.ChampsHexadecimaux(txtHEX1, txtHEX2, txtHEX3, txtHEX4) &&
+            Utils.ChampsRemplis(txtHEX1, txtHEX2, txtHEX3, txtHEX4);
 
-            return Utils.ChampsBinaires(txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4) && Utils.ChampsRemplis(txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4);
-        }
+        private bool VerifyMsqDec() =>
+            Utils.ChampsEntiers(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4) &&
+            Utils.ChampsRemplis(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4) &&
+            Utils.ChampsDansLaLimite(255, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4);
 
-        private bool verifyMsqCidr()
-        {
-            if (Utils.ChampsRemplis(txtMsqCIDR))
-                setValuesMsq(EnableCidr: true, BiEnable: false, DecEnable: false);
-            else
-                setValuesMsq();
-            return Utils.ChampsEntiers(txtMsqCIDR) && Utils.ChampsRemplis(txtMsqCIDR) && Utils.ChampsDansLaLimite(32, txtMsqCIDR);
-        }
+        private bool VerifyMsqBi() =>
+            Utils.ChampsBinaires(txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4) &&
+            Utils.ChampsRemplis(txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4);
 
+        private bool VerifyMsqCidr() =>
+            Utils.ChampsEntiers(txtMsqCIDR) &&
+            Utils.ChampsRemplis(txtMsqCIDR) &&
+            Utils.ChampsDansLaLimite(32, txtMsqCIDR);
 
-        private bool verifyMsq()
-        {
-            return verifyMsqDec() || verifyMsqBi() || verifyMsqCidr();
-        }
 
 
 
