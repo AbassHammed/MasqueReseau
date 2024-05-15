@@ -55,23 +55,27 @@
             grpAdrIP = new GroupBox();
             txtMsqCIDR = new TextBox();
             lblAdrMsqCIDR = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            label7 = new Label();
+            lblMsqBI3 = new Label();
+            lblMsqBI2 = new Label();
+            lblMsqBI1 = new Label();
             txtMsqBI4 = new TextBox();
             txtMsqBI3 = new TextBox();
             txtMsqBI2 = new TextBox();
             txtMsqBI1 = new TextBox();
             lblAdrMsqBI = new Label();
-            label9 = new Label();
-            label10 = new Label();
-            label11 = new Label();
+            lblMsqDEC3 = new Label();
+            lblMsqDEC2 = new Label();
+            lblMsqDEC1 = new Label();
             txtMsqDEC4 = new TextBox();
             txtMsqDEC3 = new TextBox();
             txtMsqDEC2 = new TextBox();
             txtMsqDEC1 = new TextBox();
             lblAdrMsqDEC = new Label();
             grpAdrMasque = new GroupBox();
+            lblMsqSlash = new Label();
+            grpFLSM = new GroupBox();
+            btnValider = new Button();
+            lblMsg = new Label();
             grpAdrIP.SuspendLayout();
             grpAdrMasque.SuspendLayout();
             SuspendLayout();
@@ -92,6 +96,7 @@
             txtDEC1.Name = "txtDEC1";
             txtDEC1.Size = new Size(62, 30);
             txtDEC1.TabIndex = 1;
+            txtDEC1.TextChanged += txtDEC1_TextChanged;
             // 
             // txtDEC2
             // 
@@ -99,6 +104,7 @@
             txtDEC2.Name = "txtDEC2";
             txtDEC2.Size = new Size(62, 30);
             txtDEC2.TabIndex = 2;
+            txtDEC2.TextChanged += txtDEC2_TextChanged;
             // 
             // txtDEC3
             // 
@@ -106,6 +112,7 @@
             txtDEC3.Name = "txtDEC3";
             txtDEC3.Size = new Size(62, 30);
             txtDEC3.TabIndex = 3;
+            txtDEC3.TextChanged += txtDEC3_TextChanged;
             // 
             // txtDEC4
             // 
@@ -113,6 +120,7 @@
             txtDEC4.Name = "txtDEC4";
             txtDEC4.Size = new Size(62, 30);
             txtDEC4.TabIndex = 4;
+            txtDEC4.TextChanged += txtDEC4_TextChanged;
             // 
             // lblDEC1
             // 
@@ -160,6 +168,7 @@
             txtBI1.Name = "txtBI1";
             txtBI1.Size = new Size(62, 30);
             txtBI1.TabIndex = 9;
+            txtBI1.TextChanged += txtBI1_TextChanged;
             // 
             // txtBI2
             // 
@@ -167,6 +176,7 @@
             txtBI2.Name = "txtBI2";
             txtBI2.Size = new Size(62, 30);
             txtBI2.TabIndex = 10;
+            txtBI2.TextChanged += txtBI2_TextChanged;
             // 
             // txtBI3
             // 
@@ -174,6 +184,7 @@
             txtBI3.Name = "txtBI3";
             txtBI3.Size = new Size(62, 30);
             txtBI3.TabIndex = 11;
+            txtBI3.TextChanged += txtBI3_TextChanged;
             // 
             // txtBI4
             // 
@@ -181,6 +192,7 @@
             txtBI4.Name = "txtBI4";
             txtBI4.Size = new Size(62, 30);
             txtBI4.TabIndex = 12;
+            txtBI4.TextChanged += txtBI4_TextChanged;
             // 
             // lblBI1
             // 
@@ -228,6 +240,7 @@
             txtHEX1.Name = "txtHEX1";
             txtHEX1.Size = new Size(62, 30);
             txtHEX1.TabIndex = 17;
+            txtHEX1.TextChanged += txtHEX1_TextChanged;
             // 
             // txtHEX2
             // 
@@ -235,6 +248,7 @@
             txtHEX2.Name = "txtHEX2";
             txtHEX2.Size = new Size(62, 30);
             txtHEX2.TabIndex = 18;
+            txtHEX2.TextChanged += txtHEX2_TextChanged;
             // 
             // txtHEX3
             // 
@@ -242,6 +256,7 @@
             txtHEX3.Name = "txtHEX3";
             txtHEX3.Size = new Size(62, 30);
             txtHEX3.TabIndex = 19;
+            txtHEX3.TextChanged += txtHEX3_TextChanged;
             // 
             // txtHEX4
             // 
@@ -249,6 +264,7 @@
             txtHEX4.Name = "txtHEX4";
             txtHEX4.Size = new Size(62, 30);
             txtHEX4.TabIndex = 20;
+            txtHEX4.TextChanged += txtHEX4_TextChanged;
             // 
             // lblHEX1
             // 
@@ -309,17 +325,18 @@
             grpAdrIP.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             grpAdrIP.Location = new Point(12, 12);
             grpAdrIP.Name = "grpAdrIP";
-            grpAdrIP.Size = new Size(451, 214);
+            grpAdrIP.Size = new Size(451, 208);
             grpAdrIP.TabIndex = 0;
             grpAdrIP.TabStop = false;
             grpAdrIP.Text = "Adresse IP";
             // 
             // txtMsqCIDR
             // 
-            txtMsqCIDR.Location = new Point(109, 146);
+            txtMsqCIDR.Location = new Point(120, 146);
             txtMsqCIDR.Name = "txtMsqCIDR";
             txtMsqCIDR.Size = new Size(62, 30);
             txtMsqCIDR.TabIndex = 17;
+            txtMsqCIDR.TextChanged += txtMsqCIDR_TextChanged;
             // 
             // lblAdrMsqCIDR
             // 
@@ -331,35 +348,35 @@
             lblAdrMsqCIDR.TabIndex = 16;
             lblAdrMsqCIDR.Text = "CIDR :";
             // 
-            // label5
+            // lblMsqBI3
             // 
-            label5.AutoSize = true;
-            label5.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            label5.Location = new Point(331, 98);
-            label5.Name = "label5";
-            label5.Size = new Size(15, 23);
-            label5.TabIndex = 15;
-            label5.Text = ".";
+            lblMsqBI3.AutoSize = true;
+            lblMsqBI3.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
+            lblMsqBI3.Location = new Point(331, 98);
+            lblMsqBI3.Name = "lblMsqBI3";
+            lblMsqBI3.Size = new Size(15, 23);
+            lblMsqBI3.TabIndex = 15;
+            lblMsqBI3.Text = ".";
             // 
-            // label6
+            // lblMsqBI2
             // 
-            label6.AutoSize = true;
-            label6.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            label6.Location = new Point(250, 98);
-            label6.Name = "label6";
-            label6.Size = new Size(15, 23);
-            label6.TabIndex = 14;
-            label6.Text = ".";
+            lblMsqBI2.AutoSize = true;
+            lblMsqBI2.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
+            lblMsqBI2.Location = new Point(250, 98);
+            lblMsqBI2.Name = "lblMsqBI2";
+            lblMsqBI2.Size = new Size(15, 23);
+            lblMsqBI2.TabIndex = 14;
+            lblMsqBI2.Text = ".";
             // 
-            // label7
+            // lblMsqBI1
             // 
-            label7.AutoSize = true;
-            label7.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            label7.Location = new Point(174, 98);
-            label7.Name = "label7";
-            label7.Size = new Size(15, 23);
-            label7.TabIndex = 13;
-            label7.Text = ".";
+            lblMsqBI1.AutoSize = true;
+            lblMsqBI1.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
+            lblMsqBI1.Location = new Point(174, 98);
+            lblMsqBI1.Name = "lblMsqBI1";
+            lblMsqBI1.Size = new Size(15, 23);
+            lblMsqBI1.TabIndex = 13;
+            lblMsqBI1.Text = ".";
             // 
             // txtMsqBI4
             // 
@@ -367,6 +384,7 @@
             txtMsqBI4.Name = "txtMsqBI4";
             txtMsqBI4.Size = new Size(62, 30);
             txtMsqBI4.TabIndex = 12;
+            txtMsqBI4.TextChanged += txtMsqBI4_TextChanged;
             // 
             // txtMsqBI3
             // 
@@ -374,6 +392,7 @@
             txtMsqBI3.Name = "txtMsqBI3";
             txtMsqBI3.Size = new Size(62, 30);
             txtMsqBI3.TabIndex = 11;
+            txtMsqBI3.TextChanged += txtMsqBI3_TextChanged;
             // 
             // txtMsqBI2
             // 
@@ -381,6 +400,7 @@
             txtMsqBI2.Name = "txtMsqBI2";
             txtMsqBI2.Size = new Size(62, 30);
             txtMsqBI2.TabIndex = 10;
+            txtMsqBI2.TextChanged += txtMsqBI2_TextChanged;
             // 
             // txtMsqBI1
             // 
@@ -388,6 +408,7 @@
             txtMsqBI1.Name = "txtMsqBI1";
             txtMsqBI1.Size = new Size(62, 30);
             txtMsqBI1.TabIndex = 9;
+            txtMsqBI1.TextChanged += txtMsqBI1_TextChanged;
             // 
             // lblAdrMsqBI
             // 
@@ -399,35 +420,35 @@
             lblAdrMsqBI.TabIndex = 8;
             lblAdrMsqBI.Text = "Binaire : ";
             // 
-            // label9
+            // lblMsqDEC3
             // 
-            label9.AutoSize = true;
-            label9.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            label9.Location = new Point(331, 44);
-            label9.Name = "label9";
-            label9.Size = new Size(15, 23);
-            label9.TabIndex = 7;
-            label9.Text = ".";
+            lblMsqDEC3.AutoSize = true;
+            lblMsqDEC3.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
+            lblMsqDEC3.Location = new Point(331, 44);
+            lblMsqDEC3.Name = "lblMsqDEC3";
+            lblMsqDEC3.Size = new Size(15, 23);
+            lblMsqDEC3.TabIndex = 7;
+            lblMsqDEC3.Text = ".";
             // 
-            // label10
+            // lblMsqDEC2
             // 
-            label10.AutoSize = true;
-            label10.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            label10.Location = new Point(250, 44);
-            label10.Name = "label10";
-            label10.Size = new Size(15, 23);
-            label10.TabIndex = 6;
-            label10.Text = ".";
+            lblMsqDEC2.AutoSize = true;
+            lblMsqDEC2.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
+            lblMsqDEC2.Location = new Point(250, 44);
+            lblMsqDEC2.Name = "lblMsqDEC2";
+            lblMsqDEC2.Size = new Size(15, 23);
+            lblMsqDEC2.TabIndex = 6;
+            lblMsqDEC2.Text = ".";
             // 
-            // label11
+            // lblMsqDEC1
             // 
-            label11.AutoSize = true;
-            label11.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            label11.Location = new Point(174, 44);
-            label11.Name = "label11";
-            label11.Size = new Size(15, 23);
-            label11.TabIndex = 5;
-            label11.Text = ".";
+            lblMsqDEC1.AutoSize = true;
+            lblMsqDEC1.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
+            lblMsqDEC1.Location = new Point(174, 44);
+            lblMsqDEC1.Name = "lblMsqDEC1";
+            lblMsqDEC1.Size = new Size(15, 23);
+            lblMsqDEC1.TabIndex = 5;
+            lblMsqDEC1.Text = ".";
             // 
             // txtMsqDEC4
             // 
@@ -435,6 +456,7 @@
             txtMsqDEC4.Name = "txtMsqDEC4";
             txtMsqDEC4.Size = new Size(62, 30);
             txtMsqDEC4.TabIndex = 4;
+            txtMsqDEC4.TextChanged += txtMsqDEC4_TextChanged;
             // 
             // txtMsqDEC3
             // 
@@ -442,6 +464,7 @@
             txtMsqDEC3.Name = "txtMsqDEC3";
             txtMsqDEC3.Size = new Size(62, 30);
             txtMsqDEC3.TabIndex = 3;
+            txtMsqDEC3.TextChanged += txtMsqDEC3_TextChanged;
             // 
             // txtMsqDEC2
             // 
@@ -449,6 +472,7 @@
             txtMsqDEC2.Name = "txtMsqDEC2";
             txtMsqDEC2.Size = new Size(62, 30);
             txtMsqDEC2.TabIndex = 2;
+            txtMsqDEC2.TextChanged += txtMsqDEC2_TextChanged;
             // 
             // txtMsqDEC1
             // 
@@ -456,6 +480,7 @@
             txtMsqDEC1.Name = "txtMsqDEC1";
             txtMsqDEC1.Size = new Size(62, 30);
             txtMsqDEC1.TabIndex = 1;
+            txtMsqDEC1.TextChanged += txtMsqDEC1_TextChanged;
             // 
             // lblAdrMsqDEC
             // 
@@ -469,39 +494,85 @@
             // 
             // grpAdrMasque
             // 
+            grpAdrMasque.Controls.Add(lblMsqSlash);
             grpAdrMasque.Controls.Add(txtMsqCIDR);
             grpAdrMasque.Controls.Add(lblAdrMsqCIDR);
-            grpAdrMasque.Controls.Add(label5);
-            grpAdrMasque.Controls.Add(label6);
-            grpAdrMasque.Controls.Add(label7);
+            grpAdrMasque.Controls.Add(lblMsqBI3);
+            grpAdrMasque.Controls.Add(lblMsqBI2);
+            grpAdrMasque.Controls.Add(lblMsqBI1);
             grpAdrMasque.Controls.Add(txtMsqBI4);
             grpAdrMasque.Controls.Add(txtMsqBI3);
             grpAdrMasque.Controls.Add(txtMsqBI2);
             grpAdrMasque.Controls.Add(txtMsqBI1);
             grpAdrMasque.Controls.Add(lblAdrMsqBI);
-            grpAdrMasque.Controls.Add(label9);
-            grpAdrMasque.Controls.Add(label10);
-            grpAdrMasque.Controls.Add(label11);
+            grpAdrMasque.Controls.Add(lblMsqDEC3);
+            grpAdrMasque.Controls.Add(lblMsqDEC2);
+            grpAdrMasque.Controls.Add(lblMsqDEC1);
             grpAdrMasque.Controls.Add(txtMsqDEC4);
             grpAdrMasque.Controls.Add(txtMsqDEC3);
             grpAdrMasque.Controls.Add(txtMsqDEC2);
             grpAdrMasque.Controls.Add(txtMsqDEC1);
             grpAdrMasque.Controls.Add(lblAdrMsqDEC);
             grpAdrMasque.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpAdrMasque.Location = new Point(12, 267);
+            grpAdrMasque.Location = new Point(12, 254);
             grpAdrMasque.Name = "grpAdrMasque";
-            grpAdrMasque.Size = new Size(451, 214);
+            grpAdrMasque.Size = new Size(451, 201);
             grpAdrMasque.TabIndex = 1;
             grpAdrMasque.TabStop = false;
             grpAdrMasque.Text = "Adresse Masque";
+            // 
+            // lblMsqSlash
+            // 
+            lblMsqSlash.AutoSize = true;
+            lblMsqSlash.Location = new Point(103, 150);
+            lblMsqSlash.Name = "lblMsqSlash";
+            lblMsqSlash.Size = new Size(17, 23);
+            lblMsqSlash.TabIndex = 25;
+            lblMsqSlash.Text = "\\";
+            // 
+            // grpFLSM
+            // 
+            grpFLSM.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            grpFLSM.Location = new Point(12, 484);
+            grpFLSM.Name = "grpFLSM";
+            grpFLSM.Size = new Size(451, 130);
+            grpFLSM.TabIndex = 2;
+            grpFLSM.TabStop = false;
+            grpFLSM.Text = "FLSM";
+            // 
+            // btnValider
+            // 
+            btnValider.Enabled = false;
+            btnValider.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnValider.Location = new Point(369, 698);
+            btnValider.Name = "btnValider";
+            btnValider.Size = new Size(94, 40);
+            btnValider.TabIndex = 3;
+            btnValider.Text = "Calculer";
+            btnValider.UseVisualStyleBackColor = true;
+            // 
+            // lblMsg
+            // 
+            lblMsg.AutoSize = true;
+            lblMsg.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMsg.Location = new Point(12, 641);
+            lblMsg.Name = "lblMsg";
+            lblMsg.Size = new Size(181, 20);
+            lblMsg.TabIndex = 4;
+            lblMsg.Text = "Veuillez remplir les cases.";
             // 
             // frmHome
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1095, 770);
+            Controls.Add(lblMsg);
+            Controls.Add(btnValider);
+            Controls.Add(grpFLSM);
             Controls.Add(grpAdrMasque);
             Controls.Add(grpAdrIP);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "frmHome";
             Text = "Form1";
             grpAdrIP.ResumeLayout(false);
@@ -509,6 +580,7 @@
             grpAdrMasque.ResumeLayout(false);
             grpAdrMasque.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -538,7 +610,7 @@
         private Label lblHEX2;
         private Label lblHEX3;
         private GroupBox grpAdrIP;
-        private Label label1;
+        private Label lblMsqSlash;
         private Label label2;
         private Label label3;
         private TextBox textBox1;
@@ -546,22 +618,25 @@
         private TextBox textBox3;
         private TextBox txtMsqCIDR;
         private Label lblAdrMsqCIDR;
-        private Label label5;
-        private Label label6;
-        private Label label7;
+        private Label lblMsqBI3;
+        private Label lblMsqBI2;
+        private Label lblMsqBI1;
         private TextBox txtMsqBI4;
         private TextBox txtMsqBI3;
         private TextBox txtMsqBI2;
         private TextBox txtMsqBI1;
         private Label lblAdrMsqBI;
-        private Label label9;
-        private Label label10;
-        private Label label11;
+        private Label lblMsqDEC3;
+        private Label lblMsqDEC2;
+        private Label lblMsqDEC1;
         private TextBox txtMsqDEC4;
         private TextBox txtMsqDEC3;
         private TextBox txtMsqDEC2;
         private TextBox txtMsqDEC1;
         private Label lblAdrMsqDEC;
         private GroupBox grpAdrMasque;
+        private GroupBox grpFLSM;
+        private Button btnValider;
+        private Label lblMsg;
     }
 }
