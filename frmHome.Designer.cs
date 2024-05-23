@@ -79,9 +79,9 @@
             rdoCidr = new RadioButton();
             rdoDecmsq = new RadioButton();
             lblMsqSlash = new Label();
-            grpFLSM = new GroupBox();
             btnValider = new Button();
             lblMsg = new Label();
+            btnInit = new Button();
             grpAdrIP.SuspendLayout();
             grpAdrMasque.SuspendLayout();
             SuspendLayout();
@@ -455,7 +455,7 @@
             // txtMsqBI2
             // 
             txtMsqBI2.Enabled = false;
-            txtMsqBI2.Location = new Point(225, 141);
+            txtMsqBI2.Location = new Point(225, 136);
             txtMsqBI2.Name = "txtMsqBI2";
             txtMsqBI2.Size = new Size(89, 30);
             txtMsqBI2.TabIndex = 10;
@@ -631,21 +631,11 @@
             lblMsqSlash.TabIndex = 25;
             lblMsqSlash.Text = "\\";
             // 
-            // grpFLSM
-            // 
-            grpFLSM.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpFLSM.Location = new Point(12, 626);
-            grpFLSM.Name = "grpFLSM";
-            grpFLSM.Size = new Size(451, 130);
-            grpFLSM.TabIndex = 2;
-            grpFLSM.TabStop = false;
-            grpFLSM.Text = "FLSM";
-            // 
             // btnValider
             // 
             btnValider.Enabled = false;
             btnValider.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnValider.Location = new Point(369, 831);
+            btnValider.Location = new Point(491, 617);
             btnValider.Name = "btnValider";
             btnValider.Size = new Size(94, 40);
             btnValider.TabIndex = 3;
@@ -656,26 +646,37 @@
             // 
             lblMsg.AutoSize = true;
             lblMsg.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMsg.Location = new Point(2, 789);
+            lblMsg.Location = new Point(12, 558);
             lblMsg.Name = "lblMsg";
             lblMsg.Size = new Size(181, 20);
             lblMsg.TabIndex = 4;
             lblMsg.Text = "Veuillez remplir les cases.";
             // 
+            // btnInit
+            // 
+            btnInit.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnInit.Location = new Point(12, 617);
+            btnInit.Name = "btnInit";
+            btnInit.Size = new Size(145, 40);
+            btnInit.TabIndex = 5;
+            btnInit.Text = "Réinitialisation";
+            btnInit.UseVisualStyleBackColor = true;
+            btnInit.Click += btnInit_Click;
+            // 
             // frmHome
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1095, 883);
+            ClientSize = new Size(1095, 680);
+            Controls.Add(btnInit);
             Controls.Add(lblMsg);
             Controls.Add(btnValider);
-            Controls.Add(grpFLSM);
             Controls.Add(grpAdrMasque);
             Controls.Add(grpAdrIP);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "frmHome";
-            Text = "Form1";
+            Text = "IpCalc";
             grpAdrIP.ResumeLayout(false);
             grpAdrIP.PerformLayout();
             grpAdrMasque.ResumeLayout(false);
@@ -736,7 +737,6 @@
         private TextBox txtMsqDEC1;
         private Label lblAdrMsqDEC;
         private GroupBox grpAdrMasque;
-        private GroupBox grpFLSM;
         private Button btnValider;
         private Label lblMsg;
         private RadioButton rdoBinaireIP;
@@ -745,5 +745,6 @@
         private RadioButton rdoBinaireMsq;
         private RadioButton rdoCidr;
         private RadioButton rdoDecmsq;
+        private Button btnInit;
     }
 }

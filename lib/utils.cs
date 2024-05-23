@@ -11,11 +11,6 @@
             return true;
         }
 
-        public static bool ChampsRemplisEtEntiers(params TextBox[] champs)
-        {
-            return ChampsRemplis(champs) && ChampsEntiers(champs);
-        }
-
         public static bool ChampsRemplis(params TextBox[] champs)
         {
             foreach (var champ in champs)

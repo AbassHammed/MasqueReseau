@@ -246,5 +246,16 @@ namespace Reseau
             txtMsqBI4.Text = binary.Split('.')[3];
 
         }
+
+        private void btnInit_Click(object sender, EventArgs e)
+        {
+            Utils.Vider(txtDEC1, txtDEC2, txtDEC3, txtDEC4, txtBI1, txtBI2, txtBI3, txtBI4, txtHEX1, txtHEX2, txtHEX3, txtHEX4);
+            Utils.Vider(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4, txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4, txtMsqCIDR);
+            rdoDecIP.Checked = true;
+            rdoDecmsq.Checked = true;
+            EnableIpFields(true, false, false);
+            EnableMsqFields(true, false, false);
+            SetMessage("", Color.Red, false);
+        }
     }
 }
