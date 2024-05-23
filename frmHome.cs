@@ -123,6 +123,7 @@ namespace Reseau
                 SetMessage("Tous les champs sont correctement remplis", Color.Green, true);
         }
 
+
         private void SetMessage(string message, Color color, bool isEnabled)
         {
             lblMsg.ForeColor = color;
@@ -130,52 +131,28 @@ namespace Reseau
             btnValider.Enabled = isEnabled;
         }
 
-        private void SetValuesIp(bool decEnable = true, bool biEnable = true, bool hexEnable = true)
-        {
-            SetControlState([txtDEC1, txtDEC2, txtDEC3, txtDEC4], decEnable);
-            SetControlState([txtBI1, txtBI2, txtBI3, txtBI4], biEnable);
-            SetControlState([txtHEX1, txtHEX2, txtHEX3, txtHEX4], hexEnable);
-        }
-
-        private void SetValuesMsq(bool decEnable = true, bool biEnable = true, bool enableCidr = true)
-        {
-            SetControlState([txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4], decEnable);
-            SetControlState([txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4], biEnable);
-            txtMsqCIDR.Enabled = enableCidr;
-        }
-
-        private void SetControlState(Control[] controls, bool state)
-        {
-            foreach (var control in controls)
-                control.Enabled = state;
-        }
-
         private bool VerifyIp()
         {
-            bool decValid = VerifyIpDec();
-            bool biValid = VerifyIpBi();
-            bool hexValid = VerifyIpHex();
-
-            if (decValid) SetValuesIp(decEnable: true, biEnable: false, hexEnable: false);
-            else if (biValid) SetValuesIp(decEnable: false, biEnable: true, hexEnable: false);
-            else if (hexValid) SetValuesIp(decEnable: false, biEnable: false, hexEnable: true);
-            else SetValuesIp(decEnable: true, biEnable: true, hexEnable: true);
-
-            return decValid || biValid || hexValid;
+            if (rdoDecIP.Checked)
+                return VerifyIpDec();
+            else if (rdoBinaireIP.Checked)
+                return VerifyIpBi();
+            else if (rdohexaIP.Checked)
+                return VerifyIpHex();
+            else
+                return false;
         }
 
         private bool VerifyMsq()
         {
-            bool decValid = VerifyMsqDec();
-            bool biValid = VerifyMsqBi();
-            bool cidrValid = VerifyMsqCidr();
-
-            if (decValid) SetValuesMsq(decEnable: true, biEnable: false, enableCidr: false);
-            else if (biValid) SetValuesMsq(decEnable: false, biEnable: true, enableCidr: false);
-            else if (cidrValid) SetValuesMsq(decEnable: false, biEnable: false, enableCidr: true);
-            else SetValuesMsq();
-
-            return decValid || biValid || cidrValid;
+            if (rdoDecmsq.Checked)
+                return VerifyMsqDec();
+            else if (rdoBinaireMsq.Checked)
+                return VerifyMsqBi();
+            else if (rdoCidr.Checked)
+                return VerifyMsqCidr();
+            else
+                return false;
         }
 
         private bool VerifyIpDec() =>
@@ -206,7 +183,63 @@ namespace Reseau
             Utils.ChampsDansLaLimite(32, txtMsqCIDR);
 
 
+        private void rdoIP_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rdo = (RadioButton)sender;
+            if (rdo.Checked)
+            {
+                if (rdo == rdoDecIP)
+                    EnableIpFields(true, false, false);
+                else if (rdo == rdoBinaireIP)
+                    EnableIpFields(false, true, false);
+                else if (rdo == rdohexaIP)
+                    EnableIpFields(false, false, true);
+            }
+        }
 
+        private void rdoMsq_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rdo = (RadioButton)sender;
+            if (rdo.Checked)
+            {
+                if (rdo == rdoDecmsq)
+                    EnableMsqFields(true, false, false);
+                else if (rdo == rdoBinaireMsq)
+                    EnableMsqFields(false, true, false);
+                else if (rdo == rdoCidr)
+                    EnableMsqFields(false, false, true);
+            }
+        }
 
+        private void EnableIpFields(bool DecState, bool BiState, bool HexState)
+        {
+            Utils.Vider(txtDEC1, txtDEC2, txtDEC3, txtDEC4, txtBI1, txtBI2, txtBI3, txtBI4, txtHEX1, txtHEX2, txtHEX3, txtHEX4);
+            txtDEC1.Enabled = DecState;
+            txtDEC2.Enabled = DecState;
+            txtDEC3.Enabled = DecState;
+            txtDEC4.Enabled = DecState;
+            txtBI1.Enabled = BiState;
+            txtBI2.Enabled = BiState;
+            txtBI3.Enabled = BiState;
+            txtBI4.Enabled = BiState;
+            txtHEX1.Enabled = HexState;
+            txtHEX2.Enabled = HexState;
+            txtHEX3.Enabled = HexState;
+            txtHEX4.Enabled = HexState;
+        }
+
+        private void EnableMsqFields(bool DecState, bool BiState, bool CidrState)
+        {
+            Utils.Vider(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4, txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4, txtMsqCIDR);
+            txtMsqDEC1.Enabled = DecState;
+            txtMsqDEC2.Enabled = DecState;
+            txtMsqDEC3.Enabled = DecState;
+            txtMsqDEC4.Enabled = DecState;
+            txtMsqBI1.Enabled = BiState;
+            txtMsqBI2.Enabled = BiState;
+            txtMsqBI3.Enabled = BiState;
+            txtMsqBI4.Enabled = BiState;
+            txtMsqCIDR.Enabled = CidrState;
+        }
     }
 }

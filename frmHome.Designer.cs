@@ -53,6 +53,9 @@
             lblHEX2 = new Label();
             lblHEX3 = new Label();
             grpAdrIP = new GroupBox();
+            rdoBinaireIP = new RadioButton();
+            rdohexaIP = new RadioButton();
+            rdoDecIP = new RadioButton();
             txtMsqCIDR = new TextBox();
             lblAdrMsqCIDR = new Label();
             lblMsqBI3 = new Label();
@@ -72,6 +75,9 @@
             txtMsqDEC1 = new TextBox();
             lblAdrMsqDEC = new Label();
             grpAdrMasque = new GroupBox();
+            rdoBinaireMsq = new RadioButton();
+            rdoCidr = new RadioButton();
+            rdoDecmsq = new RadioButton();
             lblMsqSlash = new Label();
             grpFLSM = new GroupBox();
             btnValider = new Button();
@@ -84,7 +90,7 @@
             // 
             lblAdrIPDec.AutoSize = true;
             lblAdrIPDec.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAdrIPDec.Location = new Point(18, 42);
+            lblAdrIPDec.Location = new Point(18, 88);
             lblAdrIPDec.Name = "lblAdrIPDec";
             lblAdrIPDec.Size = new Size(76, 20);
             lblAdrIPDec.TabIndex = 0;
@@ -92,7 +98,7 @@
             // 
             // txtDEC1
             // 
-            txtDEC1.Location = new Point(109, 37);
+            txtDEC1.Location = new Point(109, 83);
             txtDEC1.Name = "txtDEC1";
             txtDEC1.Size = new Size(62, 30);
             txtDEC1.TabIndex = 1;
@@ -100,7 +106,7 @@
             // 
             // txtDEC2
             // 
-            txtDEC2.Location = new Point(188, 37);
+            txtDEC2.Location = new Point(188, 83);
             txtDEC2.Name = "txtDEC2";
             txtDEC2.Size = new Size(62, 30);
             txtDEC2.TabIndex = 2;
@@ -108,7 +114,7 @@
             // 
             // txtDEC3
             // 
-            txtDEC3.Location = new Point(266, 37);
+            txtDEC3.Location = new Point(266, 83);
             txtDEC3.Name = "txtDEC3";
             txtDEC3.Size = new Size(62, 30);
             txtDEC3.TabIndex = 3;
@@ -116,7 +122,7 @@
             // 
             // txtDEC4
             // 
-            txtDEC4.Location = new Point(349, 37);
+            txtDEC4.Location = new Point(349, 83);
             txtDEC4.Name = "txtDEC4";
             txtDEC4.Size = new Size(62, 30);
             txtDEC4.TabIndex = 4;
@@ -126,7 +132,7 @@
             // 
             lblDEC1.AutoSize = true;
             lblDEC1.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblDEC1.Location = new Point(174, 44);
+            lblDEC1.Location = new Point(174, 90);
             lblDEC1.Name = "lblDEC1";
             lblDEC1.Size = new Size(15, 23);
             lblDEC1.TabIndex = 5;
@@ -136,7 +142,7 @@
             // 
             lblDEC2.AutoSize = true;
             lblDEC2.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblDEC2.Location = new Point(250, 44);
+            lblDEC2.Location = new Point(250, 90);
             lblDEC2.Name = "lblDEC2";
             lblDEC2.Size = new Size(15, 23);
             lblDEC2.TabIndex = 6;
@@ -146,7 +152,7 @@
             // 
             lblDEC3.AutoSize = true;
             lblDEC3.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblDEC3.Location = new Point(331, 44);
+            lblDEC3.Location = new Point(331, 90);
             lblDEC3.Name = "lblDEC3";
             lblDEC3.Size = new Size(15, 23);
             lblDEC3.TabIndex = 7;
@@ -156,7 +162,7 @@
             // 
             lblAdrIPBi.AutoSize = true;
             lblAdrIPBi.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAdrIPBi.Location = new Point(18, 96);
+            lblAdrIPBi.Location = new Point(18, 142);
             lblAdrIPBi.Name = "lblAdrIPBi";
             lblAdrIPBi.Size = new Size(69, 20);
             lblAdrIPBi.TabIndex = 8;
@@ -164,7 +170,8 @@
             // 
             // txtBI1
             // 
-            txtBI1.Location = new Point(109, 91);
+            txtBI1.Enabled = false;
+            txtBI1.Location = new Point(109, 137);
             txtBI1.Name = "txtBI1";
             txtBI1.Size = new Size(62, 30);
             txtBI1.TabIndex = 9;
@@ -172,7 +179,8 @@
             // 
             // txtBI2
             // 
-            txtBI2.Location = new Point(188, 91);
+            txtBI2.Enabled = false;
+            txtBI2.Location = new Point(188, 137);
             txtBI2.Name = "txtBI2";
             txtBI2.Size = new Size(62, 30);
             txtBI2.TabIndex = 10;
@@ -180,7 +188,8 @@
             // 
             // txtBI3
             // 
-            txtBI3.Location = new Point(266, 91);
+            txtBI3.Enabled = false;
+            txtBI3.Location = new Point(266, 137);
             txtBI3.Name = "txtBI3";
             txtBI3.Size = new Size(62, 30);
             txtBI3.TabIndex = 11;
@@ -188,7 +197,8 @@
             // 
             // txtBI4
             // 
-            txtBI4.Location = new Point(349, 91);
+            txtBI4.Enabled = false;
+            txtBI4.Location = new Point(349, 137);
             txtBI4.Name = "txtBI4";
             txtBI4.Size = new Size(62, 30);
             txtBI4.TabIndex = 12;
@@ -198,7 +208,7 @@
             // 
             lblBI1.AutoSize = true;
             lblBI1.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblBI1.Location = new Point(174, 98);
+            lblBI1.Location = new Point(174, 144);
             lblBI1.Name = "lblBI1";
             lblBI1.Size = new Size(15, 23);
             lblBI1.TabIndex = 13;
@@ -208,7 +218,7 @@
             // 
             lblBI2.AutoSize = true;
             lblBI2.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblBI2.Location = new Point(250, 98);
+            lblBI2.Location = new Point(250, 144);
             lblBI2.Name = "lblBI2";
             lblBI2.Size = new Size(15, 23);
             lblBI2.TabIndex = 14;
@@ -218,7 +228,7 @@
             // 
             lblBI3.AutoSize = true;
             lblBI3.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblBI3.Location = new Point(331, 98);
+            lblBI3.Location = new Point(331, 144);
             lblBI3.Name = "lblBI3";
             lblBI3.Size = new Size(15, 23);
             lblBI3.TabIndex = 15;
@@ -228,7 +238,7 @@
             // 
             lblAdrIPHex.AutoSize = true;
             lblAdrIPHex.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAdrIPHex.Location = new Point(18, 151);
+            lblAdrIPHex.Location = new Point(18, 197);
             lblAdrIPHex.Name = "lblAdrIPHex";
             lblAdrIPHex.Size = new Size(48, 20);
             lblAdrIPHex.TabIndex = 16;
@@ -236,7 +246,8 @@
             // 
             // txtHEX1
             // 
-            txtHEX1.Location = new Point(109, 146);
+            txtHEX1.Enabled = false;
+            txtHEX1.Location = new Point(109, 192);
             txtHEX1.Name = "txtHEX1";
             txtHEX1.Size = new Size(62, 30);
             txtHEX1.TabIndex = 17;
@@ -244,7 +255,8 @@
             // 
             // txtHEX2
             // 
-            txtHEX2.Location = new Point(188, 146);
+            txtHEX2.Enabled = false;
+            txtHEX2.Location = new Point(188, 192);
             txtHEX2.Name = "txtHEX2";
             txtHEX2.Size = new Size(62, 30);
             txtHEX2.TabIndex = 18;
@@ -252,7 +264,8 @@
             // 
             // txtHEX3
             // 
-            txtHEX3.Location = new Point(266, 146);
+            txtHEX3.Enabled = false;
+            txtHEX3.Location = new Point(266, 192);
             txtHEX3.Name = "txtHEX3";
             txtHEX3.Size = new Size(62, 30);
             txtHEX3.TabIndex = 19;
@@ -260,7 +273,8 @@
             // 
             // txtHEX4
             // 
-            txtHEX4.Location = new Point(349, 146);
+            txtHEX4.Enabled = false;
+            txtHEX4.Location = new Point(349, 192);
             txtHEX4.Name = "txtHEX4";
             txtHEX4.Size = new Size(62, 30);
             txtHEX4.TabIndex = 20;
@@ -270,7 +284,7 @@
             // 
             lblHEX1.AutoSize = true;
             lblHEX1.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblHEX1.Location = new Point(174, 153);
+            lblHEX1.Location = new Point(174, 199);
             lblHEX1.Name = "lblHEX1";
             lblHEX1.Size = new Size(15, 23);
             lblHEX1.TabIndex = 21;
@@ -280,7 +294,7 @@
             // 
             lblHEX2.AutoSize = true;
             lblHEX2.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblHEX2.Location = new Point(250, 153);
+            lblHEX2.Location = new Point(250, 199);
             lblHEX2.Name = "lblHEX2";
             lblHEX2.Size = new Size(15, 23);
             lblHEX2.TabIndex = 22;
@@ -290,7 +304,7 @@
             // 
             lblHEX3.AutoSize = true;
             lblHEX3.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblHEX3.Location = new Point(331, 153);
+            lblHEX3.Location = new Point(331, 199);
             lblHEX3.Name = "lblHEX3";
             lblHEX3.Size = new Size(15, 23);
             lblHEX3.TabIndex = 23;
@@ -298,6 +312,9 @@
             // 
             // grpAdrIP
             // 
+            grpAdrIP.Controls.Add(rdoBinaireIP);
+            grpAdrIP.Controls.Add(rdohexaIP);
+            grpAdrIP.Controls.Add(rdoDecIP);
             grpAdrIP.Controls.Add(lblHEX3);
             grpAdrIP.Controls.Add(lblHEX2);
             grpAdrIP.Controls.Add(lblHEX1);
@@ -325,14 +342,53 @@
             grpAdrIP.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             grpAdrIP.Location = new Point(12, 12);
             grpAdrIP.Name = "grpAdrIP";
-            grpAdrIP.Size = new Size(451, 208);
+            grpAdrIP.Size = new Size(451, 255);
             grpAdrIP.TabIndex = 0;
             grpAdrIP.TabStop = false;
             grpAdrIP.Text = "Adresse IP";
             // 
+            // rdoBinaireIP
+            // 
+            rdoBinaireIP.AutoSize = true;
+            rdoBinaireIP.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            rdoBinaireIP.Location = new Point(156, 39);
+            rdoBinaireIP.Name = "rdoBinaireIP";
+            rdoBinaireIP.Size = new Size(78, 24);
+            rdoBinaireIP.TabIndex = 26;
+            rdoBinaireIP.Text = "Binaire";
+            rdoBinaireIP.UseVisualStyleBackColor = true;
+            rdoBinaireIP.CheckedChanged += rdoIP_CheckedChanged;
+            // 
+            // rdohexaIP
+            // 
+            rdohexaIP.AutoSize = true;
+            rdohexaIP.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            rdohexaIP.Location = new Point(285, 39);
+            rdohexaIP.Name = "rdohexaIP";
+            rdohexaIP.Size = new Size(126, 24);
+            rdohexaIP.TabIndex = 25;
+            rdohexaIP.Text = "Hexadecimale";
+            rdohexaIP.UseVisualStyleBackColor = true;
+            rdohexaIP.CheckedChanged += rdoIP_CheckedChanged;
+            // 
+            // rdoDecIP
+            // 
+            rdoDecIP.AutoSize = true;
+            rdoDecIP.Checked = true;
+            rdoDecIP.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            rdoDecIP.Location = new Point(18, 39);
+            rdoDecIP.Name = "rdoDecIP";
+            rdoDecIP.Size = new Size(85, 24);
+            rdoDecIP.TabIndex = 24;
+            rdoDecIP.TabStop = true;
+            rdoDecIP.Text = "Decimal";
+            rdoDecIP.UseVisualStyleBackColor = true;
+            rdoDecIP.CheckedChanged += rdoIP_CheckedChanged;
+            // 
             // txtMsqCIDR
             // 
-            txtMsqCIDR.Location = new Point(120, 146);
+            txtMsqCIDR.Enabled = false;
+            txtMsqCIDR.Location = new Point(120, 191);
             txtMsqCIDR.Name = "txtMsqCIDR";
             txtMsqCIDR.Size = new Size(62, 30);
             txtMsqCIDR.TabIndex = 17;
@@ -342,7 +398,7 @@
             // 
             lblAdrMsqCIDR.AutoSize = true;
             lblAdrMsqCIDR.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAdrMsqCIDR.Location = new Point(18, 151);
+            lblAdrMsqCIDR.Location = new Point(18, 196);
             lblAdrMsqCIDR.Name = "lblAdrMsqCIDR";
             lblAdrMsqCIDR.Size = new Size(50, 20);
             lblAdrMsqCIDR.TabIndex = 16;
@@ -352,7 +408,7 @@
             // 
             lblMsqBI3.AutoSize = true;
             lblMsqBI3.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblMsqBI3.Location = new Point(331, 98);
+            lblMsqBI3.Location = new Point(331, 143);
             lblMsqBI3.Name = "lblMsqBI3";
             lblMsqBI3.Size = new Size(15, 23);
             lblMsqBI3.TabIndex = 15;
@@ -362,7 +418,7 @@
             // 
             lblMsqBI2.AutoSize = true;
             lblMsqBI2.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblMsqBI2.Location = new Point(250, 98);
+            lblMsqBI2.Location = new Point(250, 143);
             lblMsqBI2.Name = "lblMsqBI2";
             lblMsqBI2.Size = new Size(15, 23);
             lblMsqBI2.TabIndex = 14;
@@ -372,7 +428,7 @@
             // 
             lblMsqBI1.AutoSize = true;
             lblMsqBI1.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblMsqBI1.Location = new Point(174, 98);
+            lblMsqBI1.Location = new Point(174, 143);
             lblMsqBI1.Name = "lblMsqBI1";
             lblMsqBI1.Size = new Size(15, 23);
             lblMsqBI1.TabIndex = 13;
@@ -380,7 +436,8 @@
             // 
             // txtMsqBI4
             // 
-            txtMsqBI4.Location = new Point(349, 91);
+            txtMsqBI4.Enabled = false;
+            txtMsqBI4.Location = new Point(349, 136);
             txtMsqBI4.Name = "txtMsqBI4";
             txtMsqBI4.Size = new Size(62, 30);
             txtMsqBI4.TabIndex = 12;
@@ -388,7 +445,8 @@
             // 
             // txtMsqBI3
             // 
-            txtMsqBI3.Location = new Point(266, 91);
+            txtMsqBI3.Enabled = false;
+            txtMsqBI3.Location = new Point(266, 136);
             txtMsqBI3.Name = "txtMsqBI3";
             txtMsqBI3.Size = new Size(62, 30);
             txtMsqBI3.TabIndex = 11;
@@ -396,7 +454,8 @@
             // 
             // txtMsqBI2
             // 
-            txtMsqBI2.Location = new Point(188, 91);
+            txtMsqBI2.Enabled = false;
+            txtMsqBI2.Location = new Point(188, 136);
             txtMsqBI2.Name = "txtMsqBI2";
             txtMsqBI2.Size = new Size(62, 30);
             txtMsqBI2.TabIndex = 10;
@@ -404,7 +463,8 @@
             // 
             // txtMsqBI1
             // 
-            txtMsqBI1.Location = new Point(109, 91);
+            txtMsqBI1.Enabled = false;
+            txtMsqBI1.Location = new Point(109, 136);
             txtMsqBI1.Name = "txtMsqBI1";
             txtMsqBI1.Size = new Size(62, 30);
             txtMsqBI1.TabIndex = 9;
@@ -414,7 +474,7 @@
             // 
             lblAdrMsqBI.AutoSize = true;
             lblAdrMsqBI.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAdrMsqBI.Location = new Point(18, 96);
+            lblAdrMsqBI.Location = new Point(18, 141);
             lblAdrMsqBI.Name = "lblAdrMsqBI";
             lblAdrMsqBI.Size = new Size(69, 20);
             lblAdrMsqBI.TabIndex = 8;
@@ -424,7 +484,7 @@
             // 
             lblMsqDEC3.AutoSize = true;
             lblMsqDEC3.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblMsqDEC3.Location = new Point(331, 44);
+            lblMsqDEC3.Location = new Point(331, 89);
             lblMsqDEC3.Name = "lblMsqDEC3";
             lblMsqDEC3.Size = new Size(15, 23);
             lblMsqDEC3.TabIndex = 7;
@@ -434,7 +494,7 @@
             // 
             lblMsqDEC2.AutoSize = true;
             lblMsqDEC2.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblMsqDEC2.Location = new Point(250, 44);
+            lblMsqDEC2.Location = new Point(250, 89);
             lblMsqDEC2.Name = "lblMsqDEC2";
             lblMsqDEC2.Size = new Size(15, 23);
             lblMsqDEC2.TabIndex = 6;
@@ -444,7 +504,7 @@
             // 
             lblMsqDEC1.AutoSize = true;
             lblMsqDEC1.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Polite;
-            lblMsqDEC1.Location = new Point(174, 44);
+            lblMsqDEC1.Location = new Point(174, 89);
             lblMsqDEC1.Name = "lblMsqDEC1";
             lblMsqDEC1.Size = new Size(15, 23);
             lblMsqDEC1.TabIndex = 5;
@@ -452,7 +512,7 @@
             // 
             // txtMsqDEC4
             // 
-            txtMsqDEC4.Location = new Point(349, 37);
+            txtMsqDEC4.Location = new Point(349, 82);
             txtMsqDEC4.Name = "txtMsqDEC4";
             txtMsqDEC4.Size = new Size(62, 30);
             txtMsqDEC4.TabIndex = 4;
@@ -460,7 +520,7 @@
             // 
             // txtMsqDEC3
             // 
-            txtMsqDEC3.Location = new Point(266, 37);
+            txtMsqDEC3.Location = new Point(266, 82);
             txtMsqDEC3.Name = "txtMsqDEC3";
             txtMsqDEC3.Size = new Size(62, 30);
             txtMsqDEC3.TabIndex = 3;
@@ -468,7 +528,7 @@
             // 
             // txtMsqDEC2
             // 
-            txtMsqDEC2.Location = new Point(188, 37);
+            txtMsqDEC2.Location = new Point(188, 82);
             txtMsqDEC2.Name = "txtMsqDEC2";
             txtMsqDEC2.Size = new Size(62, 30);
             txtMsqDEC2.TabIndex = 2;
@@ -476,7 +536,7 @@
             // 
             // txtMsqDEC1
             // 
-            txtMsqDEC1.Location = new Point(109, 37);
+            txtMsqDEC1.Location = new Point(109, 82);
             txtMsqDEC1.Name = "txtMsqDEC1";
             txtMsqDEC1.Size = new Size(62, 30);
             txtMsqDEC1.TabIndex = 1;
@@ -486,7 +546,7 @@
             // 
             lblAdrMsqDEC.AutoSize = true;
             lblAdrMsqDEC.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAdrMsqDEC.Location = new Point(18, 42);
+            lblAdrMsqDEC.Location = new Point(18, 87);
             lblAdrMsqDEC.Name = "lblAdrMsqDEC";
             lblAdrMsqDEC.Size = new Size(76, 20);
             lblAdrMsqDEC.TabIndex = 0;
@@ -494,6 +554,9 @@
             // 
             // grpAdrMasque
             // 
+            grpAdrMasque.Controls.Add(rdoBinaireMsq);
+            grpAdrMasque.Controls.Add(rdoCidr);
+            grpAdrMasque.Controls.Add(rdoDecmsq);
             grpAdrMasque.Controls.Add(lblMsqSlash);
             grpAdrMasque.Controls.Add(txtMsqCIDR);
             grpAdrMasque.Controls.Add(lblAdrMsqCIDR);
@@ -514,17 +577,55 @@
             grpAdrMasque.Controls.Add(txtMsqDEC1);
             grpAdrMasque.Controls.Add(lblAdrMsqDEC);
             grpAdrMasque.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpAdrMasque.Location = new Point(12, 254);
+            grpAdrMasque.Location = new Point(12, 300);
             grpAdrMasque.Name = "grpAdrMasque";
-            grpAdrMasque.Size = new Size(451, 201);
+            grpAdrMasque.Size = new Size(451, 244);
             grpAdrMasque.TabIndex = 1;
             grpAdrMasque.TabStop = false;
             grpAdrMasque.Text = "Adresse Masque";
             // 
+            // rdoBinaireMsq
+            // 
+            rdoBinaireMsq.AutoSize = true;
+            rdoBinaireMsq.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            rdoBinaireMsq.Location = new Point(156, 40);
+            rdoBinaireMsq.Name = "rdoBinaireMsq";
+            rdoBinaireMsq.Size = new Size(78, 24);
+            rdoBinaireMsq.TabIndex = 29;
+            rdoBinaireMsq.Text = "Binaire";
+            rdoBinaireMsq.UseVisualStyleBackColor = true;
+            rdoBinaireMsq.CheckedChanged += rdoMsq_CheckedChanged;
+            // 
+            // rdoCidr
+            // 
+            rdoCidr.AutoSize = true;
+            rdoCidr.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            rdoCidr.Location = new Point(285, 40);
+            rdoCidr.Name = "rdoCidr";
+            rdoCidr.Size = new Size(63, 24);
+            rdoCidr.TabIndex = 28;
+            rdoCidr.Text = "CIDR";
+            rdoCidr.UseVisualStyleBackColor = true;
+            rdoCidr.CheckedChanged += rdoMsq_CheckedChanged;
+            // 
+            // rdoDecmsq
+            // 
+            rdoDecmsq.AutoSize = true;
+            rdoDecmsq.Checked = true;
+            rdoDecmsq.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            rdoDecmsq.Location = new Point(18, 40);
+            rdoDecmsq.Name = "rdoDecmsq";
+            rdoDecmsq.Size = new Size(85, 24);
+            rdoDecmsq.TabIndex = 27;
+            rdoDecmsq.TabStop = true;
+            rdoDecmsq.Text = "Decimal";
+            rdoDecmsq.UseVisualStyleBackColor = true;
+            rdoDecmsq.CheckedChanged += rdoMsq_CheckedChanged;
+            // 
             // lblMsqSlash
             // 
             lblMsqSlash.AutoSize = true;
-            lblMsqSlash.Location = new Point(103, 150);
+            lblMsqSlash.Location = new Point(103, 195);
             lblMsqSlash.Name = "lblMsqSlash";
             lblMsqSlash.Size = new Size(17, 23);
             lblMsqSlash.TabIndex = 25;
@@ -533,7 +634,7 @@
             // grpFLSM
             // 
             grpFLSM.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpFLSM.Location = new Point(12, 484);
+            grpFLSM.Location = new Point(12, 626);
             grpFLSM.Name = "grpFLSM";
             grpFLSM.Size = new Size(451, 130);
             grpFLSM.TabIndex = 2;
@@ -544,7 +645,7 @@
             // 
             btnValider.Enabled = false;
             btnValider.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnValider.Location = new Point(369, 698);
+            btnValider.Location = new Point(369, 831);
             btnValider.Name = "btnValider";
             btnValider.Size = new Size(94, 40);
             btnValider.TabIndex = 3;
@@ -555,7 +656,7 @@
             // 
             lblMsg.AutoSize = true;
             lblMsg.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMsg.Location = new Point(12, 641);
+            lblMsg.Location = new Point(2, 789);
             lblMsg.Name = "lblMsg";
             lblMsg.Size = new Size(181, 20);
             lblMsg.TabIndex = 4;
@@ -565,7 +666,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1095, 770);
+            ClientSize = new Size(1095, 883);
             Controls.Add(lblMsg);
             Controls.Add(btnValider);
             Controls.Add(grpFLSM);
@@ -638,5 +739,11 @@
         private GroupBox grpFLSM;
         private Button btnValider;
         private Label lblMsg;
+        private RadioButton rdoBinaireIP;
+        private RadioButton rdohexaIP;
+        private RadioButton rdoDecIP;
+        private RadioButton rdoBinaireMsq;
+        private RadioButton rdoCidr;
+        private RadioButton rdoDecmsq;
     }
 }

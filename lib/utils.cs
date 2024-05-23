@@ -38,6 +38,12 @@ namespace Reseau.lib
             return true;
         }
 
+        public static void Vider(params TextBox[] champs)
+        {
+            foreach (var champ in champs)
+                champ.Clear();
+        }
+
         private static bool EstBinaire(string text)
         {
             return text.All(c => c == '0' || c == '1');
