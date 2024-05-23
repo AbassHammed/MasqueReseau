@@ -121,6 +121,46 @@
             return string.Join(".", binaryMask);
         }
 
+        public static string BinaryToCidr(string binaryMask)
+        {
+            var parts = binaryMask.Split('.');
+            if (parts.Length != 4)
+                throw new ArgumentException("Invalid binary mask format");
+
+            uint mask = 0;
+            for (int i = 0; i < 4; i++)
+                mask |= Convert.ToUInt32(parts[i], 2) << (24 - (i * 8));
+
+            int prefixLength = 0;
+            while (mask > 0)
+            {
+                prefixLength += (int)(mask & 1);
+                mask >>= 1;
+            }
+
+            return prefixLength.ToString();
+        }
+
+        public static string DecimalToCidr(string decimalMask)
+        {
+            var parts = decimalMask.Split('.');
+            if (parts.Length != 4)
+                throw new ArgumentException("Invalid decimal mask format");
+
+            uint mask = 0;
+            for (int i = 0; i < 4; i++)
+                mask |= uint.Parse(parts[i]) << (24 - (i * 8));
+
+            int prefixLength = 0;
+            while (mask > 0)
+            {
+                prefixLength += (int)(mask & 1);
+                mask >>= 1;
+            }
+
+            return prefixLength.ToString();
+        }
+
 
 
     }

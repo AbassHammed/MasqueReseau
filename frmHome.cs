@@ -8,107 +8,7 @@ namespace Reseau
             InitializeComponent();
         }
 
-        private void txtDEC1_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtDEC2_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtDEC3_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtDEC4_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtBI1_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtBI2_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtBI3_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtBI4_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtHEX1_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtHEX2_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtHEX3_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtHEX4_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtMsqDEC1_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtMsqDEC2_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtMsqDEC3_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtMsqDEC4_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtMsqBI1_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtMsqBI2_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtMsqBI3_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtMsqBI4_TextChanged(object sender, EventArgs e)
-        {
-            CheckFields();
-        }
-
-        private void txtMsqCIDR_TextChanged(object sender, EventArgs e)
+        private void textBox_TextChanged(object sender, EventArgs e)
         {
             CheckFields();
         }
@@ -121,7 +21,8 @@ namespace Reseau
                 SetMessage("Veuillez respecter les limites", Color.Red, false);
             else
             {
-                convertOnVerify();
+                ConvertOnVerifyIP();
+                ConvertOnVerifyMsq();
                 SetMessage("Tous les champs sont correctement remplis", Color.Green, true);
             }
         }
@@ -134,7 +35,7 @@ namespace Reseau
             btnValider.Enabled = isEnabled;
         }
 
-        private void convertOnVerify()
+        private void ConvertOnVerifyIP()
         {
             if (rdoDecIP.Checked)
                 ConvertFromDecimalIP();
@@ -142,6 +43,18 @@ namespace Reseau
                 ConvertFromBinaryIP();
             else if (rdohexaIP.Checked)
                 ConvertFromHexaIP();
+            else
+                SetMessage("Veuillez choisir une option", Color.Red, false);
+        }
+
+        private void ConvertOnVerifyMsq()
+        {
+            if (rdoDecmsq.Checked)
+                ConvertFromDecimalMsq();
+            else if (rdoBinaireMsq.Checked)
+                ConvertFromBinaryMsq();
+            else if (rdoCidr.Checked)
+                ConvertFromCidr();
             else
                 SetMessage("Veuillez choisir une option", Color.Red, false);
         }
@@ -270,6 +183,17 @@ namespace Reseau
             txtHEX4.Text = Utils.DecimalToHex(txtDEC4.Text);
         }
 
+        private void ConvertFromDecimalMsq()
+        {
+            txtMsqBI1.Text = Utils.DecimalToBinary(txtMsqDEC1.Text);
+            txtMsqBI2.Text = Utils.DecimalToBinary(txtMsqDEC2.Text);
+            txtMsqBI3.Text = Utils.DecimalToBinary(txtMsqDEC3.Text);
+            txtMsqBI4.Text = Utils.DecimalToBinary(txtMsqDEC4.Text);
+
+            string cidr = string.Format("{0}.{1}.{2}.{3}", txtMsqDEC1.Text, txtMsqDEC2.Text, txtMsqDEC3.Text, txtMsqDEC4.Text);
+            txtMsqCIDR.Text = Utils.DecimalToCidr(cidr);
+        }
+
         private void ConvertFromBinaryIP()
         {
             txtDEC1.Text = Utils.BinaryToDecimal(txtBI1.Text);
@@ -283,6 +207,17 @@ namespace Reseau
             txtHEX4.Text = Utils.BinaryToHex(txtBI4.Text);
         }
 
+        private void ConvertFromBinaryMsq()
+        {
+            txtMsqDEC1.Text = Utils.BinaryToDecimal(txtMsqBI1.Text);
+            txtMsqDEC2.Text = Utils.BinaryToDecimal(txtMsqBI2.Text);
+            txtMsqDEC3.Text = Utils.BinaryToDecimal(txtMsqBI3.Text);
+            txtMsqDEC4.Text = Utils.BinaryToDecimal(txtMsqBI4.Text);
+
+            string cidr = string.Format("{0}.{1}.{2}.{3}", txtMsqBI1.Text, txtMsqBI2.Text, txtMsqBI3.Text, txtMsqBI4.Text);
+            txtMsqCIDR.Text = Utils.BinaryToCidr(cidr);
+        }
+
         private void ConvertFromHexaIP()
         {
             txtDEC1.Text = Utils.HexToDecimal(txtHEX1.Text);
@@ -294,6 +229,22 @@ namespace Reseau
             txtBI2.Text = Utils.HexToBinary(txtHEX2.Text);
             txtBI3.Text = Utils.HexToBinary(txtHEX3.Text);
             txtBI4.Text = Utils.HexToBinary(txtHEX4.Text);
+        }
+
+        private void ConvertFromCidr()
+        {
+            string cidr = Utils.CidrToDecimal(txtMsqCIDR.Text);
+            txtMsqDEC1.Text = cidr.Split('.')[0];
+            txtMsqDEC2.Text = cidr.Split('.')[1];
+            txtMsqDEC3.Text = cidr.Split('.')[2];
+            txtMsqDEC4.Text = cidr.Split('.')[3];
+
+            string binary = Utils.CidrToBinary(txtMsqCIDR.Text);
+            txtMsqBI1.Text = binary.Split('.')[0];
+            txtMsqBI2.Text = binary.Split('.')[1];
+            txtMsqBI3.Text = binary.Split('.')[2];
+            txtMsqBI4.Text = binary.Split('.')[3];
+
         }
     }
 }

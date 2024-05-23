@@ -102,7 +102,7 @@
             txtDEC1.Name = "txtDEC1";
             txtDEC1.Size = new Size(86, 30);
             txtDEC1.TabIndex = 1;
-            txtDEC1.TextChanged += txtDEC1_TextChanged;
+            txtDEC1.TextChanged += textBox_TextChanged;
             // 
             // txtDEC2
             // 
@@ -110,7 +110,7 @@
             txtDEC2.Name = "txtDEC2";
             txtDEC2.Size = new Size(89, 30);
             txtDEC2.TabIndex = 2;
-            txtDEC2.TextChanged += txtDEC2_TextChanged;
+            txtDEC2.TextChanged += textBox_TextChanged;
             // 
             // txtDEC3
             // 
@@ -118,7 +118,7 @@
             txtDEC3.Name = "txtDEC3";
             txtDEC3.Size = new Size(89, 30);
             txtDEC3.TabIndex = 3;
-            txtDEC3.TextChanged += txtDEC3_TextChanged;
+            txtDEC3.TextChanged += textBox_TextChanged;
             // 
             // txtDEC4
             // 
@@ -126,7 +126,7 @@
             txtDEC4.Name = "txtDEC4";
             txtDEC4.Size = new Size(89, 30);
             txtDEC4.TabIndex = 4;
-            txtDEC4.TextChanged += txtDEC4_TextChanged;
+            txtDEC4.TextChanged += textBox_TextChanged;
             // 
             // lblDEC1
             // 
@@ -175,7 +175,7 @@
             txtBI1.Name = "txtBI1";
             txtBI1.Size = new Size(89, 30);
             txtBI1.TabIndex = 9;
-            txtBI1.TextChanged += txtBI1_TextChanged;
+            txtBI1.TextChanged += textBox_TextChanged;
             // 
             // txtBI2
             // 
@@ -184,7 +184,7 @@
             txtBI2.Name = "txtBI2";
             txtBI2.Size = new Size(89, 30);
             txtBI2.TabIndex = 10;
-            txtBI2.TextChanged += txtBI2_TextChanged;
+            txtBI2.TextChanged += textBox_TextChanged;
             // 
             // txtBI3
             // 
@@ -193,7 +193,7 @@
             txtBI3.Name = "txtBI3";
             txtBI3.Size = new Size(89, 30);
             txtBI3.TabIndex = 11;
-            txtBI3.TextChanged += txtBI3_TextChanged;
+            txtBI3.TextChanged += textBox_TextChanged;
             // 
             // txtBI4
             // 
@@ -202,7 +202,7 @@
             txtBI4.Name = "txtBI4";
             txtBI4.Size = new Size(89, 30);
             txtBI4.TabIndex = 12;
-            txtBI4.TextChanged += txtBI4_TextChanged;
+            txtBI4.TextChanged += textBox_TextChanged;
             // 
             // lblBI1
             // 
@@ -251,7 +251,7 @@
             txtHEX1.Name = "txtHEX1";
             txtHEX1.Size = new Size(89, 30);
             txtHEX1.TabIndex = 17;
-            txtHEX1.TextChanged += txtHEX1_TextChanged;
+            txtHEX1.TextChanged += textBox_TextChanged;
             // 
             // txtHEX2
             // 
@@ -260,7 +260,7 @@
             txtHEX2.Name = "txtHEX2";
             txtHEX2.Size = new Size(89, 30);
             txtHEX2.TabIndex = 18;
-            txtHEX2.TextChanged += txtHEX2_TextChanged;
+            txtHEX2.TextChanged += textBox_TextChanged;
             // 
             // txtHEX3
             // 
@@ -269,7 +269,7 @@
             txtHEX3.Name = "txtHEX3";
             txtHEX3.Size = new Size(89, 30);
             txtHEX3.TabIndex = 19;
-            txtHEX3.TextChanged += txtHEX3_TextChanged;
+            txtHEX3.TextChanged += textBox_TextChanged;
             // 
             // txtHEX4
             // 
@@ -278,7 +278,7 @@
             txtHEX4.Name = "txtHEX4";
             txtHEX4.Size = new Size(89, 30);
             txtHEX4.TabIndex = 20;
-            txtHEX4.TextChanged += txtHEX4_TextChanged;
+            txtHEX4.TextChanged += textBox_TextChanged;
             // 
             // lblHEX1
             // 
@@ -392,7 +392,7 @@
             txtMsqCIDR.Name = "txtMsqCIDR";
             txtMsqCIDR.Size = new Size(62, 30);
             txtMsqCIDR.TabIndex = 17;
-            txtMsqCIDR.TextChanged += txtMsqCIDR_TextChanged;
+            txtMsqCIDR.TextChanged += textBox_TextChanged;
             // 
             // lblAdrMsqCIDR
             // 
@@ -441,7 +441,7 @@
             txtMsqBI4.Name = "txtMsqBI4";
             txtMsqBI4.Size = new Size(89, 30);
             txtMsqBI4.TabIndex = 12;
-            txtMsqBI4.TextChanged += txtMsqBI4_TextChanged;
+            txtMsqBI4.TextChanged += textBox_TextChanged;
             // 
             // txtMsqBI3
             // 
@@ -450,7 +450,7 @@
             txtMsqBI3.Name = "txtMsqBI3";
             txtMsqBI3.Size = new Size(89, 30);
             txtMsqBI3.TabIndex = 11;
-            txtMsqBI3.TextChanged += txtMsqBI3_TextChanged;
+            txtMsqBI3.TextChanged += textBox_TextChanged;
             // 
             // txtMsqBI2
             // 
@@ -459,7 +459,7 @@
             txtMsqBI2.Name = "txtMsqBI2";
             txtMsqBI2.Size = new Size(89, 30);
             txtMsqBI2.TabIndex = 10;
-            txtMsqBI2.TextChanged += txtMsqBI2_TextChanged;
+            txtMsqBI2.TextChanged += textBox_TextChanged;
             // 
             // txtMsqBI1
             // 
@@ -468,7 +468,7 @@
             txtMsqBI1.Name = "txtMsqBI1";
             txtMsqBI1.Size = new Size(89, 30);
             txtMsqBI1.TabIndex = 9;
-            txtMsqBI1.TextChanged += txtMsqBI1_TextChanged;
+            txtMsqBI1.TextChanged += textBox_TextChanged;
             // 
             // lblAdrMsqBI
             // 
@@ -516,7 +516,7 @@
             txtMsqDEC4.Name = "txtMsqDEC4";
             txtMsqDEC4.Size = new Size(89, 30);
             txtMsqDEC4.TabIndex = 4;
-            txtMsqDEC4.TextChanged += txtMsqDEC4_TextChanged;
+            txtMsqDEC4.TextChanged += textBox_TextChanged;
             // 
             // txtMsqDEC3
             // 
@@ -524,7 +524,7 @@
             txtMsqDEC3.Name = "txtMsqDEC3";
             txtMsqDEC3.Size = new Size(89, 30);
             txtMsqDEC3.TabIndex = 3;
-            txtMsqDEC3.TextChanged += txtMsqDEC3_TextChanged;
+            txtMsqDEC3.TextChanged += textBox_TextChanged;
             // 
             // txtMsqDEC2
             // 
@@ -532,7 +532,7 @@
             txtMsqDEC2.Name = "txtMsqDEC2";
             txtMsqDEC2.Size = new Size(89, 30);
             txtMsqDEC2.TabIndex = 2;
-            txtMsqDEC2.TextChanged += txtMsqDEC2_TextChanged;
+            txtMsqDEC2.TextChanged += textBox_TextChanged;
             // 
             // txtMsqDEC1
             // 
@@ -540,7 +540,7 @@
             txtMsqDEC1.Name = "txtMsqDEC1";
             txtMsqDEC1.Size = new Size(89, 30);
             txtMsqDEC1.TabIndex = 1;
-            txtMsqDEC1.TextChanged += txtMsqDEC1_TextChanged;
+            txtMsqDEC1.TextChanged += textBox_TextChanged;
             // 
             // lblAdrMsqDEC
             // 
