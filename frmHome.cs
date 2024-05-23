@@ -120,7 +120,10 @@ namespace Reseau
             else if (!VerifyMsq())
                 SetMessage("Veuillez respecter les limites", Color.Red, false);
             else
+            {
+                convertOnVerify();
                 SetMessage("Tous les champs sont correctement remplis", Color.Green, true);
+            }
         }
 
 
@@ -129,6 +132,18 @@ namespace Reseau
             lblMsg.ForeColor = color;
             lblMsg.Text = message;
             btnValider.Enabled = isEnabled;
+        }
+
+        private void convertOnVerify()
+        {
+            if (rdoDecIP.Checked)
+                ConvertFromDecimalIP();
+            else if (rdoBinaireIP.Checked)
+                ConvertFromBinaryIP();
+            else if (rdohexaIP.Checked)
+                ConvertFromHexaIP();
+            else
+                SetMessage("Veuillez choisir une option", Color.Red, false);
         }
 
         private bool VerifyIp()
@@ -240,6 +255,45 @@ namespace Reseau
             txtMsqBI3.Enabled = BiState;
             txtMsqBI4.Enabled = BiState;
             txtMsqCIDR.Enabled = CidrState;
+        }
+
+        private void ConvertFromDecimalIP()
+        {
+            txtBI1.Text = Utils.DecimalToBinary(txtDEC1.Text);
+            txtBI2.Text = Utils.DecimalToBinary(txtDEC2.Text);
+            txtBI3.Text = Utils.DecimalToBinary(txtDEC3.Text);
+            txtBI4.Text = Utils.DecimalToBinary(txtDEC4.Text);
+
+            txtHEX1.Text = Utils.DecimalToHex(txtDEC1.Text);
+            txtHEX2.Text = Utils.DecimalToHex(txtDEC2.Text);
+            txtHEX3.Text = Utils.DecimalToHex(txtDEC3.Text);
+            txtHEX4.Text = Utils.DecimalToHex(txtDEC4.Text);
+        }
+
+        private void ConvertFromBinaryIP()
+        {
+            txtDEC1.Text = Utils.BinaryToDecimal(txtBI1.Text);
+            txtDEC2.Text = Utils.BinaryToDecimal(txtBI2.Text);
+            txtDEC3.Text = Utils.BinaryToDecimal(txtBI3.Text);
+            txtDEC4.Text = Utils.BinaryToDecimal(txtBI4.Text);
+
+            txtHEX1.Text = Utils.BinaryToHex(txtBI1.Text);
+            txtHEX2.Text = Utils.BinaryToHex(txtBI2.Text);
+            txtHEX3.Text = Utils.BinaryToHex(txtBI3.Text);
+            txtHEX4.Text = Utils.BinaryToHex(txtBI4.Text);
+        }
+
+        private void ConvertFromHexaIP()
+        {
+            txtDEC1.Text = Utils.HexToDecimal(txtHEX1.Text);
+            txtDEC2.Text = Utils.HexToDecimal(txtHEX2.Text);
+            txtDEC3.Text = Utils.HexToDecimal(txtHEX3.Text);
+            txtDEC4.Text = Utils.HexToDecimal(txtHEX4.Text);
+
+            txtBI1.Text = Utils.HexToBinary(txtHEX1.Text);
+            txtBI2.Text = Utils.HexToBinary(txtHEX2.Text);
+            txtBI3.Text = Utils.HexToBinary(txtHEX3.Text);
+            txtBI4.Text = Utils.HexToBinary(txtHEX4.Text);
         }
     }
 }

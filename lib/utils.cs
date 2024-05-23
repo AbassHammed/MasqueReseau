@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Reseau.lib
+﻿namespace Reseau.lib
 {
     public class Utils
     {
@@ -65,6 +59,68 @@ namespace Reseau.lib
                     return false;
             return true;
         }
+        public static string BinaryToHex(string binary)
+        {
+            int decimalValue = Convert.ToInt32(binary, 2);
+            return decimalValue.ToString("X");
+        }
+
+        public static string HexToBinary(string hex)
+        {
+            int decimalValue = Convert.ToInt32(hex, 16);
+            return Convert.ToString(decimalValue, 2).PadLeft(8, '0');
+        }
+
+        public static string DecimalToBinary(string decimalNumberStr)
+        {
+            int decimalNumber = int.Parse(decimalNumberStr);
+            return Convert.ToString(decimalNumber, 2).PadLeft(8, '0');
+        }
+
+        public static string BinaryToDecimal(string binary)
+        {
+            int decimalValue = Convert.ToInt32(binary, 2);
+            return decimalValue.ToString();
+        }
+
+        public static string HexToDecimal(string hex)
+        {
+            int decimalValue = Convert.ToInt32(hex, 16);
+            return decimalValue.ToString();
+        }
+
+        public static string DecimalToHex(string decimalNumberStr)
+        {
+            int decimalNumber = int.Parse(decimalNumberStr);
+            return decimalNumber.ToString("X");
+        }
+
+        public static string CidrToDecimal(string cidr)
+        {
+            int prefixLength = int.Parse(cidr);
+
+            uint mask = uint.MaxValue << (32 - prefixLength);
+
+            string[] decimalMask = new string[4];
+            for (int i = 0; i < 4; i++)
+                decimalMask[i] = ((mask >> (24 - (i * 8))) & 0xFF).ToString();
+
+            return string.Join(".", decimalMask);
+        }
+
+        public static string CidrToBinary(string cidr)
+        {
+            int prefixLength = int.Parse(cidr);
+
+            uint mask = uint.MaxValue << (32 - prefixLength);
+
+            string[] binaryMask = new string[4];
+            for (int i = 0; i < 4; i++)
+                binaryMask[i] = Convert.ToString((mask >> (24 - (i * 8))) & 0xFF, 2).PadLeft(8, '0');
+
+            return string.Join(".", binaryMask);
+        }
+
 
 
     }
