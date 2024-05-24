@@ -11,6 +11,15 @@
             return true;
         }
 
+        public static bool IsEmpty(params TextBox[] champs)
+        {
+            foreach (var champ in champs)
+                if (string.IsNullOrWhiteSpace(champ.Text))
+                    return true;
+
+            return false;
+        }
+
         public static void Vider(params TextBox[] champs)
         {
             foreach (var champ in champs)
@@ -42,8 +51,7 @@
         {
             string[] hexValues = new string[champs.Length];
             for (int i = 0; i < champs.Length; i++)
-                if (int.TryParse(champs[i].Text, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture, out int decimalValue))
-                    hexValues[i] = Convert.ToString(decimalValue, 16).PadLeft(2, '0');
+                hexValues[i] = Convert.ToInt32(champs[i].Text, 2).ToString("X");
 
             return string.Join(".", hexValues);
         }
@@ -52,8 +60,7 @@
         {
             string[] binaryValues = new string[champs.Length];
             for (int i = 0; i < champs.Length; i++)
-                if (int.TryParse(champs[i].Text, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture, out int decimalValue))
-                    binaryValues[i] = Convert.ToString(decimalValue, 2).PadLeft(8, '0');
+                binaryValues[i] = Convert.ToString(Convert.ToInt32(champs[i].Text, 16), 2).PadLeft(8, '0');
 
             return string.Join(".", binaryValues);
         }
@@ -68,22 +75,35 @@
             return string.Join(".", binaryValues);
         }
 
-        public static string BinaryToDecimal(string binary)
+        public static string BinaryToDecimal(params TextBox[] champs)
         {
-            int decimalValue = Convert.ToInt32(binary, 2);
-            return decimalValue.ToString();
+            string[] decimalValues = new string[champs.Length];
+            for (int i = 0; i < champs.Length; i++)
+                if (int.TryParse(champs[i].Text, out _))
+                    decimalValues[i] = Convert.ToInt32(champs[i].Text, 2).ToString();
+
+            return string.Join(".", decimalValues);
+
         }
 
-        public static string HexToDecimal(string hex)
+
+        public static string HexToDecimal(params TextBox[] champs)
         {
-            int decimalValue = Convert.ToInt32(hex, 16);
-            return decimalValue.ToString();
+            string[] decimalValues = new string[champs.Length];
+            for (int i = 0; i < champs.Length; i++)
+                decimalValues[i] = Convert.ToInt32(champs[i].Text, 16).ToString();
+
+            return string.Join(".", decimalValues);
         }
 
-        public static string DecimalToHex(string decimalNumberStr)
+        public static string DecimalToHex(params TextBox[] champs)
         {
-            int decimalNumber = int.Parse(decimalNumberStr);
-            return decimalNumber.ToString("X");
+            string[] hexValues = new string[champs.Length];
+            for (int i = 0; i < champs.Length; i++)
+                if (int.TryParse(champs[i].Text, out int decimalValue))
+                    hexValues[i] = decimalValue.ToString("X");
+
+            return string.Join(".", hexValues);
         }
 
         public static string CidrToDecimal(string cidr)
@@ -152,7 +172,7 @@
             return prefixLength.ToString();
         }
 
-        public static void adjustIpDec(int min, int max, params TextBox[] champs)
+        public static bool adjustIpDec(int min, int max, params TextBox[] champs)
         {
             foreach (var champ in champs)
             {
@@ -163,7 +183,10 @@
                     else if (valeur > max)
                         champ.Text = max.ToString();
                 }
+                else
+                    return false;
             }
+            return true;
         }
 
         // public static void adjustMaskDec(params TextBox[] champs)
@@ -193,17 +216,22 @@
 
             for (int i = 0; i < champs.Length; i++)
             {
-                if (int.TryParse(champs[i].Text, out int currentValue) && validMaskValues.Contains(currentValue))
+                if (int.TryParse(champs[i].Text, out int currentValue))
                 {
-                    if (currentValue <= previousValue)
+                    if (validMaskValues.Contains(currentValue))
                     {
-                        if (previousValue != 255 && currentValue != 0)
-                            champs[i].Text = "0";
+                        if (currentValue <= previousValue)
+                        {
+                            if (previousValue != 255 && currentValue != 0)
+                                champs[i].Text = "0";
+                            else
+                                previousValue = currentValue;
+                        }
                         else
-                            previousValue = currentValue;
+                            champs[i].Text = "0";
                     }
                     else
-                        champs[i].Text = "0";
+                        champs[i].Text = previousValue.ToString();
                 }
             }
 

@@ -12,29 +12,50 @@ namespace Reseau
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permettre uniquement les touches '0', '1' et les touches de contrôle comme Backspace
-            if (e.KeyChar != '0' && e.KeyChar != '1' && !char.IsControl(e.KeyChar))
-                e.Handled = true; // Bloque la touche
+            // if (e.KeyChar != '0' && e.KeyChar != '1' && !char.IsControl(e.KeyChar))
+            // {
+            //     e.Handled = true; // Bloque la touche
+            //     SetMessage("Champs binaires, seulement '0' et '1'", Color.Red, false);
+            // }
         }
 
-        private void textBox_TextChanged(object sender, EventArgs e)
+        private void textBoxIp_TextChanged(object sender, EventArgs e)
         {
-            CheckFields();
+            CheckIpFields();
+            btnValider.Enabled = VerifyIpAddress() && VerifyMaskAddress();
         }
 
-        private void CheckFields()
+        private void textBoxMask_TextChanged(object sender, EventArgs e)
+        {
+            CheckMaskFields();
+            btnValider.Enabled = VerifyIpAddress() && VerifyMaskAddress();
+        }
+
+        private void CheckIpFields()
         {
             if (!VerifyIpAddress())
+            {
                 SetMessage("Veuillez remplir les champs correctement", Color.Red, false);
-            else if (!VerifyMaskAddress())
-                SetMessage("Veuillez respecter les limites", Color.Red, false);
+            }
             else
             {
                 ConvertOnVerifyIP();
-                ConvertOnVerifyMsq();
-                SetMessage("Tous les champs sont correctement remplis", Color.Green, true);
+                SetMessage("Tous les champs IP sont correctement remplis", Color.Green, false);
             }
         }
 
+        private void CheckMaskFields()
+        {
+            if (!VerifyMaskAddress())
+            {
+                SetMessage("Veuillez respecter les limites du masque", Color.Red, false);
+            }
+            else
+            {
+                ConvertOnVerifyMask();
+                SetMessage("Tous les champs de masque sont correctement remplis", Color.Green, false);
+            }
+        }
 
         private void SetMessage(string message, Color color, bool isEnabled)
         {
@@ -51,11 +72,9 @@ namespace Reseau
                 ConvertFromBinaryIP();
             else if (rdohexaIP.Checked)
                 ConvertFromHexaIP();
-            else
-                SetMessage("Veuillez choisir une option", Color.Red, false);
         }
 
-        private void ConvertOnVerifyMsq()
+        private void ConvertOnVerifyMask()
         {
             if (rdoDecmsq.Checked)
                 ConvertFromDecimalMsq();
@@ -63,8 +82,6 @@ namespace Reseau
                 ConvertFromBinaryMsq();
             else if (rdoCidr.Checked)
                 ConvertFromCidr();
-            else
-                SetMessage("Veuillez choisir une option", Color.Red, false);
         }
 
         private bool VerifyIpAddress()
@@ -183,10 +200,11 @@ namespace Reseau
             txtBI3.Text = binary[2];
             txtBI4.Text = binary[3];
 
-            txtHEX1.Text = Utils.DecimalToHex(txtDEC1.Text);
-            txtHEX2.Text = Utils.DecimalToHex(txtDEC2.Text);
-            txtHEX3.Text = Utils.DecimalToHex(txtDEC3.Text);
-            txtHEX4.Text = Utils.DecimalToHex(txtDEC4.Text);
+            string[] hexValues = Utils.DecimalToHex(txtDEC1, txtDEC2, txtDEC3, txtDEC4).Split('.');
+            txtHEX1.Text = hexValues[0];
+            txtHEX2.Text = hexValues[1];
+            txtHEX3.Text = hexValues[2];
+            txtHEX4.Text = hexValues[3];
         }
 
         private void ConvertFromDecimalMsq()
@@ -203,10 +221,11 @@ namespace Reseau
 
         private void ConvertFromBinaryIP()
         {
-            txtDEC1.Text = Utils.BinaryToDecimal(txtBI1.Text);
-            txtDEC2.Text = Utils.BinaryToDecimal(txtBI2.Text);
-            txtDEC3.Text = Utils.BinaryToDecimal(txtBI3.Text);
-            txtDEC4.Text = Utils.BinaryToDecimal(txtBI4.Text);
+            string[] decValue = Utils.BinaryToDecimal(txtBI1, txtBI2, txtBI3, txtBI4).Split('.');
+            txtDEC1.Text = decValue[0];
+            txtDEC2.Text = decValue[1];
+            txtDEC3.Text = decValue[2];
+            txtDEC4.Text = decValue[3];
 
             string[] hexValue = Utils.BinaryToHex(txtBI1, txtBI2, txtBI3, txtBI4).Split('.');
             txtHEX1.Text = hexValue[0];
@@ -217,10 +236,11 @@ namespace Reseau
 
         private void ConvertFromBinaryMsq()
         {
-            txtMsqDEC1.Text = Utils.BinaryToDecimal(txtMsqBI1.Text);
-            txtMsqDEC2.Text = Utils.BinaryToDecimal(txtMsqBI2.Text);
-            txtMsqDEC3.Text = Utils.BinaryToDecimal(txtMsqBI3.Text);
-            txtMsqDEC4.Text = Utils.BinaryToDecimal(txtMsqBI4.Text);
+            string[] decValues = Utils.BinaryToDecimal(txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4).Split('.');
+            txtMsqDEC1.Text = decValues[0];
+            txtMsqDEC2.Text = decValues[1];
+            txtMsqDEC3.Text = decValues[2];
+            txtMsqDEC4.Text = decValues[3];
 
             string cidr = string.Format("{0}.{1}.{2}.{3}", txtMsqBI1.Text, txtMsqBI2.Text, txtMsqBI3.Text, txtMsqBI4.Text);
             txtMsqCIDR.Text = Utils.BinaryToCidr(cidr);
@@ -228,16 +248,17 @@ namespace Reseau
 
         private void ConvertFromHexaIP()
         {
-            txtDEC1.Text = Utils.HexToDecimal(txtHEX1.Text);
-            txtDEC2.Text = Utils.HexToDecimal(txtHEX2.Text);
-            txtDEC3.Text = Utils.HexToDecimal(txtHEX3.Text);
-            txtDEC4.Text = Utils.HexToDecimal(txtHEX4.Text);
+            string[] decValues = Utils.HexToDecimal(txtHEX1, txtHEX2, txtHEX3, txtHEX4).Split('.');
+            txtDEC1.Text = decValues[0];
+            txtDEC2.Text = decValues[1];
+            txtDEC3.Text = decValues[2];
+            txtDEC4.Text = decValues[3];
 
-            string[] hexValues = Utils.HexToBinary(txtHEX1, txtHEX2, txtHEX3, txtHEX4).Split('.');
-            txtBI1.Text = hexValues[0];
-            txtBI2.Text = hexValues[1];
-            txtBI3.Text = hexValues[2];
-            txtBI4.Text = hexValues[3];
+            string[] binaryValues = Utils.HexToBinary(txtHEX1, txtHEX2, txtHEX3, txtHEX4).Split('.');
+            txtBI1.Text = binaryValues[0];
+            txtBI2.Text = binaryValues[1];
+            txtBI3.Text = binaryValues[2];
+            txtBI4.Text = binaryValues[3];
         }
 
         private void ConvertFromCidr()
