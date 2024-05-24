@@ -1,4 +1,5 @@
 using Reseau.lib;
+using System.Diagnostics;
 namespace Reseau
 {
     public partial class frmHome : Form
@@ -8,6 +9,13 @@ namespace Reseau
             InitializeComponent();
         }
 
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permettre uniquement les touches '0', '1' et les touches de contrôle comme Backspace
+            if (e.KeyChar != '0' && e.KeyChar != '1' && !char.IsControl(e.KeyChar))
+                e.Handled = true; // Bloque la touche
+        }
+
         private void textBox_TextChanged(object sender, EventArgs e)
         {
             CheckFields();
@@ -15,9 +23,9 @@ namespace Reseau
 
         private void CheckFields()
         {
-            if (!VerifyIp())
+            if (!VerifyIpAddress())
                 SetMessage("Veuillez remplir les champs correctement", Color.Red, false);
-            else if (!VerifyMsq())
+            else if (!VerifyMaskAddress())
                 SetMessage("Veuillez respecter les limites", Color.Red, false);
             else
             {
@@ -59,55 +67,52 @@ namespace Reseau
                 SetMessage("Veuillez choisir une option", Color.Red, false);
         }
 
-        private bool VerifyIp()
+        private bool VerifyIpAddress()
         {
             if (rdoDecIP.Checked)
-                return VerifyIpDec();
+            {
+                Utils.adjustIpDec(0, 255, txtDEC1, txtDEC2, txtDEC3, txtDEC4);
+                return VerifyIpDecimal();
+            }
             else if (rdoBinaireIP.Checked)
-                return VerifyIpBi();
+                return VerifyIpBinary();
             else if (rdohexaIP.Checked)
-                return VerifyIpHex();
+                return VerifyIpHexadecimal();
             else
                 return false;
         }
 
-        private bool VerifyMsq()
+        private bool VerifyMaskAddress()
         {
             if (rdoDecmsq.Checked)
-                return VerifyMsqDec();
+            {
+                Utils.adjustMaskDec(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4);
+                return VerifyMaskDecimal();
+            }
             else if (rdoBinaireMsq.Checked)
-                return VerifyMsqBi();
+                return VerifyMaskBinary();
             else if (rdoCidr.Checked)
-                return VerifyMsqCidr();
+                return VerifyMaskCidr();
             else
                 return false;
         }
 
-        private bool VerifyIpDec() =>
-            Utils.ChampsEntiers(txtDEC1, txtDEC2, txtDEC3, txtDEC4) &&
-            Utils.ChampsRemplis(txtDEC1, txtDEC2, txtDEC3, txtDEC4) &&
+        private bool VerifyIpDecimal() =>
             Utils.ChampsDansLaLimite(255, txtDEC1, txtDEC2, txtDEC3, txtDEC4);
 
-        private bool VerifyIpBi() =>
-            Utils.ChampsBinaires(txtBI1, txtBI2, txtBI3, txtBI4) &&
-            Utils.ChampsRemplis(txtBI1, txtBI2, txtBI3, txtBI4);
+        private bool VerifyIpBinary() =>
+            Utils.ChampsBinaires(txtBI1, txtBI2, txtBI3, txtBI4);
 
-        private bool VerifyIpHex() =>
-            Utils.ChampsHexadecimaux(txtHEX1, txtHEX2, txtHEX3, txtHEX4) &&
-            Utils.ChampsRemplis(txtHEX1, txtHEX2, txtHEX3, txtHEX4);
+        private bool VerifyIpHexadecimal() =>
+            Utils.ChampsHexadecimaux(txtHEX1, txtHEX2, txtHEX3, txtHEX4);
 
-        private bool VerifyMsqDec() =>
-            Utils.ChampsEntiers(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4) &&
-            Utils.ChampsRemplis(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4) &&
+        private bool VerifyMaskDecimal() =>
             Utils.ChampsDansLaLimite(255, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4);
 
-        private bool VerifyMsqBi() =>
-            Utils.ChampsBinaires(txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4) &&
-            Utils.ChampsRemplis(txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4);
+        private bool VerifyMaskBinary() =>
+            Utils.ChampsBinaires(txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4);
 
-        private bool VerifyMsqCidr() =>
-            Utils.ChampsEntiers(txtMsqCIDR) &&
-            Utils.ChampsRemplis(txtMsqCIDR) &&
+        private bool VerifyMaskCidr() =>
             Utils.ChampsDansLaLimite(32, txtMsqCIDR);
 
 
@@ -131,11 +136,11 @@ namespace Reseau
             if (rdo.Checked)
             {
                 if (rdo == rdoDecmsq)
-                    EnableMsqFields(true, false, false);
+                    EnableMaskFields(true, false, false);
                 else if (rdo == rdoBinaireMsq)
-                    EnableMsqFields(false, true, false);
+                    EnableMaskFields(false, true, false);
                 else if (rdo == rdoCidr)
-                    EnableMsqFields(false, false, true);
+                    EnableMaskFields(false, false, true);
             }
         }
 
@@ -156,7 +161,7 @@ namespace Reseau
             txtHEX4.Enabled = HexState;
         }
 
-        private void EnableMsqFields(bool DecState, bool BiState, bool CidrState)
+        private void EnableMaskFields(bool DecState, bool BiState, bool CidrState)
         {
             Utils.Vider(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4, txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4, txtMsqCIDR);
             txtMsqDEC1.Enabled = DecState;
@@ -172,10 +177,11 @@ namespace Reseau
 
         private void ConvertFromDecimalIP()
         {
-            txtBI1.Text = Utils.DecimalToBinary(txtDEC1.Text);
-            txtBI2.Text = Utils.DecimalToBinary(txtDEC2.Text);
-            txtBI3.Text = Utils.DecimalToBinary(txtDEC3.Text);
-            txtBI4.Text = Utils.DecimalToBinary(txtDEC4.Text);
+            string[] binary = Utils.DecimalToBinary(txtDEC1, txtDEC2, txtDEC3, txtDEC4).Split('.');
+            txtBI1.Text = binary[0];
+            txtBI2.Text = binary[1];
+            txtBI3.Text = binary[2];
+            txtBI4.Text = binary[3];
 
             txtHEX1.Text = Utils.DecimalToHex(txtDEC1.Text);
             txtHEX2.Text = Utils.DecimalToHex(txtDEC2.Text);
@@ -185,10 +191,11 @@ namespace Reseau
 
         private void ConvertFromDecimalMsq()
         {
-            txtMsqBI1.Text = Utils.DecimalToBinary(txtMsqDEC1.Text);
-            txtMsqBI2.Text = Utils.DecimalToBinary(txtMsqDEC2.Text);
-            txtMsqBI3.Text = Utils.DecimalToBinary(txtMsqDEC3.Text);
-            txtMsqBI4.Text = Utils.DecimalToBinary(txtMsqDEC4.Text);
+            string[] binary = Utils.DecimalToBinary(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4).Split('.');
+            txtMsqBI1.Text = binary[0];
+            txtMsqBI2.Text = binary[1];
+            txtMsqBI3.Text = binary[2];
+            txtMsqBI4.Text = binary[3];
 
             string cidr = string.Format("{0}.{1}.{2}.{3}", txtMsqDEC1.Text, txtMsqDEC2.Text, txtMsqDEC3.Text, txtMsqDEC4.Text);
             txtMsqCIDR.Text = Utils.DecimalToCidr(cidr);
@@ -201,10 +208,11 @@ namespace Reseau
             txtDEC3.Text = Utils.BinaryToDecimal(txtBI3.Text);
             txtDEC4.Text = Utils.BinaryToDecimal(txtBI4.Text);
 
-            txtHEX1.Text = Utils.BinaryToHex(txtBI1.Text);
-            txtHEX2.Text = Utils.BinaryToHex(txtBI2.Text);
-            txtHEX3.Text = Utils.BinaryToHex(txtBI3.Text);
-            txtHEX4.Text = Utils.BinaryToHex(txtBI4.Text);
+            string[] hexValue = Utils.BinaryToHex(txtBI1, txtBI2, txtBI3, txtBI4).Split('.');
+            txtHEX1.Text = hexValue[0];
+            txtHEX2.Text = hexValue[1];
+            txtHEX3.Text = hexValue[2];
+            txtHEX4.Text = hexValue[3];
         }
 
         private void ConvertFromBinaryMsq()
@@ -225,25 +233,26 @@ namespace Reseau
             txtDEC3.Text = Utils.HexToDecimal(txtHEX3.Text);
             txtDEC4.Text = Utils.HexToDecimal(txtHEX4.Text);
 
-            txtBI1.Text = Utils.HexToBinary(txtHEX1.Text);
-            txtBI2.Text = Utils.HexToBinary(txtHEX2.Text);
-            txtBI3.Text = Utils.HexToBinary(txtHEX3.Text);
-            txtBI4.Text = Utils.HexToBinary(txtHEX4.Text);
+            string[] hexValues = Utils.HexToBinary(txtHEX1, txtHEX2, txtHEX3, txtHEX4).Split('.');
+            txtBI1.Text = hexValues[0];
+            txtBI2.Text = hexValues[1];
+            txtBI3.Text = hexValues[2];
+            txtBI4.Text = hexValues[3];
         }
 
         private void ConvertFromCidr()
         {
-            string cidr = Utils.CidrToDecimal(txtMsqCIDR.Text);
-            txtMsqDEC1.Text = cidr.Split('.')[0];
-            txtMsqDEC2.Text = cidr.Split('.')[1];
-            txtMsqDEC3.Text = cidr.Split('.')[2];
-            txtMsqDEC4.Text = cidr.Split('.')[3];
+            string[] decValues = Utils.CidrToDecimal(txtMsqCIDR.Text).Split('.');
+            txtMsqDEC1.Text = decValues[0];
+            txtMsqDEC2.Text = decValues[1];
+            txtMsqDEC3.Text = decValues[2];
+            txtMsqDEC4.Text = decValues[3];
 
-            string binary = Utils.CidrToBinary(txtMsqCIDR.Text);
-            txtMsqBI1.Text = binary.Split('.')[0];
-            txtMsqBI2.Text = binary.Split('.')[1];
-            txtMsqBI3.Text = binary.Split('.')[2];
-            txtMsqBI4.Text = binary.Split('.')[3];
+            string[] binaryValues = Utils.CidrToBinary(txtMsqCIDR.Text).Split('.');
+            txtMsqBI1.Text = binaryValues[0];
+            txtMsqBI2.Text = binaryValues[1];
+            txtMsqBI3.Text = binaryValues[2];
+            txtMsqBI4.Text = binaryValues[3];
 
         }
 
@@ -254,8 +263,13 @@ namespace Reseau
             rdoDecIP.Checked = true;
             rdoDecmsq.Checked = true;
             EnableIpFields(true, false, false);
-            EnableMsqFields(true, false, false);
+            EnableMaskFields(true, false, false);
             SetMessage("", Color.Red, false);
+        }
+
+        private void btnValider_Click(object sender, EventArgs e)
+        {
+            Debug.WriteLine("Validation en cours...");
         }
     }
 }

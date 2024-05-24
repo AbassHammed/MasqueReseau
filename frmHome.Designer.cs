@@ -99,6 +99,7 @@
             // txtDEC1
             // 
             txtDEC1.Location = new Point(109, 83);
+            txtDEC1.MaxLength = 3;
             txtDEC1.Name = "txtDEC1";
             txtDEC1.Size = new Size(86, 30);
             txtDEC1.TabIndex = 1;
@@ -107,6 +108,7 @@
             // txtDEC2
             // 
             txtDEC2.Location = new Point(225, 83);
+            txtDEC2.MaxLength = 3;
             txtDEC2.Name = "txtDEC2";
             txtDEC2.Size = new Size(89, 30);
             txtDEC2.TabIndex = 2;
@@ -115,6 +117,7 @@
             // txtDEC3
             // 
             txtDEC3.Location = new Point(341, 83);
+            txtDEC3.MaxLength = 3;
             txtDEC3.Name = "txtDEC3";
             txtDEC3.Size = new Size(89, 30);
             txtDEC3.TabIndex = 3;
@@ -123,6 +126,7 @@
             // txtDEC4
             // 
             txtDEC4.Location = new Point(457, 83);
+            txtDEC4.MaxLength = 3;
             txtDEC4.Name = "txtDEC4";
             txtDEC4.Size = new Size(89, 30);
             txtDEC4.TabIndex = 4;
@@ -172,36 +176,44 @@
             // 
             txtBI1.Enabled = false;
             txtBI1.Location = new Point(109, 137);
+            txtBI1.MaxLength = 8;
             txtBI1.Name = "txtBI1";
             txtBI1.Size = new Size(89, 30);
             txtBI1.TabIndex = 9;
+            txtBI1.KeyPress += TextBox_KeyPress;
             txtBI1.TextChanged += textBox_TextChanged;
             // 
             // txtBI2
             // 
             txtBI2.Enabled = false;
             txtBI2.Location = new Point(225, 137);
+            txtBI2.MaxLength = 8;
             txtBI2.Name = "txtBI2";
             txtBI2.Size = new Size(89, 30);
             txtBI2.TabIndex = 10;
+            txtBI2.KeyPress += TextBox_KeyPress;
             txtBI2.TextChanged += textBox_TextChanged;
             // 
             // txtBI3
             // 
             txtBI3.Enabled = false;
             txtBI3.Location = new Point(341, 137);
+            txtBI3.MaxLength = 8;
             txtBI3.Name = "txtBI3";
             txtBI3.Size = new Size(89, 30);
             txtBI3.TabIndex = 11;
+            txtBI3.KeyPress += TextBox_KeyPress;
             txtBI3.TextChanged += textBox_TextChanged;
             // 
             // txtBI4
             // 
             txtBI4.Enabled = false;
             txtBI4.Location = new Point(457, 137);
+            txtBI4.MaxLength = 8;
             txtBI4.Name = "txtBI4";
             txtBI4.Size = new Size(89, 30);
             txtBI4.TabIndex = 12;
+            txtBI4.KeyPress += TextBox_KeyPress;
             txtBI4.TextChanged += textBox_TextChanged;
             // 
             // lblBI1
@@ -389,6 +401,7 @@
             // 
             txtMsqCIDR.Enabled = false;
             txtMsqCIDR.Location = new Point(120, 191);
+            txtMsqCIDR.MaxLength = 2;
             txtMsqCIDR.Name = "txtMsqCIDR";
             txtMsqCIDR.Size = new Size(62, 30);
             txtMsqCIDR.TabIndex = 17;
@@ -438,36 +451,44 @@
             // 
             txtMsqBI4.Enabled = false;
             txtMsqBI4.Location = new Point(457, 136);
+            txtMsqBI4.MaxLength = 8;
             txtMsqBI4.Name = "txtMsqBI4";
             txtMsqBI4.Size = new Size(89, 30);
             txtMsqBI4.TabIndex = 12;
+            txtMsqBI4.KeyPress += TextBox_KeyPress;
             txtMsqBI4.TextChanged += textBox_TextChanged;
             // 
             // txtMsqBI3
             // 
             txtMsqBI3.Enabled = false;
             txtMsqBI3.Location = new Point(341, 136);
+            txtMsqBI3.MaxLength = 8;
             txtMsqBI3.Name = "txtMsqBI3";
             txtMsqBI3.Size = new Size(89, 30);
             txtMsqBI3.TabIndex = 11;
+            txtMsqBI3.KeyPress += TextBox_KeyPress;
             txtMsqBI3.TextChanged += textBox_TextChanged;
             // 
             // txtMsqBI2
             // 
             txtMsqBI2.Enabled = false;
             txtMsqBI2.Location = new Point(225, 136);
+            txtMsqBI2.MaxLength = 8;
             txtMsqBI2.Name = "txtMsqBI2";
             txtMsqBI2.Size = new Size(89, 30);
             txtMsqBI2.TabIndex = 10;
+            txtMsqBI2.KeyPress += TextBox_KeyPress;
             txtMsqBI2.TextChanged += textBox_TextChanged;
             // 
             // txtMsqBI1
             // 
             txtMsqBI1.Enabled = false;
             txtMsqBI1.Location = new Point(109, 136);
+            txtMsqBI1.MaxLength = 8;
             txtMsqBI1.Name = "txtMsqBI1";
             txtMsqBI1.Size = new Size(89, 30);
             txtMsqBI1.TabIndex = 9;
+            txtMsqBI1.KeyPress += TextBox_KeyPress;
             txtMsqBI1.TextChanged += textBox_TextChanged;
             // 
             // lblAdrMsqBI
@@ -513,6 +534,7 @@
             // txtMsqDEC4
             // 
             txtMsqDEC4.Location = new Point(457, 82);
+            txtMsqDEC4.MaxLength = 3;
             txtMsqDEC4.Name = "txtMsqDEC4";
             txtMsqDEC4.Size = new Size(89, 30);
             txtMsqDEC4.TabIndex = 4;
@@ -521,6 +543,7 @@
             // txtMsqDEC3
             // 
             txtMsqDEC3.Location = new Point(341, 82);
+            txtMsqDEC3.MaxLength = 3;
             txtMsqDEC3.Name = "txtMsqDEC3";
             txtMsqDEC3.Size = new Size(89, 30);
             txtMsqDEC3.TabIndex = 3;
@@ -529,6 +552,7 @@
             // txtMsqDEC2
             // 
             txtMsqDEC2.Location = new Point(225, 78);
+            txtMsqDEC2.MaxLength = 3;
             txtMsqDEC2.Name = "txtMsqDEC2";
             txtMsqDEC2.Size = new Size(89, 30);
             txtMsqDEC2.TabIndex = 2;
@@ -537,6 +561,7 @@
             // txtMsqDEC1
             // 
             txtMsqDEC1.Location = new Point(109, 82);
+            txtMsqDEC1.MaxLength = 3;
             txtMsqDEC1.Name = "txtMsqDEC1";
             txtMsqDEC1.Size = new Size(89, 30);
             txtMsqDEC1.TabIndex = 1;
@@ -641,6 +666,7 @@
             btnValider.TabIndex = 3;
             btnValider.Text = "Calculer";
             btnValider.UseVisualStyleBackColor = true;
+            btnValider.Click += btnValider_Click;
             // 
             // lblMsg
             // 

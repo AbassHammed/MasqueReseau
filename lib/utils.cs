@@ -2,28 +2,12 @@
 {
     public class Utils
     {
-
-        public static bool ChampsEntiers(params TextBox[] champs)
-        {
-            foreach (var champ in champs)
-                if (!int.TryParse(champ.Text, out _))
-                    return false;
-            return true;
-        }
-
-        public static bool ChampsRemplis(params TextBox[] champs)
-        {
-            foreach (var champ in champs)
-                if (string.IsNullOrWhiteSpace(champ.Text))
-                    return false;
-            return true;
-        }
-
         public static bool ChampsDansLaLimite(int limite, params TextBox[] champs)
         {
             foreach (var champ in champs)
-                if (!int.TryParse(champ.Text, out int valeur) || valeur < 0 || valeur > limite)
+                if (string.IsNullOrWhiteSpace(champ.Text) || !int.TryParse(champ.Text, out int valeur) || valeur < 0 || valeur > limite)
                     return false;
+
             return true;
         }
 
@@ -42,7 +26,7 @@
         public static bool ChampsBinaires(params TextBox[] champs)
         {
             foreach (var champ in champs)
-                if (!EstBinaire(champ.Text))
+                if (string.IsNullOrWhiteSpace(champ.Text) || !EstBinaire(champ.Text))
                     return false;
             return true;
         }
@@ -50,26 +34,38 @@
         public static bool ChampsHexadecimaux(params TextBox[] champs)
         {
             foreach (var champ in champs)
-                if (!int.TryParse(champ.Text, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture, out _))
+                if (string.IsNullOrWhiteSpace(champ.Text) || !int.TryParse(champ.Text, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture, out _))
                     return false;
             return true;
         }
-        public static string BinaryToHex(string binary)
+        public static string BinaryToHex(params TextBox[] champs)
         {
-            int decimalValue = Convert.ToInt32(binary, 2);
-            return decimalValue.ToString("X");
+            string[] hexValues = new string[champs.Length];
+            for (int i = 0; i < champs.Length; i++)
+                if (int.TryParse(champs[i].Text, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture, out int decimalValue))
+                    hexValues[i] = Convert.ToString(decimalValue, 16).PadLeft(2, '0');
+
+            return string.Join(".", hexValues);
         }
 
-        public static string HexToBinary(string hex)
+        public static string HexToBinary(params TextBox[] champs)
         {
-            int decimalValue = Convert.ToInt32(hex, 16);
-            return Convert.ToString(decimalValue, 2).PadLeft(8, '0');
+            string[] binaryValues = new string[champs.Length];
+            for (int i = 0; i < champs.Length; i++)
+                if (int.TryParse(champs[i].Text, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture, out int decimalValue))
+                    binaryValues[i] = Convert.ToString(decimalValue, 2).PadLeft(8, '0');
+
+            return string.Join(".", binaryValues);
         }
 
-        public static string DecimalToBinary(string decimalNumberStr)
+        public static string DecimalToBinary(params TextBox[] champs)
         {
-            int decimalNumber = int.Parse(decimalNumberStr);
-            return Convert.ToString(decimalNumber, 2).PadLeft(8, '0');
+            string[] binaryValues = new string[champs.Length];
+            for (int i = 0; i < champs.Length; i++)
+                if (int.TryParse(champs[i].Text, out int decimalValue))
+                    binaryValues[i] = Convert.ToString(decimalValue, 2).PadLeft(8, '0');
+
+            return string.Join(".", binaryValues);
         }
 
         public static string BinaryToDecimal(string binary)
@@ -155,6 +151,78 @@
 
             return prefixLength.ToString();
         }
+
+        public static void adjustIpDec(int min, int max, params TextBox[] champs)
+        {
+            foreach (var champ in champs)
+            {
+                if (int.TryParse(champ.Text, out int valeur))
+                {
+                    if (valeur < min)
+                        champ.Text = min.ToString();
+                    else if (valeur > max)
+                        champ.Text = max.ToString();
+                }
+            }
+        }
+
+        // public static void adjustMaskDec(params TextBox[] champs)
+        // {
+        //     int[] validMaskValues = [0, 128, 192, 224, 240, 248, 252, 254, 255];
+
+        //     int previousValue = 255;
+
+        //     foreach (var champ in champs)
+        //     {
+        //         if (int.TryParse(champ.Text, out int currentValue) && validMaskValues.Contains(currentValue))
+        //         {
+        //             if (currentValue <= previousValue)
+        //                 previousValue = currentValue;
+        //             else if (currentValue > previousValue)
+        //                 champ.Text = 0.ToString();
+        //         }
+        //         else
+        //             champ.Text = previousValue.ToString();
+        //     }
+        // }
+        public static void adjustMaskDec(params TextBox[] champs)
+        {
+            int[] validMaskValues = [0, 128, 192, 224, 240, 248, 252, 254, 255];
+
+            int previousValue = 255;
+
+            for (int i = 0; i < champs.Length; i++)
+            {
+                if (int.TryParse(champs[i].Text, out int currentValue) && validMaskValues.Contains(currentValue))
+                {
+                    if (currentValue <= previousValue)
+                    {
+                        if (previousValue != 255 && currentValue != 0)
+                            champs[i].Text = "0";
+                        else
+                            previousValue = currentValue;
+                    }
+                    else
+                        champs[i].Text = "0";
+                }
+            }
+
+            // // Assurer que toutes les valeurs après une valeur différente de 255 sont 0
+            // bool foundNon255 = false;
+            // for (int i = 0; i < champs.Length; i++)
+            // {
+            //     if (int.TryParse(champs[i].Text, out int currentValue))
+            //     {
+            //         if (currentValue != 255)
+            //             foundNon255 = true;
+
+            //         if (foundNon255 && currentValue != 0)
+            //             champs[i].Text = "0";
+            //     }
+            // }
+        }
+
+
 
 
 
