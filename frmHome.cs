@@ -290,7 +290,23 @@ namespace Reseau
 
         private void btnValider_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("Validation en cours...");
+            if (!Utils.IsEmpty(txtDEC1, txtDEC2, txtDEC3, txtDEC4, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4))
+            {
+                string Ip = string.Format("{0}.{1}.{2}.{3}", txtDEC1.Text, txtDEC2.Text, txtDEC3.Text, txtDEC4.Text);
+                string Mask = string.Format("{0}.{1}.{2}.{3}", txtMsqDEC1.Text, txtMsqDEC2.Text, txtMsqDEC3.Text, txtMsqDEC4.Text);
+                Debug.WriteLine(Ip);
+                Debug.WriteLine(Mask);
+
+                IPAddressCalculator calculator = new(Ip, Mask);
+                txtClassName.Text = calculator.GetIPAddressClass();
+                txtAdrBroad.Text = calculator.GetBroadcastAddress();
+                txtAdrNet.Text = calculator.GetNetworkAddress();
+                txtFirstIp.Text = calculator.GetFirstIPAddress();
+                txtLastIp.Text = calculator.GetLastIPAddress();
+                txtNbrHost.Text = calculator.GetNumberOfHosts();
+                txtNbrIp.Text = calculator.GetNumberOfIPAddresses();
+                lblTypeIp.Text = calculator.GetIPAddressType();
+            }
         }
 
 
