@@ -81,15 +81,25 @@ namespace Reseau.lib
 
         public string GetFirstIPAddress()
         {
+            if (Mask.ToString() == "255.255.255.255" || Mask.ToString() == "255.255.255.254")
+                return Ip.ToString();
+
             byte[] networkBytes = IPAddress.Parse(GetNetworkAddress()).GetAddressBytes();
-            networkBytes[3] += 1;
+            if (networkBytes[3] < 255)
+                networkBytes[3] += 1;
+
             return new IPAddress(networkBytes).ToString();
         }
 
         public string GetLastIPAddress()
         {
+            if (Mask.ToString() == "255.255.255.255" || Mask.ToString() == "255.255.255.254")
+                return Ip.ToString();
+
             byte[] broadcastBytes = IPAddress.Parse(GetBroadcastAddress()).GetAddressBytes();
-            broadcastBytes[3] -= 1;
+            if (broadcastBytes[3] > 0)
+                broadcastBytes[3] -= 1;
+
             return new IPAddress(broadcastBytes).ToString();
         }
 
@@ -103,7 +113,7 @@ namespace Reseau.lib
         public string GetNumberOfHosts()
         {
             int totalIPs = (int)Math.Pow(2, CountZeroBitsInMask(Mask));
-            return (totalIPs - 2).ToString(); // Subtracting network and broadcast addresses
+            return (totalIPs > 2) ? (totalIPs - 2).ToString() : "0"; // Subtracting network and broadcast addresses
         }
 
         private int CountZeroBitsInMask(IPAddress mask)
@@ -117,6 +127,17 @@ namespace Reseau.lib
                         zeroBits++;
 
             return zeroBits;
+        }
+
+        public string GetWildcardMask()
+        {
+            byte[] maskBytes = Mask.GetAddressBytes();
+            byte[] wildcardBytes = new byte[maskBytes.Length];
+
+            for (int i = 0; i < maskBytes.Length; i++)
+                wildcardBytes[i] = (byte)~maskBytes[i];
+
+            return new IPAddress(wildcardBytes).ToString();
         }
     }
 }

@@ -306,6 +306,7 @@ namespace Reseau
                 txtNbrHost.Text = calculator.GetNumberOfHosts();
                 txtNbrIp.Text = calculator.GetNumberOfIPAddresses();
                 lblTypeIp.Text = calculator.GetIPAddressType();
+                txtWildcard.Text = calculator.GetWildcardMask();
             }
         }
 
