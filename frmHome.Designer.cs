@@ -83,7 +83,21 @@
             lblMsg = new Label();
             btnInit = new Button();
             grpResults = new GroupBox();
-            label1 = new Label();
+            txtClassName = new TextBox();
+            lblClassName = new Label();
+            lblTypeIp = new Label();
+            lblAddrNet = new Label();
+            lblAdrBroad = new Label();
+            lblFirstIp = new Label();
+            lblLastIp = new Label();
+            lblNbrIp = new Label();
+            lblNbrHost = new Label();
+            txtAdrNet = new TextBox();
+            txtAdrBroad = new TextBox();
+            txtFirstIp = new TextBox();
+            txtLastIp = new TextBox();
+            txtNbrIp = new TextBox();
+            txtNbrHost = new TextBox();
             grpAdrIP.SuspendLayout();
             grpAdrMasque.SuspendLayout();
             grpResults.SuspendLayout();
@@ -694,8 +708,22 @@
             // 
             // grpResults
             // 
-            grpResults.Controls.Add(label1);
-            grpResults.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            grpResults.Controls.Add(txtNbrHost);
+            grpResults.Controls.Add(txtNbrIp);
+            grpResults.Controls.Add(txtLastIp);
+            grpResults.Controls.Add(txtFirstIp);
+            grpResults.Controls.Add(txtAdrBroad);
+            grpResults.Controls.Add(txtAdrNet);
+            grpResults.Controls.Add(lblNbrHost);
+            grpResults.Controls.Add(lblNbrIp);
+            grpResults.Controls.Add(lblLastIp);
+            grpResults.Controls.Add(lblFirstIp);
+            grpResults.Controls.Add(lblAdrBroad);
+            grpResults.Controls.Add(lblAddrNet);
+            grpResults.Controls.Add(lblTypeIp);
+            grpResults.Controls.Add(txtClassName);
+            grpResults.Controls.Add(lblClassName);
+            grpResults.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             grpResults.Location = new Point(604, 24);
             grpResults.Name = "grpResults";
             grpResults.Size = new Size(479, 644);
@@ -703,14 +731,149 @@
             grpResults.TabStop = false;
             grpResults.Text = "Resultat des calculs";
             // 
-            // label1
+            // txtClassName
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(6, 26);
-            label1.Name = "label1";
-            label1.Size = new Size(53, 23);
-            label1.TabIndex = 0;
-            label1.Text = "label1";
+            txtClassName.BackColor = Color.White;
+            txtClassName.Enabled = false;
+            txtClassName.ForeColor = SystemColors.WindowText;
+            txtClassName.Location = new Point(88, 29);
+            txtClassName.Name = "txtClassName";
+            txtClassName.Size = new Size(85, 30);
+            txtClassName.TabIndex = 1;
+            // 
+            // lblClassName
+            // 
+            lblClassName.AutoSize = true;
+            lblClassName.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblClassName.Location = new Point(6, 32);
+            lblClassName.Name = "lblClassName";
+            lblClassName.Size = new Size(58, 20);
+            lblClassName.TabIndex = 0;
+            lblClassName.Text = "Classe :";
+            // 
+            // lblTypeIp
+            // 
+            lblTypeIp.AutoSize = true;
+            lblTypeIp.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTypeIp.Location = new Point(6, 71);
+            lblTypeIp.Name = "lblTypeIp";
+            lblTypeIp.Size = new Size(285, 20);
+            lblTypeIp.TabIndex = 2;
+            lblTypeIp.Text = "Effectuer un calcul pour savoir le type d'IP";
+            // 
+            // lblAddrNet
+            // 
+            lblAddrNet.AutoSize = true;
+            lblAddrNet.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAddrNet.Location = new Point(6, 116);
+            lblAddrNet.Name = "lblAddrNet";
+            lblAddrNet.Size = new Size(106, 20);
+            lblAddrNet.TabIndex = 3;
+            lblAddrNet.Text = "Adresse NET : ";
+            // 
+            // lblAdrBroad
+            // 
+            lblAdrBroad.AutoSize = true;
+            lblAdrBroad.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAdrBroad.Location = new Point(6, 164);
+            lblAdrBroad.Name = "lblAdrBroad";
+            lblAdrBroad.Size = new Size(145, 20);
+            lblAdrBroad.TabIndex = 4;
+            lblAdrBroad.Text = "Adresse Broadcast : ";
+            // 
+            // lblFirstIp
+            // 
+            lblFirstIp.AutoSize = true;
+            lblFirstIp.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFirstIp.Location = new Point(6, 214);
+            lblFirstIp.Name = "lblFirstIp";
+            lblFirstIp.Size = new Size(100, 20);
+            lblFirstIp.TabIndex = 5;
+            lblFirstIp.Text = "Première Ip : ";
+            // 
+            // lblLastIp
+            // 
+            lblLastIp.AutoSize = true;
+            lblLastIp.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblLastIp.Location = new Point(6, 266);
+            lblLastIp.Name = "lblLastIp";
+            lblLastIp.Size = new Size(98, 20);
+            lblLastIp.TabIndex = 6;
+            lblLastIp.Text = "Dernière IP : ";
+            // 
+            // lblNbrIp
+            // 
+            lblNbrIp.AutoSize = true;
+            lblNbrIp.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNbrIp.Location = new Point(6, 316);
+            lblNbrIp.Name = "lblNbrIp";
+            lblNbrIp.Size = new Size(104, 20);
+            lblNbrIp.TabIndex = 7;
+            lblNbrIp.Text = "Nombre d'IP :";
+            // 
+            // lblNbrHost
+            // 
+            lblNbrHost.AutoSize = true;
+            lblNbrHost.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNbrHost.Location = new Point(6, 361);
+            lblNbrHost.Name = "lblNbrHost";
+            lblNbrHost.Size = new Size(155, 20);
+            lblNbrHost.TabIndex = 8;
+            lblNbrHost.Text = "Nombre de machines";
+            // 
+            // txtAdrNet
+            // 
+            txtAdrNet.BackColor = Color.White;
+            txtAdrNet.Enabled = false;
+            txtAdrNet.Location = new Point(122, 106);
+            txtAdrNet.Name = "txtAdrNet";
+            txtAdrNet.Size = new Size(212, 30);
+            txtAdrNet.TabIndex = 9;
+            // 
+            // txtAdrBroad
+            // 
+            txtAdrBroad.BackColor = Color.White;
+            txtAdrBroad.Enabled = false;
+            txtAdrBroad.Location = new Point(157, 159);
+            txtAdrBroad.Name = "txtAdrBroad";
+            txtAdrBroad.Size = new Size(207, 30);
+            txtAdrBroad.TabIndex = 10;
+            // 
+            // txtFirstIp
+            // 
+            txtFirstIp.BackColor = Color.White;
+            txtFirstIp.Enabled = false;
+            txtFirstIp.Location = new Point(112, 209);
+            txtFirstIp.Name = "txtFirstIp";
+            txtFirstIp.Size = new Size(191, 30);
+            txtFirstIp.TabIndex = 11;
+            // 
+            // txtLastIp
+            // 
+            txtLastIp.BackColor = Color.White;
+            txtLastIp.Enabled = false;
+            txtLastIp.Location = new Point(110, 261);
+            txtLastIp.Name = "txtLastIp";
+            txtLastIp.Size = new Size(181, 30);
+            txtLastIp.TabIndex = 12;
+            // 
+            // txtNbrIp
+            // 
+            txtNbrIp.BackColor = Color.White;
+            txtNbrIp.Enabled = false;
+            txtNbrIp.Location = new Point(116, 313);
+            txtNbrIp.Name = "txtNbrIp";
+            txtNbrIp.Size = new Size(125, 30);
+            txtNbrIp.TabIndex = 13;
+            // 
+            // txtNbrHost
+            // 
+            txtNbrHost.BackColor = Color.White;
+            txtNbrHost.Enabled = false;
+            txtNbrHost.Location = new Point(167, 358);
+            txtNbrHost.Name = "txtNbrHost";
+            txtNbrHost.Size = new Size(125, 30);
+            txtNbrHost.TabIndex = 14;
             // 
             // frmHome
             // 
@@ -794,6 +957,20 @@
         private RadioButton rdoDecmsq;
         private Button btnInit;
         private GroupBox grpResults;
-        private Label label1;
+        private Label lblClassName;
+        private TextBox txtClassName;
+        private Label lblTypeIp;
+        private Label lblAddrNet;
+        private Label lblAdrBroad;
+        private Label lblFirstIp;
+        private Label lblLastIp;
+        private Label lblNbrIp;
+        private Label lblNbrHost;
+        private TextBox txtAdrNet;
+        private TextBox txtAdrBroad;
+        private TextBox txtFirstIp;
+        private TextBox txtLastIp;
+        private TextBox txtNbrIp;
+        private TextBox txtNbrHost;
     }
 }

@@ -12,11 +12,11 @@ namespace Reseau
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permettre uniquement les touches '0', '1' et les touches de contrôle comme Backspace
-            // if (e.KeyChar != '0' && e.KeyChar != '1' && !char.IsControl(e.KeyChar))
-            // {
-            //     e.Handled = true; // Bloque la touche
-            //     SetMessage("Champs binaires, seulement '0' et '1'", Color.Red, false);
-            // }
+            if (e.KeyChar != '0' && e.KeyChar != '1' && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Bloque la touche
+                SetMessage("Champs binaires, seulement '0' et '1'", Color.Red, false);
+            }
         }
 
         private void textBoxIp_TextChanged(object sender, EventArgs e)
@@ -292,5 +292,7 @@ namespace Reseau
         {
             Debug.WriteLine("Validation en cours...");
         }
+
+
     }
 }
