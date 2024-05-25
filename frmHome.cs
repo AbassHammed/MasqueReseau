@@ -87,12 +87,9 @@ namespace Reseau
         private bool VerifyIpAddress()
         {
             if (rdoDecIP.Checked)
-            {
-                Utils.adjustIpDec(0, 255, txtDEC1, txtDEC2, txtDEC3, txtDEC4);
-                return VerifyIpDecimal();
-            }
+                return Utils.adjustTextBoxValuesBaseOnLimits(0, 255, txtDEC1, txtDEC2, txtDEC3, txtDEC4);
             else if (rdoBinaireIP.Checked)
-                return VerifyIpBinary();
+                return Utils.IsEmpty(txtBI1, txtBI2, txtBI3, txtBI4);
             else if (rdohexaIP.Checked)
                 return VerifyIpHexadecimal();
             else
@@ -109,16 +106,10 @@ namespace Reseau
             else if (rdoBinaireMsq.Checked)
                 return VerifyMaskBinary();
             else if (rdoCidr.Checked)
-                return VerifyMaskCidr();
+                return Utils.adjustTextBoxValuesBaseOnLimits(0, 32, txtMsqCIDR);
             else
                 return false;
         }
-
-        private bool VerifyIpDecimal() =>
-            Utils.ChampsDansLaLimite(255, txtDEC1, txtDEC2, txtDEC3, txtDEC4);
-
-        private bool VerifyIpBinary() =>
-            Utils.ChampsBinaires(txtBI1, txtBI2, txtBI3, txtBI4);
 
         private bool VerifyIpHexadecimal() =>
             Utils.ChampsHexadecimaux(txtHEX1, txtHEX2, txtHEX3, txtHEX4);
@@ -128,9 +119,6 @@ namespace Reseau
 
         private bool VerifyMaskBinary() =>
             Utils.ChampsBinaires(txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4);
-
-        private bool VerifyMaskCidr() =>
-            Utils.ChampsDansLaLimite(32, txtMsqCIDR);
 
 
         private void rdoIP_CheckedChanged(object sender, EventArgs e)
@@ -309,7 +297,6 @@ namespace Reseau
                 txtWildcard.Text = calculator.GetWildcardMask();
             }
         }
-
 
     }
 }

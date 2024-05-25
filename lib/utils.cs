@@ -26,16 +26,11 @@
                 champ.Clear();
         }
 
-        private static bool EstBinaire(string text)
-        {
-            return text.All(c => c == '0' || c == '1');
-        }
-
 
         public static bool ChampsBinaires(params TextBox[] champs)
         {
             foreach (var champ in champs)
-                if (string.IsNullOrWhiteSpace(champ.Text) || !EstBinaire(champ.Text))
+                if (string.IsNullOrWhiteSpace(champ.Text))
                     return false;
             return true;
         }
@@ -172,7 +167,7 @@
             return prefixLength.ToString();
         }
 
-        public static bool adjustIpDec(int min, int max, params TextBox[] champs)
+        public static bool adjustTextBoxValuesBaseOnLimits(int min, int max, params TextBox[] champs)
         {
             foreach (var champ in champs)
             {
@@ -189,25 +184,6 @@
             return true;
         }
 
-        // public static void adjustMaskDec(params TextBox[] champs)
-        // {
-        //     int[] validMaskValues = [0, 128, 192, 224, 240, 248, 252, 254, 255];
-
-        //     int previousValue = 255;
-
-        //     foreach (var champ in champs)
-        //     {
-        //         if (int.TryParse(champ.Text, out int currentValue) && validMaskValues.Contains(currentValue))
-        //         {
-        //             if (currentValue <= previousValue)
-        //                 previousValue = currentValue;
-        //             else if (currentValue > previousValue)
-        //                 champ.Text = 0.ToString();
-        //         }
-        //         else
-        //             champ.Text = previousValue.ToString();
-        //     }
-        // }
         public static void adjustMaskDec(params TextBox[] champs)
         {
             int[] validMaskValues = [0, 128, 192, 224, 240, 248, 252, 254, 255];
@@ -234,25 +210,6 @@
                         champs[i].Text = previousValue.ToString();
                 }
             }
-
-            // // Assurer que toutes les valeurs après une valeur différente de 255 sont 0
-            // bool foundNon255 = false;
-            // for (int i = 0; i < champs.Length; i++)
-            // {
-            //     if (int.TryParse(champs[i].Text, out int currentValue))
-            //     {
-            //         if (currentValue != 255)
-            //             foundNon255 = true;
-
-            //         if (foundNon255 && currentValue != 0)
-            //             champs[i].Text = "0";
-            //     }
-            // }
         }
-
-
-
-
-
     }
 }

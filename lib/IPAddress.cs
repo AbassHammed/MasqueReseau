@@ -2,34 +2,28 @@
 
 namespace Reseau.lib
 {
-    public class IPAddressCalculator
+    public class IPAddressCalculator(string ip, string mask)
     {
-        private IPAddress Ip { get; set; }
-        private IPAddress Mask { get; set; }
+        private IPAddress Ip { get; set; } = IPAddress.Parse(ip);
+        private IPAddress Mask { get; set; } = IPAddress.Parse(mask);
         private static readonly Dictionary<Func<byte[], bool>, string> ipRanges = new()
-    {
-        { ipBytes => ipBytes[0] == 0, "\"This\" Network" },
-        { ipBytes => ipBytes[0] == 10, "Private-Use Networks" },
-        { ipBytes => ipBytes[0] == 127, "Loopback" },
-        { ipBytes => ipBytes[0] == 169 && ipBytes[1] == 254, "Link Local" },
-        { ipBytes => ipBytes[0] == 172 && ipBytes[1] >= 16 && ipBytes[1] <= 31, "Private-Use Networks" },
-        { ipBytes => ipBytes[0] == 192 && ipBytes[1] == 0 && ipBytes[2] == 0, "IETF Protocol Assignments" },
-        { ipBytes => ipBytes[0] == 192 && ipBytes[1] == 0 && ipBytes[2] == 2, "TEST-NET-1" },
-        { ipBytes => ipBytes[0] == 192 && ipBytes[1] == 88 && ipBytes[2] == 99, "6to4 Relay Anycast" },
-        { ipBytes => ipBytes[0] == 192 && ipBytes[1] == 168, "Private-Use Networks" },
-        { ipBytes => ipBytes[0] == 198 && ipBytes[1] >= 18 && ipBytes[1] <= 19, "Network Interconnect Device Benchmark Testing" },
-        { ipBytes => ipBytes[0] == 198 && ipBytes[1] == 51 && ipBytes[2] == 100, "TEST-NET-2" },
-        { ipBytes => ipBytes[0] == 203 && ipBytes[1] == 0 && ipBytes[2] == 113, "TEST-NET-3" },
-        { ipBytes => ipBytes[0] >= 224 && ipBytes[0] <= 239, "Multicast" },
-        { ipBytes => ipBytes[0] >= 240 && ipBytes[0] <= 255, "Reserved for Future Use" },
-        { ipBytes => ipBytes[0] == 255 && ipBytes[1] == 255 && ipBytes[2] == 255 && ipBytes[3] == 255, "Limited Broadcast" }
-    };
-
-        public IPAddressCalculator(string ip, string mask)
         {
-            Ip = IPAddress.Parse(ip);
-            Mask = IPAddress.Parse(mask);
-        }
+            { ipBytes => ipBytes[0] == 0, "\"Ce\" réseau" },
+            { ipBytes => ipBytes[0] == 10, "Réseaux à usage privé" },
+            { ipBytes => ipBytes[0] == 127, "Bouclage" },
+            { ipBytes => ipBytes[0] == 169 && ipBytes[1] == 254, "Lien local" },
+            { ipBytes => ipBytes[0] == 172 && ipBytes[1] >= 16 && ipBytes[1] <= 31, "Réseaux à usage privé" },
+            { ipBytes => ipBytes[0] == 192 && ipBytes[1] == 0 && ipBytes[2] == 0, "Attributions de protocole IETF" },
+            { ipBytes => ipBytes[0] == 192 && ipBytes[1] == 0 && ipBytes[2] == 2, "TEST-NET-1" },
+            { ipBytes => ipBytes[0] == 192 && ipBytes[1] == 88 && ipBytes[2] == 99, "6to4 Relay Anycast" },
+            { ipBytes => ipBytes[0] == 192 && ipBytes[1] == 168, "Réseaux à usage privé" },
+            { ipBytes => ipBytes[0] == 198 && ipBytes[1] >= 18 && ipBytes[1] <= 19, "Test d'interconnexion de dispositifs réseau" },
+            { ipBytes => ipBytes[0] == 198 && ipBytes[1] == 51 && ipBytes[2] == 100, "TEST-NET-2" },
+            { ipBytes => ipBytes[0] == 203 && ipBytes[1] == 0 && ipBytes[2] == 113, "TEST-NET-3" },
+            { ipBytes => ipBytes[0] >= 224 && ipBytes[0] <= 239, "Multidiffusion" },
+            { ipBytes => ipBytes[0] >= 240 && ipBytes[0] <= 255, "Réservé pour un usage futur" },
+            { ipBytes => ipBytes[0] == 255 && ipBytes[1] == 255 && ipBytes[2] == 255 && ipBytes[3] == 255, "Diffusion limitée" }
+        };
 
         public string GetNetworkAddress()
         {
@@ -113,7 +107,7 @@ namespace Reseau.lib
         public string GetNumberOfHosts()
         {
             int totalIPs = (int)Math.Pow(2, CountZeroBitsInMask(Mask));
-            return (totalIPs > 2) ? (totalIPs - 2).ToString() : "0"; // Subtracting network and broadcast addresses
+            return (totalIPs > 2) ? (totalIPs - 2).ToString() : "0";
         }
 
         private int CountZeroBitsInMask(IPAddress mask)

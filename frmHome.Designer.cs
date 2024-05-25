@@ -83,6 +83,7 @@
             lblMsg = new Label();
             btnInit = new Button();
             grpResults = new GroupBox();
+            txtWildcard = new TextBox();
             lblwildCard = new Label();
             txtNbrHost = new TextBox();
             txtNbrIp = new TextBox();
@@ -99,7 +100,6 @@
             lblTypeIp = new Label();
             txtClassName = new TextBox();
             lblClassName = new Label();
-            txtWildcard = new TextBox();
             grpAdrIP.SuspendLayout();
             grpAdrMasque.SuspendLayout();
             grpResults.SuspendLayout();
@@ -279,6 +279,7 @@
             // 
             txtHEX1.Enabled = false;
             txtHEX1.Location = new Point(109, 192);
+            txtHEX1.MaxLength = 2;
             txtHEX1.Name = "txtHEX1";
             txtHEX1.Size = new Size(89, 30);
             txtHEX1.TabIndex = 17;
@@ -288,6 +289,7 @@
             // 
             txtHEX2.Enabled = false;
             txtHEX2.Location = new Point(225, 192);
+            txtHEX2.MaxLength = 2;
             txtHEX2.Name = "txtHEX2";
             txtHEX2.Size = new Size(89, 30);
             txtHEX2.TabIndex = 18;
@@ -297,6 +299,7 @@
             // 
             txtHEX3.Enabled = false;
             txtHEX3.Location = new Point(341, 192);
+            txtHEX3.MaxLength = 2;
             txtHEX3.Name = "txtHEX3";
             txtHEX3.Size = new Size(89, 30);
             txtHEX3.TabIndex = 19;
@@ -306,6 +309,7 @@
             // 
             txtHEX4.Enabled = false;
             txtHEX4.Location = new Point(457, 192);
+            txtHEX4.MaxLength = 2;
             txtHEX4.Name = "txtHEX4";
             txtHEX4.Size = new Size(89, 30);
             txtHEX4.TabIndex = 20;
@@ -371,7 +375,7 @@
             grpAdrIP.Controls.Add(txtDEC1);
             grpAdrIP.Controls.Add(lblAdrIPDec);
             grpAdrIP.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpAdrIP.Location = new Point(12, 12);
+            grpAdrIP.Location = new Point(12, 65);
             grpAdrIP.Name = "grpAdrIP";
             grpAdrIP.Size = new Size(573, 255);
             grpAdrIP.TabIndex = 0;
@@ -557,7 +561,7 @@
             txtMsqDEC4.Name = "txtMsqDEC4";
             txtMsqDEC4.Size = new Size(89, 30);
             txtMsqDEC4.TabIndex = 4;
-            txtMsqDEC4.TextChanged += textBoxMask_TextChanged;
+            txtMsqDEC4.Leave += textBoxMask_TextChanged;
             // 
             // txtMsqDEC3
             // 
@@ -566,7 +570,7 @@
             txtMsqDEC3.Name = "txtMsqDEC3";
             txtMsqDEC3.Size = new Size(89, 30);
             txtMsqDEC3.TabIndex = 3;
-            txtMsqDEC3.TextChanged += textBoxMask_TextChanged;
+            txtMsqDEC3.Leave += textBoxMask_TextChanged;
             // 
             // txtMsqDEC2
             // 
@@ -575,7 +579,7 @@
             txtMsqDEC2.Name = "txtMsqDEC2";
             txtMsqDEC2.Size = new Size(89, 30);
             txtMsqDEC2.TabIndex = 2;
-            txtMsqDEC2.TextChanged += textBoxMask_TextChanged;
+            txtMsqDEC2.Leave += textBoxMask_TextChanged;
             // 
             // txtMsqDEC1
             // 
@@ -584,7 +588,7 @@
             txtMsqDEC1.Name = "txtMsqDEC1";
             txtMsqDEC1.Size = new Size(89, 30);
             txtMsqDEC1.TabIndex = 1;
-            txtMsqDEC1.TextChanged += textBoxMask_TextChanged;
+            txtMsqDEC1.Leave += textBoxMask_TextChanged;
             // 
             // lblAdrMsqDEC
             // 
@@ -621,7 +625,7 @@
             grpAdrMasque.Controls.Add(txtMsqDEC1);
             grpAdrMasque.Controls.Add(lblAdrMsqDEC);
             grpAdrMasque.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpAdrMasque.Location = new Point(12, 300);
+            grpAdrMasque.Location = new Point(12, 349);
             grpAdrMasque.Name = "grpAdrMasque";
             grpAdrMasque.Size = new Size(573, 244);
             grpAdrMasque.TabIndex = 1;
@@ -679,19 +683,20 @@
             // 
             btnValider.Enabled = false;
             btnValider.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnValider.Location = new Point(491, 617);
+            btnValider.Location = new Point(491, 661);
             btnValider.Name = "btnValider";
             btnValider.Size = new Size(94, 40);
             btnValider.TabIndex = 3;
             btnValider.Text = "Calculer";
             btnValider.UseVisualStyleBackColor = true;
             btnValider.Click += btnValider_Click;
+            btnValider.Cursor = Cursors.Hand;
             // 
             // lblMsg
             // 
             lblMsg.AutoSize = true;
             lblMsg.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMsg.Location = new Point(12, 558);
+            lblMsg.Location = new Point(12, 608);
             lblMsg.Name = "lblMsg";
             lblMsg.Size = new Size(181, 20);
             lblMsg.TabIndex = 4;
@@ -700,13 +705,14 @@
             // btnInit
             // 
             btnInit.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnInit.Location = new Point(12, 617);
+            btnInit.Location = new Point(12, 661);
             btnInit.Name = "btnInit";
             btnInit.Size = new Size(145, 40);
             btnInit.TabIndex = 5;
             btnInit.Text = "Réinitialisation";
             btnInit.UseVisualStyleBackColor = true;
             btnInit.Click += btnInit_Click;
+            btnInit.Cursor = Cursors.Hand;
             // 
             // grpResults
             // 
@@ -728,18 +734,27 @@
             grpResults.Controls.Add(txtClassName);
             grpResults.Controls.Add(lblClassName);
             grpResults.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpResults.Location = new Point(604, 24);
+            grpResults.Location = new Point(610, 65);
             grpResults.Name = "grpResults";
-            grpResults.Size = new Size(479, 644);
+            grpResults.Size = new Size(379, 470);
             grpResults.TabIndex = 6;
             grpResults.TabStop = false;
             grpResults.Text = "Resultat des calculs";
+            // 
+            // txtWildcard
+            // 
+            txtWildcard.BackColor = Color.White;
+            txtWildcard.Enabled = false;
+            txtWildcard.Location = new Point(194, 416);
+            txtWildcard.Name = "txtWildcard";
+            txtWildcard.Size = new Size(157, 30);
+            txtWildcard.TabIndex = 16;
             // 
             // lblwildCard
             // 
             lblwildCard.AutoSize = true;
             lblwildCard.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblwildCard.Location = new Point(6, 412);
+            lblwildCard.Location = new Point(19, 421);
             lblwildCard.Name = "lblwildCard";
             lblwildCard.Size = new Size(84, 20);
             lblwildCard.TabIndex = 15;
@@ -749,61 +764,61 @@
             // 
             txtNbrHost.BackColor = Color.White;
             txtNbrHost.Enabled = false;
-            txtNbrHost.Location = new Point(167, 358);
+            txtNbrHost.Location = new Point(194, 369);
             txtNbrHost.Name = "txtNbrHost";
-            txtNbrHost.Size = new Size(125, 30);
+            txtNbrHost.Size = new Size(157, 30);
             txtNbrHost.TabIndex = 14;
             // 
             // txtNbrIp
             // 
             txtNbrIp.BackColor = Color.White;
             txtNbrIp.Enabled = false;
-            txtNbrIp.Location = new Point(116, 313);
+            txtNbrIp.Location = new Point(194, 320);
             txtNbrIp.Name = "txtNbrIp";
-            txtNbrIp.Size = new Size(125, 30);
+            txtNbrIp.Size = new Size(157, 30);
             txtNbrIp.TabIndex = 13;
             // 
             // txtLastIp
             // 
             txtLastIp.BackColor = Color.White;
             txtLastIp.Enabled = false;
-            txtLastIp.Location = new Point(110, 261);
+            txtLastIp.Location = new Point(194, 134);
             txtLastIp.Name = "txtLastIp";
-            txtLastIp.Size = new Size(181, 30);
+            txtLastIp.Size = new Size(157, 30);
             txtLastIp.TabIndex = 12;
             // 
             // txtFirstIp
             // 
             txtFirstIp.BackColor = Color.White;
             txtFirstIp.Enabled = false;
-            txtFirstIp.Location = new Point(112, 209);
+            txtFirstIp.Location = new Point(194, 82);
             txtFirstIp.Name = "txtFirstIp";
-            txtFirstIp.Size = new Size(191, 30);
+            txtFirstIp.Size = new Size(157, 30);
             txtFirstIp.TabIndex = 11;
             // 
             // txtAdrBroad
             // 
             txtAdrBroad.BackColor = Color.White;
             txtAdrBroad.Enabled = false;
-            txtAdrBroad.Location = new Point(157, 159);
+            txtAdrBroad.Location = new Point(194, 184);
             txtAdrBroad.Name = "txtAdrBroad";
-            txtAdrBroad.Size = new Size(207, 30);
+            txtAdrBroad.Size = new Size(157, 30);
             txtAdrBroad.TabIndex = 10;
             // 
             // txtAdrNet
             // 
             txtAdrNet.BackColor = Color.White;
             txtAdrNet.Enabled = false;
-            txtAdrNet.Location = new Point(122, 106);
+            txtAdrNet.Location = new Point(194, 33);
             txtAdrNet.Name = "txtAdrNet";
-            txtAdrNet.Size = new Size(212, 30);
+            txtAdrNet.Size = new Size(157, 30);
             txtAdrNet.TabIndex = 9;
             // 
             // lblNbrHost
             // 
             lblNbrHost.AutoSize = true;
             lblNbrHost.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblNbrHost.Location = new Point(6, 361);
+            lblNbrHost.Location = new Point(19, 372);
             lblNbrHost.Name = "lblNbrHost";
             lblNbrHost.Size = new Size(155, 20);
             lblNbrHost.TabIndex = 8;
@@ -813,7 +828,7 @@
             // 
             lblNbrIp.AutoSize = true;
             lblNbrIp.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblNbrIp.Location = new Point(6, 316);
+            lblNbrIp.Location = new Point(19, 325);
             lblNbrIp.Name = "lblNbrIp";
             lblNbrIp.Size = new Size(104, 20);
             lblNbrIp.TabIndex = 7;
@@ -823,7 +838,7 @@
             // 
             lblLastIp.AutoSize = true;
             lblLastIp.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblLastIp.Location = new Point(6, 266);
+            lblLastIp.Location = new Point(19, 139);
             lblLastIp.Name = "lblLastIp";
             lblLastIp.Size = new Size(98, 20);
             lblLastIp.TabIndex = 6;
@@ -833,7 +848,7 @@
             // 
             lblFirstIp.AutoSize = true;
             lblFirstIp.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblFirstIp.Location = new Point(6, 214);
+            lblFirstIp.Location = new Point(19, 87);
             lblFirstIp.Name = "lblFirstIp";
             lblFirstIp.Size = new Size(100, 20);
             lblFirstIp.TabIndex = 5;
@@ -843,7 +858,7 @@
             // 
             lblAdrBroad.AutoSize = true;
             lblAdrBroad.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAdrBroad.Location = new Point(6, 164);
+            lblAdrBroad.Location = new Point(19, 189);
             lblAdrBroad.Name = "lblAdrBroad";
             lblAdrBroad.Size = new Size(145, 20);
             lblAdrBroad.TabIndex = 4;
@@ -853,7 +868,7 @@
             // 
             lblAddrNet.AutoSize = true;
             lblAddrNet.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAddrNet.Location = new Point(6, 116);
+            lblAddrNet.Location = new Point(19, 38);
             lblAddrNet.Name = "lblAddrNet";
             lblAddrNet.Size = new Size(106, 20);
             lblAddrNet.TabIndex = 3;
@@ -863,7 +878,7 @@
             // 
             lblTypeIp.AutoSize = true;
             lblTypeIp.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTypeIp.Location = new Point(6, 71);
+            lblTypeIp.Location = new Point(19, 276);
             lblTypeIp.Name = "lblTypeIp";
             lblTypeIp.Size = new Size(285, 20);
             lblTypeIp.TabIndex = 2;
@@ -874,7 +889,7 @@
             txtClassName.BackColor = Color.White;
             txtClassName.Enabled = false;
             txtClassName.ForeColor = SystemColors.WindowText;
-            txtClassName.Location = new Point(88, 29);
+            txtClassName.Location = new Point(194, 232);
             txtClassName.Name = "txtClassName";
             txtClassName.Size = new Size(85, 30);
             txtClassName.TabIndex = 1;
@@ -883,26 +898,17 @@
             // 
             lblClassName.AutoSize = true;
             lblClassName.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblClassName.Location = new Point(6, 32);
+            lblClassName.Location = new Point(19, 237);
             lblClassName.Name = "lblClassName";
             lblClassName.Size = new Size(58, 20);
             lblClassName.TabIndex = 0;
             lblClassName.Text = "Classe :";
             // 
-            // txtWildcard
-            // 
-            txtWildcard.BackColor = Color.White;
-            txtWildcard.Enabled = false;
-            txtWildcard.Location = new Point(96, 407);
-            txtWildcard.Name = "txtWildcard";
-            txtWildcard.Size = new Size(125, 30);
-            txtWildcard.TabIndex = 16;
-            // 
             // frmHome
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1095, 680);
+            ClientSize = new Size(1001, 713);
             Controls.Add(grpResults);
             Controls.Add(btnInit);
             Controls.Add(lblMsg);
