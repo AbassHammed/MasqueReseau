@@ -76,7 +76,7 @@ namespace Reseau.lib
         public string GetFirstIPAddress()
         {
             if (Mask.ToString() == "255.255.255.255" || Mask.ToString() == "255.255.255.254")
-                return Ip.ToString();
+                return "N/A";
 
             byte[] networkBytes = IPAddress.Parse(GetNetworkAddress()).GetAddressBytes();
             if (networkBytes[3] < 255)
@@ -88,7 +88,7 @@ namespace Reseau.lib
         public string GetLastIPAddress()
         {
             if (Mask.ToString() == "255.255.255.255" || Mask.ToString() == "255.255.255.254")
-                return Ip.ToString();
+                return "N/A";
 
             byte[] broadcastBytes = IPAddress.Parse(GetBroadcastAddress()).GetAddressBytes();
             if (broadcastBytes[3] > 0)

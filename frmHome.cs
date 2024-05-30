@@ -9,7 +9,7 @@ namespace Reseau
             InitializeComponent();
         }
 
-        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        private void BinTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permettre uniquement les touches '0', '1' et les touches de contrôle comme Backspace
             if (e.KeyChar != '0' && e.KeyChar != '1' && !char.IsControl(e.KeyChar))
@@ -118,7 +118,7 @@ namespace Reseau
             Utils.ChampsDansLaLimite(255, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4);
 
         private bool VerifyMaskBinary() =>
-            Utils.ChampsBinaires(txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4);
+            !Utils.IsEmpty(txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4);
 
 
         private void rdoIP_CheckedChanged(object sender, EventArgs e)
