@@ -103,7 +103,6 @@
                 }
             }
 
-            // Rejoint les valeurs binaires en une seule chaîne, séparées par des points
             return string.Join(".", binaryValues);
         }
 
@@ -125,7 +124,6 @@
                 }
             }
 
-            // Concaténation des valeurs décimales en une seule chaîne, séparées par des points
             return string.Join(".", decimalValues);
         }
 
@@ -165,7 +163,6 @@
                 }
             }
 
-            // Rejoint les valeurs hexadécimales en une seule chaîne, séparées par des points.
             return string.Join(".", hexValues);
         }
 
@@ -184,91 +181,144 @@
             // alors le masque sera 11111111.11111111.11111111.00000000 en binaire
             uint mask = uint.MaxValue << (32 - prefixLength);
 
-            // Crée un tableau pour stocker les parties décimales du masque
             string[] decimalMask = new string[4];
             for (int i = 0; i < 4; i++)
             {
                 // Décale le masque de 24, 16, 8 et 0 bits vers la droite (pour chaque octet) et 
-                // applique un ET avec 0xFF pour obtenir seulement la dernière partie (dernier octet).
+                // applique un ET avec 0xFF(255) pour obtenir seulement la dernière partie (dernier octet).
                 // Puis convertit cet octet en sa représentation décimale et le stocke dans le tableau.
                 decimalMask[i] = ((mask >> (24 - (i * 8))) & 0xFF).ToString();
             }
 
-            // Joint les quatre parties décimales en une seule chaîne, séparées par des points
-            // et retourne cette chaîne. C'est la représentation décimale du masque CIDR.
             return string.Join(".", decimalMask);
         }
 
 
+        /// <summary>
+        /// Convertit un préfixe CIDR en une représentation binaire de son masque de sous-réseau.
+        /// </summary>
+        /// <param name="cidr">Le préfixe CIDR, indiquant la longueur du préfixe de masque de sous-réseau.</param>
+        /// <returns>Une chaîne représentant le masque de sous-réseau en notation binaire.</returns>
         public static string CidrToBinary(string cidr)
         {
+            // Convertit la chaîne CIDR en un entier pour déterminer la longueur du préfixe du masque de sous-réseau.
             int prefixLength = int.Parse(cidr);
 
-            uint mask = uint.MaxValue << (32 - prefixLength);
-
+            // Initialise un tableau pour stocker les quatre octets binaires du masque.
             string[] binaryMask = new string[4];
+
+            // Un compteur pour suivre le nombre total de bits à 1 ajoutés au masque.
+            int totalBits = 0;
+
+            // Boucle sur chaque élément du tableau (chaque octet du masque).
             for (int i = 0; i < 4; i++)
-                binaryMask[i] = Convert.ToString((mask >> (24 - (i * 8))) & 0xFF, 2).PadLeft(8, '0');
+            {
+                // Crée une chaîne vide pour construire l'octet binaire.
+                string binaryOctet = "";
+
+                // Construit chaque octet avec 8 bits.
+                for (int j = 0; j < 8; j++)
+                {
+                    // Ajoute '1' au masque tant que le total de bits à 1 n'atteint pas la longueur du préfixe.
+                    if (totalBits < prefixLength)
+                    {
+                        binaryOctet += "1";
+                        totalBits++;
+                    }
+                    else
+                        // Remplit le reste de l'octet avec des '0' une fois la longueur du préfixe atteinte.
+                        binaryOctet += "0";
+                }
+
+                binaryMask[i] = binaryOctet;
+            }
 
             return string.Join(".", binaryMask);
         }
 
+
+        /// <summary>
+        /// Convertit un masque de réseau binaire en notation CIDR.
+        /// </summary>
+        /// <param name="binaryMask">Le masque de réseau en notation binaire, séparé par des points.</param>
+        /// <returns>CIDR correspondant au masque binaire.</returns>
         public static string BinaryToCidr(string binaryMask)
         {
             var parts = binaryMask.Split('.');
-            if (parts.Length != 4)
-                throw new ArgumentException("Invalid binary mask format");
+            int cidr = 0;
 
-            uint mask = 0;
-            for (int i = 0; i < 4; i++)
-                mask |= Convert.ToUInt32(parts[i], 2) << (24 - (i * 8));
-
-            int prefixLength = 0;
-            while (mask > 0)
+            // Parcourt chaque partie (octet) du masque binaire.
+            foreach (string part in parts)
             {
-                prefixLength += (int)(mask & 1);
-                mask >>= 1;
+                // Pour chaque caractère dans la partie de l'octet (devrait être composé de '0' ou de '1').
+                foreach (char bit in part)
+                    // Ajoute 1 au compteur CIDR pour chaque bit à '1'.
+                    if (bit == '1')
+                        cidr++;
             }
 
-            return prefixLength.ToString();
+            return cidr.ToString();
         }
 
+        /// <summary>
+        /// Convertit un masque de sous-réseau décimal en notation CIDR.
+        /// </summary>
+        /// <param name="decimalMask">Le masque de réseau en notation décimale, séparé par des points.</param>
+        /// <returns>CIDR correspondant au masque décimal.</returns>
         public static string DecimalToCidr(string decimalMask)
         {
             var parts = decimalMask.Split('.');
-            if (parts.Length != 4)
-                throw new ArgumentException("Invalid decimal mask format");
-
-            uint mask = 0;
-            for (int i = 0; i < 4; i++)
-                mask |= uint.Parse(parts[i]) << (24 - (i * 8));
-
             int prefixLength = 0;
-            while (mask > 0)
+
+            // Parcourt chaque partie (octet) du masque décimal.
+            foreach (string part in parts)
             {
-                prefixLength += (int)(mask & 1);
-                mask >>= 1;
+                // Convertit chaque partie décimale en un entier.
+                int decimalValue = int.Parse(part);
+
+                // Convertit la valeur décimale en une chaîne binaire.
+                string binaryRepresentation = Convert.ToString(decimalValue, 2);
+
+                // Compte les '1' dans la représentation binaire de l'octet.
+                foreach (char bit in binaryRepresentation)
+                    if (bit == '1')
+                        prefixLength++;
             }
 
             return prefixLength.ToString();
         }
 
+
+        /// <summary>
+        /// Ajuste les valeurs dans un ensemble de TextBox pour s'assurer qu'elles respectent les limites spécifiées.
+        /// Si une valeur n'est pas un entier valide ou ne respecte pas les limites, elle est ajustée au minimum ou au maximum.
+        /// </summary>
+        /// <param name="min">La valeur minimale autorisée.</param>
+        /// <param name="max">La valeur maximale autorisée.</param>
+        /// <param name="champs">Un tableau de TextBox dont les valeurs doivent être vérifiées et ajustées.</param>
+        /// <returns>True si toutes les valeurs ont été ajustées avec succès ou étaient déjà valides, False si au moins une valeur n'était pas convertible en entier.</returns>
         public static bool adjustTextBoxValuesBaseOnLimits(int min, int max, params TextBox[] champs)
         {
             foreach (var champ in champs)
             {
+                // Essaie de convertir le texte du champ en un entier.
                 if (int.TryParse(champ.Text, out int valeur))
                 {
+                    // Si la valeur est inférieure au minimum, ajuste-la au minimum.
                     if (valeur < min)
                         champ.Text = min.ToString();
+                    // Si la valeur est supérieure au maximum, ajuste-la au maximum.
                     else if (valeur > max)
                         champ.Text = max.ToString();
                 }
                 else
+                    // Si la conversion échoue, renvoie false, indiquant une valeur invalide.
                     return false;
             }
+            // Renvoie true si toutes les valeurs ont été ajustées avec succès ou étaient déjà valides.
             return true;
         }
+
 
         public static void adjustMaskDec(params TextBox[] champs)
         {

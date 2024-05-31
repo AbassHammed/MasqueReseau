@@ -89,7 +89,7 @@ namespace Reseau
             if (rdoDecIP.Checked)
                 return Utils.adjustTextBoxValuesBaseOnLimits(0, 255, txtDEC1, txtDEC2, txtDEC3, txtDEC4);
             else if (rdoBinaireIP.Checked)
-                return Utils.IsEmpty(txtBI1, txtBI2, txtBI3, txtBI4);
+                return !Utils.IsEmpty(txtBI1, txtBI2, txtBI3, txtBI4);
             else if (rdohexaIP.Checked)
                 return VerifyIpHexadecimal();
             else

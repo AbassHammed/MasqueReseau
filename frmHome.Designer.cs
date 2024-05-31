@@ -384,39 +384,44 @@
             // 
             // rdoBinaireIP
             // 
-            rdoBinaireIP.AutoSize = true;
+            rdoBinaireIP.Appearance = Appearance.Button;
+            rdoBinaireIP.CheckAlign = ContentAlignment.MiddleCenter;
             rdoBinaireIP.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            rdoBinaireIP.Location = new Point(204, 39);
+            rdoBinaireIP.Location = new Point(225, 39);
             rdoBinaireIP.Name = "rdoBinaireIP";
-            rdoBinaireIP.Size = new Size(78, 24);
+            rdoBinaireIP.Size = new Size(102, 30);
             rdoBinaireIP.TabIndex = 26;
             rdoBinaireIP.Text = "Binaire";
+            rdoBinaireIP.TextAlign = ContentAlignment.MiddleCenter;
             rdoBinaireIP.UseVisualStyleBackColor = true;
             rdoBinaireIP.CheckedChanged += rdoIP_CheckedChanged;
             // 
             // rdohexaIP
             // 
-            rdohexaIP.AutoSize = true;
+            rdohexaIP.Appearance = Appearance.Button;
             rdohexaIP.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            rdohexaIP.Location = new Point(373, 39);
+            rdohexaIP.Location = new Point(420, 39);
             rdohexaIP.Name = "rdohexaIP";
-            rdohexaIP.Size = new Size(126, 24);
+            rdohexaIP.Size = new Size(126, 30);
             rdohexaIP.TabIndex = 25;
             rdohexaIP.Text = "Hexadecimale";
+            rdohexaIP.TextAlign = ContentAlignment.MiddleCenter;
             rdohexaIP.UseVisualStyleBackColor = true;
             rdohexaIP.CheckedChanged += rdoIP_CheckedChanged;
             // 
             // rdoDecIP
             // 
-            rdoDecIP.AutoSize = true;
+            rdoDecIP.Appearance = Appearance.Button;
+            rdoDecIP.CheckAlign = ContentAlignment.MiddleCenter;
             rdoDecIP.Checked = true;
             rdoDecIP.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             rdoDecIP.Location = new Point(18, 39);
             rdoDecIP.Name = "rdoDecIP";
-            rdoDecIP.Size = new Size(85, 24);
+            rdoDecIP.Size = new Size(102, 30);
             rdoDecIP.TabIndex = 24;
             rdoDecIP.TabStop = true;
             rdoDecIP.Text = "Decimal";
+            rdoDecIP.TextAlign = ContentAlignment.MiddleCenter;
             rdoDecIP.UseVisualStyleBackColor = true;
             rdoDecIP.CheckedChanged += rdoIP_CheckedChanged;
             // 
@@ -634,39 +639,42 @@
             // 
             // rdoBinaireMsq
             // 
-            rdoBinaireMsq.AutoSize = true;
+            rdoBinaireMsq.Appearance = Appearance.Button;
             rdoBinaireMsq.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            rdoBinaireMsq.Location = new Point(204, 40);
+            rdoBinaireMsq.Location = new Point(225, 36);
             rdoBinaireMsq.Name = "rdoBinaireMsq";
-            rdoBinaireMsq.Size = new Size(78, 24);
+            rdoBinaireMsq.Size = new Size(102, 30);
             rdoBinaireMsq.TabIndex = 29;
             rdoBinaireMsq.Text = "Binaire";
+            rdoBinaireMsq.TextAlign = ContentAlignment.MiddleCenter;
             rdoBinaireMsq.UseVisualStyleBackColor = true;
             rdoBinaireMsq.CheckedChanged += rdoMsq_CheckedChanged;
             // 
             // rdoCidr
             // 
-            rdoCidr.AutoSize = true;
+            rdoCidr.Appearance = Appearance.Button;
             rdoCidr.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            rdoCidr.Location = new Point(436, 40);
+            rdoCidr.Location = new Point(444, 36);
             rdoCidr.Name = "rdoCidr";
-            rdoCidr.Size = new Size(63, 24);
+            rdoCidr.Size = new Size(102, 30);
             rdoCidr.TabIndex = 28;
             rdoCidr.Text = "CIDR";
+            rdoCidr.TextAlign = ContentAlignment.MiddleCenter;
             rdoCidr.UseVisualStyleBackColor = true;
             rdoCidr.CheckedChanged += rdoMsq_CheckedChanged;
             // 
             // rdoDecmsq
             // 
-            rdoDecmsq.AutoSize = true;
+            rdoDecmsq.Appearance = Appearance.Button;
             rdoDecmsq.Checked = true;
             rdoDecmsq.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            rdoDecmsq.Location = new Point(18, 40);
+            rdoDecmsq.Location = new Point(18, 36);
             rdoDecmsq.Name = "rdoDecmsq";
-            rdoDecmsq.Size = new Size(85, 24);
+            rdoDecmsq.Size = new Size(102, 30);
             rdoDecmsq.TabIndex = 27;
             rdoDecmsq.TabStop = true;
             rdoDecmsq.Text = "Decimal";
+            rdoDecmsq.TextAlign = ContentAlignment.MiddleCenter;
             rdoDecmsq.UseVisualStyleBackColor = true;
             rdoDecmsq.CheckedChanged += rdoMsq_CheckedChanged;
             // 
@@ -681,6 +689,7 @@
             // 
             // btnValider
             // 
+            btnValider.Cursor = Cursors.Hand;
             btnValider.Enabled = false;
             btnValider.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnValider.Location = new Point(491, 661);
@@ -690,7 +699,6 @@
             btnValider.Text = "Calculer";
             btnValider.UseVisualStyleBackColor = true;
             btnValider.Click += btnValider_Click;
-            btnValider.Cursor = Cursors.Hand;
             // 
             // lblMsg
             // 
@@ -704,6 +712,7 @@
             // 
             // btnInit
             // 
+            btnInit.Cursor = Cursors.Hand;
             btnInit.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnInit.Location = new Point(12, 661);
             btnInit.Name = "btnInit";
@@ -712,7 +721,6 @@
             btnInit.Text = "Réinitialisation";
             btnInit.UseVisualStyleBackColor = true;
             btnInit.Click += btnInit_Click;
-            btnInit.Cursor = Cursors.Hand;
             // 
             // grpResults
             // 
