@@ -22,13 +22,13 @@ namespace Reseau
         private void textBoxIp_TextChanged(object sender, EventArgs e)
         {
             CheckIpFields();
-            btnValider.Enabled = VerifyIpAddress() && VerifyMaskAddress();
+            VerifyMaskIPMatch();
         }
 
         private void textBoxMask_TextChanged(object sender, EventArgs e)
         {
             CheckMaskFields();
-            btnValider.Enabled = VerifyIpAddress() && VerifyMaskAddress();
+            VerifyMaskIPMatch();
         }
 
         private void CheckIpFields()
@@ -193,6 +193,21 @@ namespace Reseau
             txtHEX2.Text = hexValues[1];
             txtHEX3.Text = hexValues[2];
             txtHEX4.Text = hexValues[3];
+        }
+
+        private void VerifyMaskIPMatch()
+        {
+            if (!Utils.IsEmpty(txtDEC1, txtDEC2, txtDEC3, txtDEC4, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4))
+            {
+                string Ip = string.Format("{0}.{1}.{2}.{3}", txtDEC1.Text, txtDEC2.Text, txtDEC3.Text, txtDEC4.Text);
+                string Mask = string.Format("{0}.{1}.{2}.{3}", txtMsqDEC1.Text, txtMsqDEC2.Text, txtMsqDEC3.Text, txtMsqDEC4.Text);
+                if (Utils.validateIPAndMask(Ip, Mask))
+                {
+                    SetMessage("Tous les champs sont corrects", Color.Green, true);
+                }
+                else
+                    SetMessage("Les adresses IP et masque ne correspondent pas", Color.Red, false);
+            }
         }
 
         private void ConvertFromDecimalMsq()

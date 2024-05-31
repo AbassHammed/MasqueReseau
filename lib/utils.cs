@@ -3,9 +3,9 @@
     public class Utils
     {
         /// <summary>
-        /// Vérifie si tous les champs textuels contiennent des valeurs entières valides dans la limite spécifiée.
+        /// Vérifie si tous les champs contiennent des valeurs entières valides dans la limite spécifiée.
         /// </summary>
-        /// <param name="limite">La valeur limite pour les nombres entiers dans les champs textuels.</param>
+        /// <param name="limite">La valeur limite pour les nombres entiers dans les champs.</param>
         /// <param name="champs">Les champs TextBox à vérifier.</param>
         /// <returns>True si tous les champs sont dans la limite, sinon False.</returns>
         public static bool ChampsDansLaLimite(int limite, params TextBox[] champs)
@@ -32,7 +32,7 @@
         }
 
         /// <summary>
-        /// Efface le texte de tous les champs textuels fournis.
+        /// Efface le texte de tous les champs fournis.
         /// </summary>
         /// <param name="champs">Les champs TextBox à vider.</param>
         public static void Vider(params TextBox[] champs)
@@ -319,7 +319,46 @@
             return true;
         }
 
+        /// <summary>
+        /// Vérifie si une adresse IP et un masque de sous-réseau sont valides ensemble.
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <param name="mask"></param>
+        /// <returns></returns>
+        public static bool validateIPAndMask(string ip, string mask)
+        {
+            // récupère le nombre de bits à 1 necessaires dans le masque pour la classe de l'adresse IP
+            int minMask = GetMinMaskLength(ip);
+            // convertit le masque en notation CIDR pour avoir le nombre de bits à 1 dans le masque
+            int bitcount = int.Parse(DecimalToCidr(mask));
+            // vérifie si le nombre de bits à 1 dans le masque est supérieur ou égal au nombre de bits à 1 necessaires pour la classe de l'adresse IP
+            return bitcount >= minMask;
+        }
 
+        /// <summary>
+        /// Récupère le nombre de bits à 1 necessaires dans le masque pour la classe de l'adresse IP
+        /// </summary>
+        /// <param name="ipBytes"></param>
+        /// <returns></returns>
+        private static int GetMinMaskLength(string ipBytes)
+        {
+            var part = ipBytes.Split('.');
+            // récupère le premier octet de l'adresse IP
+            int ipB = int.Parse(part[0]);
+            // détermine la classe de l'adresse IP et retourne le nombre de bits à 1 necessaires dans le masque
+            return ipB switch
+            {
+                >= 192 => 24,
+                >= 128 => 16,
+                _ => 8,
+            };
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="champs"></param>
         public static void adjustMaskDec(params TextBox[] champs)
         {
             int[] validMaskValues = [0, 128, 192, 224, 240, 248, 252, 254, 255];

@@ -117,6 +117,7 @@
             // 
             // txtDEC1
             // 
+            txtDEC1.BorderStyle = BorderStyle.FixedSingle;
             txtDEC1.Location = new Point(109, 83);
             txtDEC1.MaxLength = 3;
             txtDEC1.Name = "txtDEC1";
@@ -126,6 +127,7 @@
             // 
             // txtDEC2
             // 
+            txtDEC2.BorderStyle = BorderStyle.FixedSingle;
             txtDEC2.Location = new Point(225, 83);
             txtDEC2.MaxLength = 3;
             txtDEC2.Name = "txtDEC2";
@@ -135,6 +137,7 @@
             // 
             // txtDEC3
             // 
+            txtDEC3.BorderStyle = BorderStyle.FixedSingle;
             txtDEC3.Location = new Point(341, 83);
             txtDEC3.MaxLength = 3;
             txtDEC3.Name = "txtDEC3";
@@ -144,6 +147,7 @@
             // 
             // txtDEC4
             // 
+            txtDEC4.BorderStyle = BorderStyle.FixedSingle;
             txtDEC4.Location = new Point(457, 83);
             txtDEC4.MaxLength = 3;
             txtDEC4.Name = "txtDEC4";
@@ -193,6 +197,7 @@
             // 
             // txtBI1
             // 
+            txtBI1.BorderStyle = BorderStyle.FixedSingle;
             txtBI1.Enabled = false;
             txtBI1.Location = new Point(109, 137);
             txtBI1.MaxLength = 8;
@@ -204,6 +209,7 @@
             // 
             // txtBI2
             // 
+            txtBI2.BorderStyle = BorderStyle.FixedSingle;
             txtBI2.Enabled = false;
             txtBI2.Location = new Point(225, 137);
             txtBI2.MaxLength = 8;
@@ -215,6 +221,7 @@
             // 
             // txtBI3
             // 
+            txtBI3.BorderStyle = BorderStyle.FixedSingle;
             txtBI3.Enabled = false;
             txtBI3.Location = new Point(341, 137);
             txtBI3.MaxLength = 8;
@@ -226,6 +233,7 @@
             // 
             // txtBI4
             // 
+            txtBI4.BorderStyle = BorderStyle.FixedSingle;
             txtBI4.Enabled = false;
             txtBI4.Location = new Point(457, 137);
             txtBI4.MaxLength = 8;
@@ -277,6 +285,7 @@
             // 
             // txtHEX1
             // 
+            txtHEX1.BorderStyle = BorderStyle.FixedSingle;
             txtHEX1.Enabled = false;
             txtHEX1.Location = new Point(109, 192);
             txtHEX1.MaxLength = 2;
@@ -287,6 +296,7 @@
             // 
             // txtHEX2
             // 
+            txtHEX2.BorderStyle = BorderStyle.FixedSingle;
             txtHEX2.Enabled = false;
             txtHEX2.Location = new Point(225, 192);
             txtHEX2.MaxLength = 2;
@@ -297,6 +307,7 @@
             // 
             // txtHEX3
             // 
+            txtHEX3.BorderStyle = BorderStyle.FixedSingle;
             txtHEX3.Enabled = false;
             txtHEX3.Location = new Point(341, 192);
             txtHEX3.MaxLength = 2;
@@ -307,6 +318,7 @@
             // 
             // txtHEX4
             // 
+            txtHEX4.BorderStyle = BorderStyle.FixedSingle;
             txtHEX4.Enabled = false;
             txtHEX4.Location = new Point(457, 192);
             txtHEX4.MaxLength = 2;
@@ -427,6 +439,7 @@
             // 
             // txtMsqCIDR
             // 
+            txtMsqCIDR.BorderStyle = BorderStyle.FixedSingle;
             txtMsqCIDR.Enabled = false;
             txtMsqCIDR.Location = new Point(120, 191);
             txtMsqCIDR.MaxLength = 2;
@@ -477,6 +490,7 @@
             // 
             // txtMsqBI4
             // 
+            txtMsqBI4.BorderStyle = BorderStyle.FixedSingle;
             txtMsqBI4.Enabled = false;
             txtMsqBI4.Location = new Point(457, 136);
             txtMsqBI4.MaxLength = 8;
@@ -488,6 +502,7 @@
             // 
             // txtMsqBI3
             // 
+            txtMsqBI3.BorderStyle = BorderStyle.FixedSingle;
             txtMsqBI3.Enabled = false;
             txtMsqBI3.Location = new Point(341, 136);
             txtMsqBI3.MaxLength = 8;
@@ -499,6 +514,7 @@
             // 
             // txtMsqBI2
             // 
+            txtMsqBI2.BorderStyle = BorderStyle.FixedSingle;
             txtMsqBI2.Enabled = false;
             txtMsqBI2.Location = new Point(225, 136);
             txtMsqBI2.MaxLength = 8;
@@ -510,6 +526,7 @@
             // 
             // txtMsqBI1
             // 
+            txtMsqBI1.BorderStyle = BorderStyle.FixedSingle;
             txtMsqBI1.Enabled = false;
             txtMsqBI1.Location = new Point(109, 136);
             txtMsqBI1.MaxLength = 8;
@@ -561,6 +578,7 @@
             // 
             // txtMsqDEC4
             // 
+            txtMsqDEC4.BorderStyle = BorderStyle.FixedSingle;
             txtMsqDEC4.Location = new Point(457, 82);
             txtMsqDEC4.MaxLength = 3;
             txtMsqDEC4.Name = "txtMsqDEC4";
@@ -570,6 +588,7 @@
             // 
             // txtMsqDEC3
             // 
+            txtMsqDEC3.BorderStyle = BorderStyle.FixedSingle;
             txtMsqDEC3.Location = new Point(341, 82);
             txtMsqDEC3.MaxLength = 3;
             txtMsqDEC3.Name = "txtMsqDEC3";
@@ -579,6 +598,7 @@
             // 
             // txtMsqDEC2
             // 
+            txtMsqDEC2.BorderStyle = BorderStyle.FixedSingle;
             txtMsqDEC2.Location = new Point(225, 78);
             txtMsqDEC2.MaxLength = 3;
             txtMsqDEC2.Name = "txtMsqDEC2";
@@ -588,6 +608,7 @@
             // 
             // txtMsqDEC1
             // 
+            txtMsqDEC1.BorderStyle = BorderStyle.FixedSingle;
             txtMsqDEC1.Location = new Point(109, 82);
             txtMsqDEC1.MaxLength = 3;
             txtMsqDEC1.Name = "txtMsqDEC1";
@@ -752,6 +773,7 @@
             // txtWildcard
             // 
             txtWildcard.BackColor = Color.White;
+            txtWildcard.BorderStyle = BorderStyle.FixedSingle;
             txtWildcard.Enabled = false;
             txtWildcard.Location = new Point(194, 416);
             txtWildcard.Name = "txtWildcard";
@@ -771,6 +793,7 @@
             // txtNbrHost
             // 
             txtNbrHost.BackColor = Color.White;
+            txtNbrHost.BorderStyle = BorderStyle.FixedSingle;
             txtNbrHost.Enabled = false;
             txtNbrHost.Location = new Point(194, 369);
             txtNbrHost.Name = "txtNbrHost";
@@ -780,6 +803,7 @@
             // txtNbrIp
             // 
             txtNbrIp.BackColor = Color.White;
+            txtNbrIp.BorderStyle = BorderStyle.FixedSingle;
             txtNbrIp.Enabled = false;
             txtNbrIp.Location = new Point(194, 320);
             txtNbrIp.Name = "txtNbrIp";
@@ -789,6 +813,7 @@
             // txtLastIp
             // 
             txtLastIp.BackColor = Color.White;
+            txtLastIp.BorderStyle = BorderStyle.FixedSingle;
             txtLastIp.Enabled = false;
             txtLastIp.Location = new Point(194, 134);
             txtLastIp.Name = "txtLastIp";
@@ -798,6 +823,7 @@
             // txtFirstIp
             // 
             txtFirstIp.BackColor = Color.White;
+            txtFirstIp.BorderStyle = BorderStyle.FixedSingle;
             txtFirstIp.Enabled = false;
             txtFirstIp.Location = new Point(194, 82);
             txtFirstIp.Name = "txtFirstIp";
@@ -807,6 +833,7 @@
             // txtAdrBroad
             // 
             txtAdrBroad.BackColor = Color.White;
+            txtAdrBroad.BorderStyle = BorderStyle.FixedSingle;
             txtAdrBroad.Enabled = false;
             txtAdrBroad.Location = new Point(194, 184);
             txtAdrBroad.Name = "txtAdrBroad";
@@ -816,6 +843,7 @@
             // txtAdrNet
             // 
             txtAdrNet.BackColor = Color.White;
+            txtAdrNet.BorderStyle = BorderStyle.FixedSingle;
             txtAdrNet.Enabled = false;
             txtAdrNet.Location = new Point(194, 33);
             txtAdrNet.Name = "txtAdrNet";
@@ -895,6 +923,7 @@
             // txtClassName
             // 
             txtClassName.BackColor = Color.White;
+            txtClassName.BorderStyle = BorderStyle.FixedSingle;
             txtClassName.Enabled = false;
             txtClassName.ForeColor = SystemColors.WindowText;
             txtClassName.Location = new Point(194, 232);
