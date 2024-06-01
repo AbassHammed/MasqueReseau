@@ -75,7 +75,6 @@
             txtMsqDEC1 = new TextBox();
             lblAdrMsqDEC = new Label();
             grpAdrMasque = new GroupBox();
-            rdoBinaireMsq = new RadioButton();
             rdoCidr = new RadioButton();
             rdoDecmsq = new RadioButton();
             lblMsqSlash = new Label();
@@ -128,6 +127,7 @@
             txtDEC1.Size = new Size(86, 30);
             txtDEC1.TabIndex = 1;
             txtDEC1.TextChanged += textBoxIp_TextChanged;
+            txtDEC1.KeyPress += TextBox_KeyPress;
             // 
             // txtDEC2
             // 
@@ -138,6 +138,7 @@
             txtDEC2.Size = new Size(89, 30);
             txtDEC2.TabIndex = 2;
             txtDEC2.TextChanged += textBoxIp_TextChanged;
+            txtDEC2.KeyPress += TextBox_KeyPress;
             // 
             // txtDEC3
             // 
@@ -148,6 +149,7 @@
             txtDEC3.Size = new Size(89, 30);
             txtDEC3.TabIndex = 3;
             txtDEC3.TextChanged += textBoxIp_TextChanged;
+            txtDEC3.KeyPress += TextBox_KeyPress;
             // 
             // txtDEC4
             // 
@@ -158,6 +160,7 @@
             txtDEC4.Size = new Size(89, 30);
             txtDEC4.TabIndex = 4;
             txtDEC4.TextChanged += textBoxIp_TextChanged;
+            txtDEC4.KeyPress += TextBox_KeyPress;
             // 
             // lblDEC1
             // 
@@ -589,6 +592,7 @@
             txtMsqDEC4.Size = new Size(89, 30);
             txtMsqDEC4.TabIndex = 4;
             txtMsqDEC4.Leave += textBoxMask_TextChanged;
+            txtMsqDEC4.KeyPress += TextBox_KeyPress;
             // 
             // txtMsqDEC3
             // 
@@ -599,6 +603,7 @@
             txtMsqDEC3.Size = new Size(89, 30);
             txtMsqDEC3.TabIndex = 3;
             txtMsqDEC3.Leave += textBoxMask_TextChanged;
+            txtMsqDEC3.KeyPress += TextBox_KeyPress;
             // 
             // txtMsqDEC2
             // 
@@ -609,6 +614,7 @@
             txtMsqDEC2.Size = new Size(89, 30);
             txtMsqDEC2.TabIndex = 2;
             txtMsqDEC2.Leave += textBoxMask_TextChanged;
+            txtMsqDEC2.KeyPress += TextBox_KeyPress;
             // 
             // txtMsqDEC1
             // 
@@ -619,6 +625,7 @@
             txtMsqDEC1.Size = new Size(89, 30);
             txtMsqDEC1.TabIndex = 1;
             txtMsqDEC1.Leave += textBoxMask_TextChanged;
+            txtMsqDEC1.KeyPress += TextBox_KeyPress;
             // 
             // lblAdrMsqDEC
             // 
@@ -632,7 +639,6 @@
             // 
             // grpAdrMasque
             // 
-            grpAdrMasque.Controls.Add(rdoBinaireMsq);
             grpAdrMasque.Controls.Add(rdoCidr);
             grpAdrMasque.Controls.Add(rdoDecmsq);
             grpAdrMasque.Controls.Add(lblMsqSlash);
@@ -662,24 +668,11 @@
             grpAdrMasque.TabStop = false;
             grpAdrMasque.Text = "Adresse Masque";
             // 
-            // rdoBinaireMsq
-            // 
-            rdoBinaireMsq.Appearance = Appearance.Button;
-            rdoBinaireMsq.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            rdoBinaireMsq.Location = new Point(225, 36);
-            rdoBinaireMsq.Name = "rdoBinaireMsq";
-            rdoBinaireMsq.Size = new Size(102, 30);
-            rdoBinaireMsq.TabIndex = 29;
-            rdoBinaireMsq.Text = "Binaire";
-            rdoBinaireMsq.TextAlign = ContentAlignment.MiddleCenter;
-            rdoBinaireMsq.UseVisualStyleBackColor = true;
-            rdoBinaireMsq.CheckedChanged += rdoMsq_CheckedChanged;
-            // 
             // rdoCidr
             // 
             rdoCidr.Appearance = Appearance.Button;
             rdoCidr.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            rdoCidr.Location = new Point(444, 36);
+            rdoCidr.Location = new Point(225, 36);
             rdoCidr.Name = "rdoCidr";
             rdoCidr.Size = new Size(102, 30);
             rdoCidr.TabIndex = 28;
@@ -918,7 +911,7 @@
             // 
             lblTypeIp.AutoSize = true;
             lblTypeIp.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblTypeIp.ForeColor = Color.Olive;
+            lblTypeIp.ForeColor = Color.Black;
             lblTypeIp.Location = new Point(19, 276);
             lblTypeIp.Name = "lblTypeIp";
             lblTypeIp.Size = new Size(274, 20);
@@ -1066,7 +1059,6 @@
         private RadioButton rdoBinaireIP;
         private RadioButton rdohexaIP;
         private RadioButton rdoDecIP;
-        private RadioButton rdoBinaireMsq;
         private RadioButton rdoCidr;
         private RadioButton rdoDecmsq;
         private Button btnInit;

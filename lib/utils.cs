@@ -1,21 +1,21 @@
 ﻿namespace Reseau.lib
 {
+
+    /*
+    Groupe D-06
+    ABASS Hammed
+    AURIGNAC Arthur
+    DOHER Alexis
+    GODET Adrien
+    MAS Cédric
+    NAHARRO Guerby
+
+    SAE 2.03
+    2023/2024
+    */
+
     public class Utils
     {
-        /// <summary>
-        /// Vérifie si tous les champs contiennent des valeurs entières valides dans la limite spécifiée.
-        /// </summary>
-        /// <param name="limite">La valeur limite pour les nombres entiers dans les champs.</param>
-        /// <param name="champs">Les champs TextBox à vérifier.</param>
-        /// <returns>True si tous les champs sont dans la limite, sinon False.</returns>
-        public static bool ChampsDansLaLimite(int limite, params TextBox[] champs)
-        {
-            foreach (var champ in champs)
-                if (string.IsNullOrWhiteSpace(champ.Text) || !int.TryParse(champ.Text, out int valeur) || valeur < 0 || valeur > limite) // Verifier si le text est vide ou si la valeur n'est pas un entier valide ou si la valeur n'est pas dans la limite
-                    return false;
-
-            return true;
-        }
 
         /// <summary>
         /// Vérifie si au moins un des champs textuels est vide.
@@ -167,9 +167,9 @@
         }
 
         /// <summary>
-        /// Convertit un masque CIDR en un masque binaire
+        /// Convertit le CIDR en un masque décimal.
         /// </summary>
-        /// <param name="cidr"> Le masque CIDR </param>
+        /// <param name="cidr"> La valeure du CIDR </param>
         /// <returns></returns>
         public static string CidrToDecimal(string cidr)
         {
@@ -195,9 +195,9 @@
 
 
         /// <summary>
-        /// Convertit un préfixe CIDR en une représentation binaire de son masque de sous-réseau.
+        /// Conversion du CIDR en un masque binaire.
         /// </summary>
-        /// <param name="cidr">Le préfixe CIDR, indiquant la longueur du préfixe de masque de sous-réseau.</param>
+        /// <param name="cidr"> La valeure du CIDR en chaine de caractères </param>
         /// <returns>Une chaîne représentant le masque de sous-réseau en notation binaire.</returns>
         public static string CidrToBinary(string cidr)
         {
@@ -234,30 +234,6 @@
             }
 
             return string.Join(".", binaryMask);
-        }
-
-
-        /// <summary>
-        /// Convertit un masque de réseau binaire en notation CIDR.
-        /// </summary>
-        /// <param name="binaryMask">Le masque de réseau en notation binaire, séparé par des points.</param>
-        /// <returns>CIDR correspondant au masque binaire.</returns>
-        public static string BinaryToCidr(string binaryMask)
-        {
-            var parts = binaryMask.Split('.');
-            int cidr = 0;
-
-            // Parcourt chaque partie (octet) du masque binaire.
-            foreach (string part in parts)
-            {
-                // Pour chaque caractère dans la partie de l'octet (devrait être composé de '0' ou de '1').
-                foreach (char bit in part)
-                    // Ajoute 1 au compteur CIDR pour chaque bit à '1'.
-                    if (bit == '1')
-                        cidr++;
-            }
-
-            return cidr.ToString();
         }
 
         /// <summary>
@@ -357,56 +333,37 @@
 
         /// <summary>
         /// Ajuste les valeurs de masque de sous-réseau dans un ensemble de TextBox pour s'assurer qu'elles sont cohérentes et valides
-        /// selon les règles du masquage CIDR. Les valeurs du masque peuvent être en format binaire ou décimal.
+        /// selon les règles du masquage.
         /// </summary>
         /// <param name="champs">Les TextBox représentant les octets d'un masque de sous-réseau.</param>
-        /// <param name="isBinary">Indique si les valeurs dans les champs sont en format binaire. Sinon, elles sont considérées comme décimales.</param>
-        public static bool adjustMask(bool isBinary = false, params TextBox[] champs)
+        /// <returns>True si tous les masques de sous-réseau sont cohérents et valides, False sinon.</returns>
+        public static bool adjustMask(params TextBox[] champs)
         {
-            int[] validMaskValues = isBinary ?
-                [0, 128, 192, 224, 240, 248, 252, 254, 255] :
-                [0b0, 0b10000000, 0b11000000, 0b11100000, 0b11110000, 0b11111000, 0b11111100, 0b11111110, 0b11111111, 0b1, 0b11, 0b111, 0b1111, 0b11111, 0b111111, 0b1111111, 0b11111111];
+            int[] validMaskValues = [0, 128, 192, 224, 240, 248, 252, 254, 255];
 
-            int previousValue = isBinary ? 255 : 0b11111111;
+            int previousValue = 255;
 
-            foreach (var champ in champs)
+            for (int i = 0; i < champs.Length; i++)
             {
-                if (string.IsNullOrWhiteSpace(champ.Text))
+                if (int.TryParse(champs[i].Text, out int currentValue))
                 {
-                    return false; 
-                }
-
-                int currentValue;
-                if (isBinary)
-                {
-                    currentValue = Convert.ToInt32(champ.Text, 2);  // Convert from binary to decimal
-                }
-                else
-                {
-                    if (!int.TryParse(champ.Text, out currentValue))
+                    if (validMaskValues.Contains(currentValue))
                     {
-                        return false;
-                    }
-                }
-
-                if (validMaskValues.Contains(currentValue))
-                {
-                    if (currentValue <= previousValue)
-                    {
-                        if (previousValue != 255 && currentValue != 0)
-                            champ.Text = isBinary ? Convert.ToString(0, 2).PadLeft(8, '0') : "0";
+                        if (currentValue <= previousValue)
+                        {
+                            if (previousValue != 255 && currentValue != 0)
+                                champs[i].Text = "0";
+                            else
+                                previousValue = currentValue;
+                        }
                         else
-                            previousValue = currentValue;
+                            champs[i].Text = "0";
                     }
                     else
-                    {
-                        champ.Text = isBinary ? Convert.ToString(0, 2).PadLeft(8, '0') : "0";
-                    }
+                        champs[i].Text = previousValue.ToString();
                 }
                 else
-                {
-                    champ.Text = isBinary ? Convert.ToString(previousValue, 2).PadLeft(8, '0') : previousValue.ToString();
-                }
+                    return false;
             }
 
             return true;

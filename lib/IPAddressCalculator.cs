@@ -1,5 +1,19 @@
 ﻿using System.Net;
 
+
+/*
+Groupe D-06
+ABASS Hammed
+AURIGNAC Arthur
+DOHER Alexis
+GODET Adrien
+MAS Cédric
+NAHARRO Guerby
+
+SAE 2.03
+2023/2024
+*/
+
 namespace Reseau.lib
 {
     /// <summary>
@@ -45,6 +59,8 @@ namespace Reseau.lib
             byte[] networkBytes = new byte[ipBytes.Length];
 
             for (int i = 0; i < ipBytes.Length; i++)
+                // L'opérateur ET est utilisé ici pour calculer l'adresse de réseau:
+                // on conserve chaque bit dans l'octet de l'adresse IP où l'octet correspondant dans le masque est à 1.
                 networkBytes[i] = (byte)(ipBytes[i] & maskBytes[i]);
 
             return new IPAddress(networkBytes).ToString();
@@ -61,6 +77,8 @@ namespace Reseau.lib
             byte[] broadcastBytes = new byte[ipBytes.Length];
 
             for (int i = 0; i < ipBytes.Length; i++)
+                // Applique l'opérateur NOT (~) pour inverser les bits du masque,
+                // puis l'opérateur OR (|) pour combiner les bits inversés du masque avec ceux de l'adresse IP.
                 broadcastBytes[i] = (byte)(ipBytes[i] | ~maskBytes[i]);
 
             return new IPAddress(broadcastBytes).ToString();
@@ -108,8 +126,7 @@ namespace Reseau.lib
                 return "N/A";
 
             byte[] networkBytes = IPAddress.Parse(GetNetworkAddress()).GetAddressBytes();
-            if (networkBytes[3] < 255)
-                networkBytes[3] += 1;
+            networkBytes[3] += 1; // ajout de 1 au dernier octet de l'adresse net
 
             return new IPAddress(networkBytes).ToString();
         }
@@ -152,13 +169,19 @@ namespace Reseau.lib
         }
 
 
-        private int CountZeroBitsInMask(IPAddress mask)
+        /// <summary>
+        /// Compte le nombre de bits à 0 dans le masque de sous-réseau IP fourni.
+        /// </summary>
+        /// <param name="mask">L'adresse IP du masque de sous-réseau</param>
+        /// <returns>Le nombre de bits à 0 dans le masque de sous-réseau.</returns>
+        private static int CountZeroBitsInMask(IPAddress mask)
         {
             byte[] maskBytes = mask.GetAddressBytes();
             int zeroBits = 0;
 
             foreach (byte b in maskBytes)
                 for (int i = 7; i >= 0; i--)
+                    // Vérifie si le bit en position i est à 0.
                     if ((b & (1 << i)) == 0)
                         zeroBits++;
 
@@ -175,6 +198,8 @@ namespace Reseau.lib
             byte[] wildcardBytes = new byte[maskBytes.Length];
 
             for (int i = 0; i < maskBytes.Length; i++)
+                // Inverse chaque bit du masque: les '1' deviennent '0' et vice versa.
+                // L'opérateur ~(NON) est un opérateur de complément binaire qui inverse les bits.
                 wildcardBytes[i] = (byte)~maskBytes[i];
 
             return new IPAddress(wildcardBytes).ToString();

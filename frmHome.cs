@@ -1,12 +1,40 @@
 using Reseau.lib;
-using System.Diagnostics;
 namespace Reseau
 {
+
+
+    /*
+    Groupe D-06
+    ABASS Hammed
+    AURIGNAC Arthur
+    DOHER Alexis
+    GODET Adrien
+    MAS Cédric
+    NAHARRO Guerby
+
+    SAE 2.03
+    2023/2024
+    */
+
     public partial class frmHome : Form
     {
         public frmHome()
         {
             InitializeComponent();
+        }
+
+
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Vérifie si le caractère pressé est un chiffre.
+            // Si le caractère n'est pas un chiffre, on ignore l'entrée.
+            if (!char.IsDigit(e.KeyChar))
+            {
+                // Si ce n'est pas un chiffre et ce n'est pas la touche Backspace (pour permettre de corriger les entrées),
+                // on marque l'événement comme traité, ce qui empêche le caractère d'être ajouté au TextBox.
+                if (e.KeyChar != (char)Keys.Back)
+                    e.Handled = true;
+            }
         }
 
         private void BinTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -64,6 +92,10 @@ namespace Reseau
             btnValider.Enabled = isEnabled;
         }
 
+        /// <summary>
+        /// Déclenche la conversion de l'adresse IP depuis le format spécifié par l'utilisateur.
+        /// Le format peut être décimal, binaire ou hexadécimal.
+        /// </summary>
         private void ConvertOnVerifyIP()
         {
             if (rdoDecIP.Checked)
@@ -74,16 +106,22 @@ namespace Reseau
                 ConvertFromHexaIP();
         }
 
+        /// <summary>
+        /// Déclenche la conversion de l'adresse IP depuis le format spécifié par l'utilisateur.
+        /// Le format peut être décimal ou CIDR. 
+        /// </summary>
         private void ConvertOnVerifyMask()
         {
             if (rdoDecmsq.Checked)
                 ConvertFromDecimalMsq();
-            else if (rdoBinaireMsq.Checked)
-                ConvertFromBinaryMsq();
             else if (rdoCidr.Checked)
                 ConvertFromCidr();
         }
 
+        /// <summary>
+        /// Vérifie la validité de l'adresse IP entrée selon le format sélectionné (décimal, binaire, hexadécimal).
+        /// </summary>
+        /// <returns>True si l'adresse IP est valide selon le format spécifié, False sinon.</returns>
         private bool VerifyIpAddress()
         {
             if (rdoDecIP.Checked)
@@ -91,29 +129,33 @@ namespace Reseau
             else if (rdoBinaireIP.Checked)
                 return !Utils.IsEmpty(txtBI1, txtBI2, txtBI3, txtBI4);
             else if (rdohexaIP.Checked)
-                return VerifyIpHexadecimal();
+                return Utils.ChampsHexadecimaux(txtHEX1, txtHEX2, txtHEX3, txtHEX4);
             else
                 return false;
         }
 
+        /// <summary>
+        /// Vérifie la validité de l'adresse de masque selon le format sélectionné (décimal ou CIDR).
+        /// </summary>
+        /// <returns>True si l'adresse de masque est valide selon le format spécifié, False sinon.</returns>
         private bool VerifyMaskAddress()
         {
             if (rdoDecmsq.Checked)
-                return Utils.adjustMask(false, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4);
-            else if (rdoBinaireMsq.Checked)
-                return Utils.adjustMask(true, txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4);
+                return Utils.adjustMask(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4);
             else if (rdoCidr.Checked)
                 return Utils.adjustTextBoxValuesBaseOnLimits(0, 32, txtMsqCIDR);
             else
                 return false;
         }
 
-        private bool VerifyIpHexadecimal() =>
-            Utils.ChampsHexadecimaux(txtHEX1, txtHEX2, txtHEX3, txtHEX4);
-
-
+        /// <summary>
+        /// Gère les événements de changement d'état des boutons radio pour activer ou désactiver les champs de saisie de l'adresse IP.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rdoIP_CheckedChanged(object sender, EventArgs e)
         {
+            // Cast l'objet sender en RadioButton pour accéder à ses propriétés.
             RadioButton rdo = (RadioButton)sender;
             if (rdo.Checked)
             {
@@ -126,59 +168,88 @@ namespace Reseau
             }
         }
 
+        /// <summary>
+        /// Gère les événements de changement d'état des boutons radio pour activer ou désactiver les champs de saisie de masques de sous-réseau.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rdoMsq_CheckedChanged(object sender, EventArgs e)
         {
+            // Cast l'objet sender en RadioButton pour accéder à ses propriétés.
             RadioButton rdo = (RadioButton)sender;
             if (rdo.Checked)
             {
                 if (rdo == rdoDecmsq)
                     EnableMaskFields(true, false, false);
-                else if (rdo == rdoBinaireMsq)
-                    EnableMaskFields(false, true, false);
                 else if (rdo == rdoCidr)
                     EnableMaskFields(false, false, true);
             }
         }
 
+        /// <summary>
+        /// Active ou desactive les champs de l'IP
+        /// </summary>
+        /// <param name="DecState"></param>
+        /// <param name="BiState"></param>
+        /// <param name="HexState"></param>
         private void EnableIpFields(bool DecState, bool BiState, bool HexState)
         {
+            // Vider les champs de saisie
             Utils.Vider(txtDEC1, txtDEC2, txtDEC3, txtDEC4, txtBI1, txtBI2, txtBI3, txtBI4, txtHEX1, txtHEX2, txtHEX3, txtHEX4);
             txtDEC1.Enabled = DecState;
             txtDEC2.Enabled = DecState;
             txtDEC3.Enabled = DecState;
             txtDEC4.Enabled = DecState;
+
             txtBI1.Enabled = BiState;
             txtBI2.Enabled = BiState;
             txtBI3.Enabled = BiState;
             txtBI4.Enabled = BiState;
+
             txtHEX1.Enabled = HexState;
             txtHEX2.Enabled = HexState;
             txtHEX3.Enabled = HexState;
             txtHEX4.Enabled = HexState;
         }
 
+        /// <summary>
+        /// Active ou désactive les champs de saisie pour les masques de sous-réseau en format décimal, binaire et CIDR,
+        /// et nettoie leur contenu.
+        /// </summary>
+        /// <param name="DecState">État activé/désactivé pour les champs de format décimal.</param>
+        /// <param name="BiState">État activé/désactivé pour les champs de format binaire.</param>
+        /// <param name="CidrState">État activé/désactivé pour le champ de format CIDR.</param>
         private void EnableMaskFields(bool DecState, bool BiState, bool CidrState)
         {
+            // Vide le contenu de tous les champs liés aux masques de sous-réseau, à la fois en formats décimal et binaire, ainsi que le champ CIDR.
             Utils.Vider(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4, txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4, txtMsqCIDR);
+
             txtMsqDEC1.Enabled = DecState;
             txtMsqDEC2.Enabled = DecState;
             txtMsqDEC3.Enabled = DecState;
             txtMsqDEC4.Enabled = DecState;
+
             txtMsqBI1.Enabled = BiState;
             txtMsqBI2.Enabled = BiState;
             txtMsqBI3.Enabled = BiState;
             txtMsqBI4.Enabled = BiState;
+
             txtMsqCIDR.Enabled = CidrState;
         }
 
+        /// <summary>
+        /// Convertit l'adresse IP de décimal en binaire et hexadécimal.
+        /// </summary>
         private void ConvertFromDecimalIP()
         {
+            // Convertir l'adresse IP en binaire
             string[] binary = Utils.DecimalToBinary(txtDEC1, txtDEC2, txtDEC3, txtDEC4).Split('.');
             txtBI1.Text = binary[0];
             txtBI2.Text = binary[1];
             txtBI3.Text = binary[2];
             txtBI4.Text = binary[3];
 
+            // Convertir l'adresse IP en hexadécimal
             string[] hexValues = Utils.DecimalToHex(txtDEC1, txtDEC2, txtDEC3, txtDEC4).Split('.');
             txtHEX1.Text = hexValues[0];
             txtHEX2.Text = hexValues[1];
@@ -201,26 +272,36 @@ namespace Reseau
             }
         }
 
+        /// <summary>
+        /// Conversion de l'adresse de masque de sous-réseau de décimal en binaire et CIDR.
+        /// </summary>
         private void ConvertFromDecimalMsq()
         {
+            // Convertir le masque de sous-réseau en binaire
             string[] binary = Utils.DecimalToBinary(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4).Split('.');
             txtMsqBI1.Text = binary[0];
             txtMsqBI2.Text = binary[1];
             txtMsqBI3.Text = binary[2];
             txtMsqBI4.Text = binary[3];
 
+            // Convertir le masque de sous-réseau en CIDR
             string cidr = string.Format("{0}.{1}.{2}.{3}", txtMsqDEC1.Text, txtMsqDEC2.Text, txtMsqDEC3.Text, txtMsqDEC4.Text);
             txtMsqCIDR.Text = Utils.DecimalToCidr(cidr);
         }
 
+        /// <summary>
+        /// Convertit l'adresse IP de binaire en décimal et hexadécimal.
+        /// </summary>
         private void ConvertFromBinaryIP()
         {
+            // Convertir l'adresse IP en décimal
             string[] decValue = Utils.BinaryToDecimal(txtBI1, txtBI2, txtBI3, txtBI4).Split('.');
             txtDEC1.Text = decValue[0];
             txtDEC2.Text = decValue[1];
             txtDEC3.Text = decValue[2];
             txtDEC4.Text = decValue[3];
 
+            // Convertir l'adresse IP en hexadécimal
             string[] hexValue = Utils.BinaryToHex(txtBI1, txtBI2, txtBI3, txtBI4).Split('.');
             txtHEX1.Text = hexValue[0];
             txtHEX2.Text = hexValue[1];
@@ -228,26 +309,19 @@ namespace Reseau
             txtHEX4.Text = hexValue[3];
         }
 
-        private void ConvertFromBinaryMsq()
-        {
-            string[] decValues = Utils.BinaryToDecimal(txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4).Split('.');
-            txtMsqDEC1.Text = decValues[0];
-            txtMsqDEC2.Text = decValues[1];
-            txtMsqDEC3.Text = decValues[2];
-            txtMsqDEC4.Text = decValues[3];
-
-            string cidr = string.Format("{0}.{1}.{2}.{3}", txtMsqBI1.Text, txtMsqBI2.Text, txtMsqBI3.Text, txtMsqBI4.Text);
-            txtMsqCIDR.Text = Utils.BinaryToCidr(cidr);
-        }
-
+        /// <summary>
+        /// Convertit l'adresse IP de hexadécimal en décimal et binaire.
+        /// </summary>
         private void ConvertFromHexaIP()
         {
+            // Convertir l'adresse IP en décimal
             string[] decValues = Utils.HexToDecimal(txtHEX1, txtHEX2, txtHEX3, txtHEX4).Split('.');
             txtDEC1.Text = decValues[0];
             txtDEC2.Text = decValues[1];
             txtDEC3.Text = decValues[2];
             txtDEC4.Text = decValues[3];
 
+            // Convertir l'adresse IP en binaire
             string[] binaryValues = Utils.HexToBinary(txtHEX1, txtHEX2, txtHEX3, txtHEX4).Split('.');
             txtBI1.Text = binaryValues[0];
             txtBI2.Text = binaryValues[1];
@@ -255,15 +329,22 @@ namespace Reseau
             txtBI4.Text = binaryValues[3];
         }
 
+        /// <summary>
+        /// Convertit le CIDR de masque de sous-réseau en formats décimal et binaire, et met à jour l'interface utilisateur avec ces valeurs.
+        /// </summary>
         private void ConvertFromCidr()
         {
+            // Conversion du masque de sous-réseau en décimale
             string[] decValues = Utils.CidrToDecimal(txtMsqCIDR.Text).Split('.');
+            // Mettre à jour l'interface utilisateur
             txtMsqDEC1.Text = decValues[0];
             txtMsqDEC2.Text = decValues[1];
             txtMsqDEC3.Text = decValues[2];
             txtMsqDEC4.Text = decValues[3];
 
+            // Conversion du masque de sous-réseau en binaire
             string[] binaryValues = Utils.CidrToBinary(txtMsqCIDR.Text).Split('.');
+            // Mettre à jour l'interface utilisateur
             txtMsqBI1.Text = binaryValues[0];
             txtMsqBI2.Text = binaryValues[1];
             txtMsqBI3.Text = binaryValues[2];
@@ -271,6 +352,11 @@ namespace Reseau
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnInit_Click(object sender, EventArgs e)
         {
             Utils.Vider(txtDEC1, txtDEC2, txtDEC3, txtDEC4, txtBI1, txtBI2, txtBI3, txtBI4, txtHEX1, txtHEX2, txtHEX3, txtHEX4);
@@ -290,8 +376,6 @@ namespace Reseau
             {
                 string Ip = string.Format("{0}.{1}.{2}.{3}", txtDEC1.Text, txtDEC2.Text, txtDEC3.Text, txtDEC4.Text);
                 string Mask = string.Format("{0}.{1}.{2}.{3}", txtMsqDEC1.Text, txtMsqDEC2.Text, txtMsqDEC3.Text, txtMsqDEC4.Text);
-                Debug.WriteLine(Ip);
-                Debug.WriteLine(Mask);
 
                 IPAddressCalculator calculator = new(Ip, Mask);
                 txtClassName.Text = calculator.GetIPAddressClass();
