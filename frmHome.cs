@@ -99,15 +99,9 @@ namespace Reseau
         private bool VerifyMaskAddress()
         {
             if (rdoDecmsq.Checked)
-            {
-                Utils.adjustMask(false, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4);
-                return VerifyMaskDecimal();
-            }
+                return Utils.adjustMask(false, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4);
             else if (rdoBinaireMsq.Checked)
-            {
-                Utils.adjustMask(true, txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4);
-                return VerifyMaskBinary();
-            }
+                return Utils.adjustMask(true, txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4);
             else if (rdoCidr.Checked)
                 return Utils.adjustTextBoxValuesBaseOnLimits(0, 32, txtMsqCIDR);
             else
@@ -116,12 +110,6 @@ namespace Reseau
 
         private bool VerifyIpHexadecimal() =>
             Utils.ChampsHexadecimaux(txtHEX1, txtHEX2, txtHEX3, txtHEX4);
-
-        private bool VerifyMaskDecimal() =>
-            Utils.ChampsDansLaLimite(255, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4);
-
-        private bool VerifyMaskBinary() =>
-            !Utils.IsEmpty(txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4);
 
 
         private void rdoIP_CheckedChanged(object sender, EventArgs e)
@@ -287,6 +275,8 @@ namespace Reseau
         {
             Utils.Vider(txtDEC1, txtDEC2, txtDEC3, txtDEC4, txtBI1, txtBI2, txtBI3, txtBI4, txtHEX1, txtHEX2, txtHEX3, txtHEX4);
             Utils.Vider(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4, txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4, txtMsqCIDR);
+            Utils.Vider(txtClassName, txtAdrBroad, txtAdrNet, txtFirstIp, txtLastIp, txtNbrHost, txtNbrIp, txtWildcard);
+            lblTypeIp.Text = "Effectuer un calcul pour savoir le type d'IP";
             rdoDecIP.Checked = true;
             rdoDecmsq.Checked = true;
             EnableIpFields(true, false, false);

@@ -100,6 +100,10 @@
             lblTypeIp = new Label();
             txtClassName = new TextBox();
             lblClassName = new Label();
+            lblTitre = new Label();
+            lblSch = new Label();
+            lblSession = new Label();
+            lblGrp = new Label();
             grpAdrIP.SuspendLayout();
             grpAdrMasque.SuspendLayout();
             grpResults.SuspendLayout();
@@ -497,8 +501,8 @@
             txtMsqBI4.Name = "txtMsqBI4";
             txtMsqBI4.Size = new Size(89, 30);
             txtMsqBI4.TabIndex = 12;
-            txtMsqBI4.Leave += textBoxMask_TextChanged;
             txtMsqBI4.KeyPress += BinTextBox_KeyPress;
+            txtMsqBI4.Leave += textBoxMask_TextChanged;
             // 
             // txtMsqBI3
             // 
@@ -509,8 +513,8 @@
             txtMsqBI3.Name = "txtMsqBI3";
             txtMsqBI3.Size = new Size(89, 30);
             txtMsqBI3.TabIndex = 11;
-            txtMsqBI3.Leave += textBoxMask_TextChanged;
             txtMsqBI3.KeyPress += BinTextBox_KeyPress;
+            txtMsqBI3.Leave += textBoxMask_TextChanged;
             // 
             // txtMsqBI2
             // 
@@ -521,8 +525,8 @@
             txtMsqBI2.Name = "txtMsqBI2";
             txtMsqBI2.Size = new Size(89, 30);
             txtMsqBI2.TabIndex = 10;
-            txtMsqBI2.Leave += textBoxMask_TextChanged;
             txtMsqBI2.KeyPress += BinTextBox_KeyPress;
+            txtMsqBI2.Leave += textBoxMask_TextChanged;
             // 
             // txtMsqBI1
             // 
@@ -533,8 +537,8 @@
             txtMsqBI1.Name = "txtMsqBI1";
             txtMsqBI1.Size = new Size(89, 30);
             txtMsqBI1.TabIndex = 9;
-            txtMsqBI1.Leave += textBoxMask_TextChanged;
             txtMsqBI1.KeyPress += BinTextBox_KeyPress;
+            txtMsqBI1.Leave += textBoxMask_TextChanged;
             // 
             // lblAdrMsqBI
             // 
@@ -913,10 +917,11 @@
             // lblTypeIp
             // 
             lblTypeIp.AutoSize = true;
-            lblTypeIp.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTypeIp.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblTypeIp.ForeColor = Color.Olive;
             lblTypeIp.Location = new Point(19, 276);
             lblTypeIp.Name = "lblTypeIp";
-            lblTypeIp.Size = new Size(285, 20);
+            lblTypeIp.Size = new Size(274, 20);
             lblTypeIp.TabIndex = 2;
             lblTypeIp.Text = "Effectuer un calcul pour savoir le type d'IP";
             // 
@@ -941,11 +946,54 @@
             lblClassName.TabIndex = 0;
             lblClassName.Text = "Classe :";
             // 
+            // lblTitre
+            // 
+            lblTitre.AutoSize = true;
+            lblTitre.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitre.Location = new Point(310, 21);
+            lblTitre.Name = "lblTitre";
+            lblTitre.Size = new Size(350, 28);
+            lblTitre.TabIndex = 7;
+            lblTitre.Text = "Calculateur de Masque Réseau IPV4";
+            // 
+            // lblSch
+            // 
+            lblSch.AutoSize = true;
+            lblSch.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSch.Location = new Point(677, 684);
+            lblSch.Name = "lblSch";
+            lblSch.Size = new Size(256, 20);
+            lblSch.TabIndex = 8;
+            lblSch.Text = "I.U.T. d'Amiens - B.U.T. Informatique";
+            // 
+            // lblSession
+            // 
+            lblSession.AutoSize = true;
+            lblSession.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSession.Location = new Point(730, 661);
+            lblSession.Name = "lblSession";
+            lblSession.Size = new Size(142, 20);
+            lblSession.TabIndex = 9;
+            lblSession.Text = "Session : 2023/2024";
+            // 
+            // lblGrp
+            // 
+            lblGrp.AutoSize = true;
+            lblGrp.Location = new Point(720, 637);
+            lblGrp.Name = "lblGrp";
+            lblGrp.Size = new Size(160, 20);
+            lblGrp.TabIndex = 10;
+            lblGrp.Text = "SAE 2.03 - Groupe D06";
+            // 
             // frmHome
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1001, 713);
+            Controls.Add(lblGrp);
+            Controls.Add(lblSession);
+            Controls.Add(lblSch);
+            Controls.Add(lblTitre);
             Controls.Add(grpResults);
             Controls.Add(btnInit);
             Controls.Add(lblMsg);
@@ -1040,5 +1088,9 @@
         private TextBox txtNbrHost;
         private Label lblwildCard;
         private TextBox txtWildcard;
+        private Label lblTitre;
+        private Label lblSch;
+        private Label lblSession;
+        private Label lblGrp;
     }
 }
