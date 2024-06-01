@@ -356,35 +356,61 @@
         }
 
         /// <summary>
-        /// 
+        /// Ajuste les valeurs de masque de sous-réseau dans un ensemble de TextBox pour s'assurer qu'elles sont cohérentes et valides
+        /// selon les règles du masquage CIDR. Les valeurs du masque peuvent être en format binaire ou décimal.
         /// </summary>
-        /// <param name="champs"></param>
-        public static void adjustMaskDec(params TextBox[] champs)
+        /// <param name="champs">Les TextBox représentant les octets d'un masque de sous-réseau.</param>
+        /// <param name="isBinary">Indique si les valeurs dans les champs sont en format binaire. Sinon, elles sont considérées comme décimales.</param>
+        public static bool adjustMask(bool isBinary = false, params TextBox[] champs)
         {
-            int[] validMaskValues = [0, 128, 192, 224, 240, 248, 252, 254, 255];
+            int[] validMaskValues = isBinary ?
+                [0, 128, 192, 224, 240, 248, 252, 254, 255] :
+                [0b0, 0b10000000, 0b11000000, 0b11100000, 0b11110000, 0b11111000, 0b11111100, 0b11111110, 0b11111111, 0b1, 0b11, 0b111, 0b1111, 0b11111, 0b111111, 0b1111111, 0b11111111];
 
-            int previousValue = 255;
+            int previousValue = isBinary ? 255 : 0b11111111;
 
-            for (int i = 0; i < champs.Length; i++)
+            foreach (var champ in champs)
             {
-                if (int.TryParse(champs[i].Text, out int currentValue))
+                if (string.IsNullOrWhiteSpace(champ.Text))
                 {
-                    if (validMaskValues.Contains(currentValue))
+                    return false; 
+                }
+
+                int currentValue;
+                if (isBinary)
+                {
+                    currentValue = Convert.ToInt32(champ.Text, 2);  // Convert from binary to decimal
+                }
+                else
+                {
+                    if (!int.TryParse(champ.Text, out currentValue))
                     {
-                        if (currentValue <= previousValue)
-                        {
-                            if (previousValue != 255 && currentValue != 0)
-                                champs[i].Text = "0";
-                            else
-                                previousValue = currentValue;
-                        }
+                        return false;
+                    }
+                }
+
+                if (validMaskValues.Contains(currentValue))
+                {
+                    if (currentValue <= previousValue)
+                    {
+                        if (previousValue != 255 && currentValue != 0)
+                            champ.Text = isBinary ? Convert.ToString(0, 2).PadLeft(8, '0') : "0";
                         else
-                            champs[i].Text = "0";
+                            previousValue = currentValue;
                     }
                     else
-                        champs[i].Text = previousValue.ToString();
+                    {
+                        champ.Text = isBinary ? Convert.ToString(0, 2).PadLeft(8, '0') : "0";
+                    }
+                }
+                else
+                {
+                    champ.Text = isBinary ? Convert.ToString(previousValue, 2).PadLeft(8, '0') : previousValue.ToString();
                 }
             }
+
+            return true;
         }
+
     }
 }

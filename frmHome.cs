@@ -100,11 +100,14 @@ namespace Reseau
         {
             if (rdoDecmsq.Checked)
             {
-                Utils.adjustMaskDec(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4);
+                Utils.adjustMask(false, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4);
                 return VerifyMaskDecimal();
             }
             else if (rdoBinaireMsq.Checked)
+            {
+                Utils.adjustMask(true, txtMsqBI1, txtMsqBI2, txtMsqBI3, txtMsqBI4);
                 return VerifyMaskBinary();
+            }
             else if (rdoCidr.Checked)
                 return Utils.adjustTextBoxValuesBaseOnLimits(0, 32, txtMsqCIDR);
             else

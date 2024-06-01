@@ -497,7 +497,7 @@
             txtMsqBI4.Name = "txtMsqBI4";
             txtMsqBI4.Size = new Size(89, 30);
             txtMsqBI4.TabIndex = 12;
-            txtMsqBI4.TextChanged += textBoxMask_TextChanged;
+            txtMsqBI4.Leave += textBoxMask_TextChanged;
             txtMsqBI4.KeyPress += BinTextBox_KeyPress;
             // 
             // txtMsqBI3
@@ -509,7 +509,7 @@
             txtMsqBI3.Name = "txtMsqBI3";
             txtMsqBI3.Size = new Size(89, 30);
             txtMsqBI3.TabIndex = 11;
-            txtMsqBI3.TextChanged += textBoxMask_TextChanged;
+            txtMsqBI3.Leave += textBoxMask_TextChanged;
             txtMsqBI3.KeyPress += BinTextBox_KeyPress;
             // 
             // txtMsqBI2
@@ -521,7 +521,7 @@
             txtMsqBI2.Name = "txtMsqBI2";
             txtMsqBI2.Size = new Size(89, 30);
             txtMsqBI2.TabIndex = 10;
-            txtMsqBI2.TextChanged += textBoxMask_TextChanged;
+            txtMsqBI2.Leave += textBoxMask_TextChanged;
             txtMsqBI2.KeyPress += BinTextBox_KeyPress;
             // 
             // txtMsqBI1
@@ -533,7 +533,7 @@
             txtMsqBI1.Name = "txtMsqBI1";
             txtMsqBI1.Size = new Size(89, 30);
             txtMsqBI1.TabIndex = 9;
-            txtMsqBI1.TextChanged += textBoxMask_TextChanged;
+            txtMsqBI1.Leave += textBoxMask_TextChanged;
             txtMsqBI1.KeyPress += BinTextBox_KeyPress;
             // 
             // lblAdrMsqBI
