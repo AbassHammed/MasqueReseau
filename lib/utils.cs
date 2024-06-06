@@ -1,5 +1,6 @@
 ﻿namespace Reseau.lib
 {
+    using Markdig;
 
     /*
     Groupe D-06
@@ -14,14 +15,16 @@
     2023/2024
     */
 
+    /// <summary>
+    /// Defines the <see cref="Utils" />
+    /// </summary>
     public class Utils
     {
-
         /// <summary>
-        /// Vérifie si au moins un des champs textuels est vide.
+        /// Vérifie si au moins un des champs textuels est vide
         /// </summary>
-        /// <param name="champs">Les champs TextBox à vérifier.</param>
-        /// <returns>True si au moins un champ est vide, sinon False.</returns>
+        /// <param name="champs">Les champs TextBox à vérifier</param>
+        /// <returns>True si au moins un champ est vide, sinon False</returns>
         public static bool IsEmpty(params TextBox[] champs)
         {
             foreach (var champ in champs)
@@ -32,9 +35,9 @@
         }
 
         /// <summary>
-        /// Efface le texte de tous les champs fournis.
+        /// Efface le texte de tous les champs fournis
         /// </summary>
-        /// <param name="champs">Les champs TextBox à vider.</param>
+        /// <param name="champs">Les champs TextBox à vider</param>
         public static void Vider(params TextBox[] champs)
         {
             foreach (var champ in champs)
@@ -42,10 +45,10 @@
         }
 
         /// <summary>
-        /// Vérifie si tous les champs contiennent des valeurs hexadécimales valides.
+        /// Vérifie si tous les champs contiennent des valeurs hexadécimales valides
         /// </summary>
-        /// <param name="champs">Les champs TextBox à vérifier.</param>
-        /// <returns>True si tous les champs contiennent des valeurs hexadécimales valides, sinon False.</returns>
+        /// <param name="champs">Les champs TextBox à vérifier</param>
+        /// <returns>True si tous les champs contiennent des valeurs hexadécimales valides, sinon False</returns>
         public static bool ChampsHexadecimaux(params TextBox[] champs)
         {
             foreach (var champ in champs)
@@ -55,10 +58,10 @@
         }
 
         /// <summary>
-        /// Convertit les valeurs binaires de tous les champs en valeurs hexadécimales.
+        /// Convertit les valeurs binaires de tous les champs en valeurs hexadécimales
         /// </summary>
-        /// <param name="champs">Les champs TextBox contenant des valeurs binaires.</param>
-        /// <returns>Une chaîne représentant les valeurs hexadécimales séparées par des points.</returns>
+        /// <param name="champs">Les champs TextBox contenant des valeurs binaires</param>
+        /// <returns>Une chaîne représentant les valeurs hexadécimales séparées par des points</returns>
         public static string BinaryToHex(params TextBox[] champs)
         {
             string[] hexValues = new string[champs.Length];
@@ -69,10 +72,10 @@
         }
 
         /// <summary>
-        /// Convertit les valeurs hexadécimales de tous les champs en valeurs binaires.
+        /// Convertit les valeurs hexadécimales de tous les champs en valeurs binaires
         /// </summary>
-        /// <param name="champs">Les champs TextBox contenant des valeurs hexadécimales.</param>
-        /// <returns>Une chaîne représentant les valeurs binaires séparées par des points.</returns>
+        /// <param name="champs">Les champs TextBox contenant des valeurs hexadécimales</param>
+        /// <returns>Une chaîne représentant les valeurs binaires séparées par des points</returns>
         public static string HexToBinary(params TextBox[] champs)
         {
             string[] binaryValues = new string[champs.Length];
@@ -86,10 +89,10 @@
         }
 
         /// <summary>
-        /// Convertit les valeurs décimales de tous les champs en valeurs binaires, avec chaque valeur binaire formatée pour avoir au moins 8 chiffres.
+        /// Convertit les valeurs décimales de tous les champs en valeurs binaires, avec chaque valeur binaire formatée pour avoir au moins 8 chiffres
         /// </summary>
-        /// <param name="champs">Les champs TextBox contenant des valeurs décimales.</param>
-        /// <returns>Une chaîne représentant les valeurs binaires séparées par des points.</returns>
+        /// <param name="champs">Les champs TextBox contenant des valeurs décimales</param>
+        /// <returns>Une chaîne représentant les valeurs binaires séparées par des points</returns>
         public static string DecimalToBinary(params TextBox[] champs)
         {
             string[] binaryValues = new string[champs.Length];
@@ -107,10 +110,10 @@
         }
 
         /// <summary>
-        /// Convertit les valeurs binaires de tous les champs en valeurs décimales.
+        /// Convertit les valeurs binaires de tous les champs en valeurs décimales
         /// </summary>
-        /// <param name="champs">Les champs TextBox contenant des valeurs binaires.</param>
-        /// <returns>Une chaîne représentant les valeurs décimales séparées par des points.</returns>
+        /// <param name="champs">Les champs TextBox contenant des valeurs binaires</param>
+        /// <returns>Une chaîne représentant les valeurs décimales séparées par des points</returns>
         public static string BinaryToDecimal(params TextBox[] champs)
         {
             string[] decimalValues = new string[champs.Length];
@@ -128,10 +131,10 @@
         }
 
         /// <summary>
-        /// Convertit les valeurs hexadécimales de tous les champs en valeurs décimales.
+        /// Convertit les valeurs hexadécimales de tous les champs en valeurs décimales
         /// </summary>
-        /// <param name="champs">Les champs TextBox contenant des valeurs hexadécimales.</param>
-        /// <returns>Une chaîne représentant les valeurs décimales séparées par des points.</returns>
+        /// <param name="champs">Les champs TextBox contenant des valeurs hexadécimales</param>
+        /// <returns>Une chaîne représentant les valeurs décimales séparées par des points</returns>
         public static string HexToDecimal(params TextBox[] champs)
         {
             string[] decimalValues = new string[champs.Length];
@@ -146,10 +149,10 @@
         }
 
         /// <summary>
-        /// Convertit les valeurs décimales de tous les champs en valeurs hexadécimales.
+        /// Convertit les valeurs décimales de tous les champs en valeurs hexadécimales
         /// </summary>
-        /// <param name="champs">Les champs TextBox contenant des valeurs décimales.</param>
-        /// <returns>Une chaîne représentant les valeurs hexadécimales séparées par des points.</returns>
+        /// <param name="champs">Les champs TextBox contenant des valeurs décimales</param>
+        /// <returns>Une chaîne représentant les valeurs hexadécimales séparées par des points</returns>
         public static string DecimalToHex(params TextBox[] champs)
         {
             string[] hexValues = new string[champs.Length];
@@ -167,7 +170,7 @@
         }
 
         /// <summary>
-        /// Convertit le CIDR en un masque décimal.
+        /// Convertit le CIDR en un masque décimal
         /// </summary>
         /// <param name="cidr"> La valeure du CIDR </param>
         /// <returns></returns>
@@ -193,12 +196,11 @@
             return string.Join(".", decimalMask);
         }
 
-
         /// <summary>
-        /// Conversion du CIDR en un masque binaire.
+        /// Conversion du CIDR en un masque binaire
         /// </summary>
         /// <param name="cidr"> La valeure du CIDR en chaine de caractères </param>
-        /// <returns>Une chaîne représentant le masque de sous-réseau en notation binaire.</returns>
+        /// <returns>Une chaîne représentant le masque de sous-réseau en notation binaire</returns>
         public static string CidrToBinary(string cidr)
         {
             // Convertit la chaîne CIDR en un entier pour déterminer la longueur du préfixe du masque de sous-réseau.
@@ -237,10 +239,10 @@
         }
 
         /// <summary>
-        /// Convertit un masque de sous-réseau décimal en notation CIDR.
+        /// Convertit un masque de sous-réseau décimal en notation CIDR
         /// </summary>
-        /// <param name="decimalMask">Le masque de réseau en notation décimale, séparé par des points.</param>
-        /// <returns>CIDR correspondant au masque décimal.</returns>
+        /// <param name="decimalMask">Le masque de réseau en notation décimale, séparé par des points</param>
+        /// <returns>CIDR correspondant au masque décimal</returns>
         public static string DecimalToCidr(string decimalMask)
         {
             var parts = decimalMask.Split('.');
@@ -264,15 +266,14 @@
             return prefixLength.ToString();
         }
 
-
         /// <summary>
         /// Ajuste les valeurs dans un ensemble de TextBox pour s'assurer qu'elles respectent les limites spécifiées.
-        /// Si une valeur n'est pas un entier valide ou ne respecte pas les limites, elle est ajustée au minimum ou au maximum.
+        /// Si une valeur n'est pas un entier valide ou ne respecte pas les limites, elle est ajustée au minimum ou au maximum
         /// </summary>
-        /// <param name="min">La valeur minimale autorisée.</param>
-        /// <param name="max">La valeur maximale autorisée.</param>
-        /// <param name="champs">Un tableau de TextBox dont les valeurs doivent être vérifiées et ajustées.</param>
-        /// <returns>True si toutes les valeurs ont été ajustées avec succès ou étaient déjà valides, False si au moins une valeur n'était pas convertible en entier.</returns>
+        /// <param name="min">La valeur minimale autorisée</param>
+        /// <param name="max">La valeur maximale autorisée</param>
+        /// <param name="champs">Un tableau de TextBox dont les valeurs doivent être vérifiées et ajustées</param>
+        /// <returns>True si toutes les valeurs ont été ajustées avec succès ou étaient déjà valides, False si au moins une valeur n'était pas convertible en entier</returns>
         public static bool adjustTextBoxValuesBaseOnLimits(int min, int max, params TextBox[] champs)
         {
             foreach (var champ in champs)
@@ -296,7 +297,7 @@
         }
 
         /// <summary>
-        /// Vérifie si une adresse IP et un masque de sous-réseau sont valides ensemble.
+        /// Vérifie si une adresse IP et un masque de sous-réseau sont valides ensemble
         /// </summary>
         /// <param name="ip"></param>
         /// <param name="mask"></param>
@@ -328,15 +329,14 @@
                 >= 128 => 16,
                 _ => 8,
             };
-
         }
 
         /// <summary>
         /// Ajuste les valeurs de masque de sous-réseau dans un ensemble de TextBox pour s'assurer qu'elles sont cohérentes et valides
-        /// selon les règles du masquage.
+        /// selon les règles du masquage
         /// </summary>
-        /// <param name="champs">Les TextBox représentant les octets d'un masque de sous-réseau.</param>
-        /// <returns>True si tous les masques de sous-réseau sont cohérents et valides, False sinon.</returns>
+        /// <param name="champs">Les TextBox représentant les octets d'un masque de sous-réseau</param>
+        /// <returns>True si tous les masques de sous-réseau sont cohérents et valides, False sinon</returns>
         public static bool adjustMask(params TextBox[] champs)
         {
             int[] validMaskValues = [0, 128, 192, 224, 240, 248, 252, 254, 255];
@@ -369,5 +369,23 @@
             return true;
         }
 
+        /// <summary>
+        /// The ConvertMarkdownToPlainText
+        /// </summary>
+        /// <param name="markdown">The markdown<see cref="string"/></param>
+        /// <returns>The <see cref="string"/></returns>
+        public static string ConvertMarkdownToPlainText(string markdown)
+        {
+            // Convert markdown to HTML
+            var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+            string html = Markdown.ToHtml(markdown, pipeline);
+
+            // // Strip HTML tags to get plain text
+            // var htmlDocument = new HtmlAgilityPack.HtmlDocument();
+            // htmlDocument.LoadHtml(html);
+            // string plainText = htmlDocument.DocumentNode.InnerText;
+
+            return html;
+        }
     }
 }

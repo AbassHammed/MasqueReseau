@@ -1,16 +1,19 @@
 ﻿namespace Reseau
 {
-    partial class frmHome
+    /// <summary>
+    /// Defines the <see cref="FrmHome" />
+    /// </summary>
+    partial class FrmHome
     {
         /// <summary>
-        ///  Required designer variable.
+        /// Required designer variable
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        ///  Clean up any resources being used.
+        /// Clean up any resources being used
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,11 +23,9 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
         /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
+        /// Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor
         /// </summary>
         private void InitializeComponent()
         {
@@ -103,9 +104,14 @@
             lblSch = new Label();
             lblSession = new Label();
             lblGrp = new Label();
+            lblNotice = new Label();
+            picQuetion = new PictureBox();
+            pnlNotice = new Panel();
             grpAdrIP.SuspendLayout();
             grpAdrMasque.SuspendLayout();
             grpResults.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picQuetion).BeginInit();
+            pnlNotice.SuspendLayout();
             SuspendLayout();
             // 
             // lblAdrIPDec
@@ -591,8 +597,8 @@
             txtMsqDEC4.Name = "txtMsqDEC4";
             txtMsqDEC4.Size = new Size(89, 30);
             txtMsqDEC4.TabIndex = 4;
-            txtMsqDEC4.Leave += textBoxMask_TextChanged;
             txtMsqDEC4.KeyPress += TextBox_KeyPress;
+            txtMsqDEC4.Leave += textBoxMask_TextChanged;
             // 
             // txtMsqDEC3
             // 
@@ -602,8 +608,8 @@
             txtMsqDEC3.Name = "txtMsqDEC3";
             txtMsqDEC3.Size = new Size(89, 30);
             txtMsqDEC3.TabIndex = 3;
-            txtMsqDEC3.Leave += textBoxMask_TextChanged;
             txtMsqDEC3.KeyPress += TextBox_KeyPress;
+            txtMsqDEC3.Leave += textBoxMask_TextChanged;
             // 
             // txtMsqDEC2
             // 
@@ -613,8 +619,8 @@
             txtMsqDEC2.Name = "txtMsqDEC2";
             txtMsqDEC2.Size = new Size(89, 30);
             txtMsqDEC2.TabIndex = 2;
-            txtMsqDEC2.Leave += textBoxMask_TextChanged;
             txtMsqDEC2.KeyPress += TextBox_KeyPress;
+            txtMsqDEC2.Leave += textBoxMask_TextChanged;
             // 
             // txtMsqDEC1
             // 
@@ -624,8 +630,8 @@
             txtMsqDEC1.Name = "txtMsqDEC1";
             txtMsqDEC1.Size = new Size(89, 30);
             txtMsqDEC1.TabIndex = 1;
-            txtMsqDEC1.Leave += textBoxMask_TextChanged;
             txtMsqDEC1.KeyPress += TextBox_KeyPress;
+            txtMsqDEC1.Leave += textBoxMask_TextChanged;
             // 
             // lblAdrMsqDEC
             // 
@@ -978,11 +984,43 @@
             lblGrp.TabIndex = 10;
             lblGrp.Text = "SAE 2.03 - Groupe D06";
             // 
-            // frmHome
+            // lblNotice
+            // 
+            lblNotice.AutoSize = true;
+            lblNotice.Location = new Point(15, 6);
+            lblNotice.Name = "lblNotice";
+            lblNotice.Size = new Size(53, 20);
+            lblNotice.TabIndex = 11;
+            lblNotice.Text = "Notice";
+            lblNotice.Click += pnlNotice_Click;
+            // 
+            // picQuetion
+            // 
+            picQuetion.Image = Properties.Resources.question;
+            picQuetion.Location = new Point(72, 2);
+            picQuetion.Name = "picQuetion";
+            picQuetion.Size = new Size(27, 26);
+            picQuetion.SizeMode = PictureBoxSizeMode.Zoom;
+            picQuetion.TabIndex = 12;
+            picQuetion.TabStop = false;
+            picQuetion.Click += pnlNotice_Click;
+            // 
+            // pnlNotice
+            // 
+            pnlNotice.Controls.Add(picQuetion);
+            pnlNotice.Controls.Add(lblNotice);
+            pnlNotice.Location = new Point(881, 540);
+            pnlNotice.Name = "pnlNotice";
+            pnlNotice.Size = new Size(108, 30);
+            pnlNotice.TabIndex = 13;
+            pnlNotice.Click += pnlNotice_Click;
+            // 
+            // FrmHome
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1001, 713);
+            Controls.Add(pnlNotice);
             Controls.Add(lblGrp);
             Controls.Add(lblSession);
             Controls.Add(lblSch);
@@ -995,94 +1033,401 @@
             Controls.Add(grpAdrIP);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
-            Name = "frmHome";
-            Text = "IpCalc";
+            Name = "FrmHome";
+            Text = "Calculateur de Masque Réseau IPV4";
             grpAdrIP.ResumeLayout(false);
             grpAdrIP.PerformLayout();
             grpAdrMasque.ResumeLayout(false);
             grpAdrMasque.PerformLayout();
             grpResults.ResumeLayout(false);
             grpResults.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picQuetion).EndInit();
+            pnlNotice.ResumeLayout(false);
+            pnlNotice.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
-        #endregion
-
+        /// <summary>
+        /// Defines the lblAdrIPDec
+        /// </summary>
         private Label lblAdrIPDec;
+
+        /// <summary>
+        /// Defines the txtDEC1
+        /// </summary>
         private TextBox txtDEC1;
+
+        /// <summary>
+        /// Defines the txtDEC2
+        /// </summary>
         private TextBox txtDEC2;
+
+        /// <summary>
+        /// Defines the txtDEC3
+        /// </summary>
         private TextBox txtDEC3;
+
+        /// <summary>
+        /// Defines the txtDEC4
+        /// </summary>
         private TextBox txtDEC4;
+
+        /// <summary>
+        /// Defines the lblDEC1
+        /// </summary>
         private Label lblDEC1;
+
+        /// <summary>
+        /// Defines the lblDEC2
+        /// </summary>
         private Label lblDEC2;
+
+        /// <summary>
+        /// Defines the lblDEC3
+        /// </summary>
         private Label lblDEC3;
+
+        /// <summary>
+        /// Defines the lblAdrIPBi
+        /// </summary>
         private Label lblAdrIPBi;
+
+        /// <summary>
+        /// Defines the txtBI1
+        /// </summary>
         private TextBox txtBI1;
+
+        /// <summary>
+        /// Defines the txtBI2
+        /// </summary>
         private TextBox txtBI2;
+
+        /// <summary>
+        /// Defines the txtBI3
+        /// </summary>
         private TextBox txtBI3;
+
+        /// <summary>
+        /// Defines the txtBI4
+        /// </summary>
         private TextBox txtBI4;
+
+        /// <summary>
+        /// Defines the lblBI1
+        /// </summary>
         private Label lblBI1;
+
+        /// <summary>
+        /// Defines the lblBI2
+        /// </summary>
         private Label lblBI2;
+
+        /// <summary>
+        /// Defines the lblBI3
+        /// </summary>
         private Label lblBI3;
+
+        /// <summary>
+        /// Defines the lblAdrIPHex
+        /// </summary>
         private Label lblAdrIPHex;
+
+        /// <summary>
+        /// Defines the txtHEX1
+        /// </summary>
         private TextBox txtHEX1;
+
+        /// <summary>
+        /// Defines the txtHEX2
+        /// </summary>
         private TextBox txtHEX2;
+
+        /// <summary>
+        /// Defines the txtHEX3
+        /// </summary>
         private TextBox txtHEX3;
+
+        /// <summary>
+        /// Defines the txtHEX4
+        /// </summary>
         private TextBox txtHEX4;
+
+        /// <summary>
+        /// Defines the lblHEX1
+        /// </summary>
         private Label lblHEX1;
+
+        /// <summary>
+        /// Defines the lblHEX2
+        /// </summary>
         private Label lblHEX2;
+
+        /// <summary>
+        /// Defines the lblHEX3
+        /// </summary>
         private Label lblHEX3;
+
+        /// <summary>
+        /// Defines the grpAdrIP
+        /// </summary>
         private GroupBox grpAdrIP;
+
+        /// <summary>
+        /// Defines the lblMsqSlash
+        /// </summary>
         private Label lblMsqSlash;
+
+        /// <summary>
+        /// Defines the txtMsqCIDR
+        /// </summary>
         private TextBox txtMsqCIDR;
+
+        /// <summary>
+        /// Defines the lblAdrMsqCIDR
+        /// </summary>
         private Label lblAdrMsqCIDR;
+
+        /// <summary>
+        /// Defines the lblMsqBI3
+        /// </summary>
         private Label lblMsqBI3;
+
+        /// <summary>
+        /// Defines the lblMsqBI2
+        /// </summary>
         private Label lblMsqBI2;
+
+        /// <summary>
+        /// Defines the lblMsqBI1
+        /// </summary>
         private Label lblMsqBI1;
+
+        /// <summary>
+        /// Defines the txtMsqBI4
+        /// </summary>
         private TextBox txtMsqBI4;
+
+        /// <summary>
+        /// Defines the txtMsqBI3
+        /// </summary>
         private TextBox txtMsqBI3;
+
+        /// <summary>
+        /// Defines the txtMsqBI2
+        /// </summary>
         private TextBox txtMsqBI2;
+
+        /// <summary>
+        /// Defines the txtMsqBI1
+        /// </summary>
         private TextBox txtMsqBI1;
+
+        /// <summary>
+        /// Defines the lblAdrMsqBI
+        /// </summary>
         private Label lblAdrMsqBI;
+
+        /// <summary>
+        /// Defines the lblMsqDEC3
+        /// </summary>
         private Label lblMsqDEC3;
+
+        /// <summary>
+        /// Defines the lblMsqDEC2
+        /// </summary>
         private Label lblMsqDEC2;
+
+        /// <summary>
+        /// Defines the lblMsqDEC1
+        /// </summary>
         private Label lblMsqDEC1;
+
+        /// <summary>
+        /// Defines the txtMsqDEC4
+        /// </summary>
         private TextBox txtMsqDEC4;
+
+        /// <summary>
+        /// Defines the txtMsqDEC3
+        /// </summary>
         private TextBox txtMsqDEC3;
+
+        /// <summary>
+        /// Defines the txtMsqDEC2
+        /// </summary>
         private TextBox txtMsqDEC2;
+
+        /// <summary>
+        /// Defines the txtMsqDEC1
+        /// </summary>
         private TextBox txtMsqDEC1;
+
+        /// <summary>
+        /// Defines the lblAdrMsqDEC
+        /// </summary>
         private Label lblAdrMsqDEC;
+
+        /// <summary>
+        /// Defines the grpAdrMasque
+        /// </summary>
         private GroupBox grpAdrMasque;
+
+        /// <summary>
+        /// Defines the btnValider
+        /// </summary>
         private Button btnValider;
+
+        /// <summary>
+        /// Defines the lblMsg
+        /// </summary>
         private Label lblMsg;
+
+        /// <summary>
+        /// Defines the rdoBinaireIP
+        /// </summary>
         private RadioButton rdoBinaireIP;
+
+        /// <summary>
+        /// Defines the rdohexaIP
+        /// </summary>
         private RadioButton rdohexaIP;
+
+        /// <summary>
+        /// Defines the rdoDecIP
+        /// </summary>
         private RadioButton rdoDecIP;
+
+        /// <summary>
+        /// Defines the rdoCidr
+        /// </summary>
         private RadioButton rdoCidr;
+
+        /// <summary>
+        /// Defines the rdoDecmsq
+        /// </summary>
         private RadioButton rdoDecmsq;
+
+        /// <summary>
+        /// Defines the btnInit
+        /// </summary>
         private Button btnInit;
+
+        /// <summary>
+        /// Defines the grpResults
+        /// </summary>
         private GroupBox grpResults;
+
+        /// <summary>
+        /// Defines the lblClassName
+        /// </summary>
         private Label lblClassName;
+
+        /// <summary>
+        /// Defines the txtClassName
+        /// </summary>
         private TextBox txtClassName;
+
+        /// <summary>
+        /// Defines the lblTypeIp
+        /// </summary>
         private Label lblTypeIp;
+
+        /// <summary>
+        /// Defines the lblAddrNet
+        /// </summary>
         private Label lblAddrNet;
+
+        /// <summary>
+        /// Defines the lblAdrBroad
+        /// </summary>
         private Label lblAdrBroad;
+
+        /// <summary>
+        /// Defines the lblFirstIp
+        /// </summary>
         private Label lblFirstIp;
+
+        /// <summary>
+        /// Defines the lblLastIp
+        /// </summary>
         private Label lblLastIp;
+
+        /// <summary>
+        /// Defines the lblNbrIp
+        /// </summary>
         private Label lblNbrIp;
+
+        /// <summary>
+        /// Defines the lblNbrHost
+        /// </summary>
         private Label lblNbrHost;
+
+        /// <summary>
+        /// Defines the txtAdrNet
+        /// </summary>
         private TextBox txtAdrNet;
+
+        /// <summary>
+        /// Defines the txtAdrBroad
+        /// </summary>
         private TextBox txtAdrBroad;
+
+        /// <summary>
+        /// Defines the txtFirstIp
+        /// </summary>
         private TextBox txtFirstIp;
+
+        /// <summary>
+        /// Defines the txtLastIp
+        /// </summary>
         private TextBox txtLastIp;
+
+        /// <summary>
+        /// Defines the txtNbrIp
+        /// </summary>
         private TextBox txtNbrIp;
+
+        /// <summary>
+        /// Defines the txtNbrHost
+        /// </summary>
         private TextBox txtNbrHost;
+
+        /// <summary>
+        /// Defines the lblwildCard
+        /// </summary>
         private Label lblwildCard;
+
+        /// <summary>
+        /// Defines the txtWildcard
+        /// </summary>
         private TextBox txtWildcard;
+
+        /// <summary>
+        /// Defines the lblTitre
+        /// </summary>
         private Label lblTitre;
+
+        /// <summary>
+        /// Defines the lblSch
+        /// </summary>
         private Label lblSch;
+
+        /// <summary>
+        /// Defines the lblSession
+        /// </summary>
         private Label lblSession;
+
+        /// <summary>
+        /// Defines the lblGrp
+        /// </summary>
         private Label lblGrp;
+
+        /// <summary>
+        /// Defines the lblNotice
+        /// </summary>
+        private Label lblNotice;
+        private PictureBox picQuetion;
+        private Panel pnlNotice;
     }
 }

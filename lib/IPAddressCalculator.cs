@@ -1,33 +1,28 @@
-﻿using System.Net;
-
-
-/*
-Groupe D-06
-ABASS Hammed
-AURIGNAC Arthur
-DOHER Alexis
-GODET Adrien
-MAS Cédric
-NAHARRO Guerby
-
-SAE 2.03
-2023/2024
-*/
-
-namespace Reseau.lib
+﻿namespace Reseau.lib
 {
+    using System.Net;
+
     /// <summary>
     /// Fournit des méthodes pour calculer divers détails du réseau tels que l'adresse de réseau,
-    /// l'adresse de diffusion, la classe de l'IP, et plus, en fonction de l'adresse IP et du masque de sous-réseau fournis.
+    /// l'adresse de diffusion, la classe de l'IP, et plus, en fonction de l'adresse IP et du masque de sous-réseau fournis
     /// </summary>
-    /// <param name="ip"></param>
-    /// <param name="mask"></param>
     public class IPAddressCalculator(string ip, string mask)
     {
+        /// <summary>
+        /// Gets or sets the Ip
+        /// </summary>
         private IPAddress Ip { get; set; } = IPAddress.Parse(ip);
+
+        /// <summary>
+        /// Gets or sets the Mask
+        /// </summary>
         private IPAddress Mask { get; set; } = IPAddress.Parse(mask);
 
         // Dictionnaire liant des plages spécifiques d'adresses IP à leurs descriptions.
+
+        /// <summary>
+        /// Defines the ipRanges
+        /// </summary>
         private static readonly Dictionary<Func<byte[], bool>, string> ipRanges = new()
         {
             // Initialisations avec des conditions spécifiques pour chaque plage d'adresse IP
@@ -49,9 +44,9 @@ namespace Reseau.lib
         };
 
         /// <summary>
-        /// Calcule et retourne l'adresse de réseau dérivée de l'adresse IP et du masque de sous-réseau.
+        /// Calcule et retourne l'adresse de réseau dérivée de l'adresse IP et du masque de sous-réseau
         /// </summary>
-        /// <returns>Adresse de réseau sous forme de chaîne.</returns>
+        /// <returns>Adresse de réseau sous forme de chaîne</returns>
         public string GetNetworkAddress()
         {
             byte[] ipBytes = Ip.GetAddressBytes();
@@ -67,9 +62,9 @@ namespace Reseau.lib
         }
 
         /// <summary>
-        /// Calcule et retourne l'adresse de diffusion basée sur l'adresse IP et le masque de sous-réseau.
+        /// Calcule et retourne l'adresse de diffusion basée sur l'adresse IP et le masque de sous-réseau
         /// </summary>
-        /// <returns>Adresse de diffusion sous forme de chaîne.</returns>
+        /// <returns>Adresse de diffusion sous forme de chaîne</returns>
         public string GetBroadcastAddress()
         {
             byte[] ipBytes = Ip.GetAddressBytes();
@@ -85,9 +80,9 @@ namespace Reseau.lib
         }
 
         /// <summary>
-        /// Détermine la classe de l'adresse IP basée sur le premier octet.
+        /// Détermine la classe de l'adresse IP basée sur le premier octet
         /// </summary>
-        /// <returns>La classe de l'adresse IP (A, B, C, D, ou E).</returns>
+        /// <returns>La classe de l'adresse IP (A, B, C, D, ou E)</returns>
         public string GetIPAddressClass()
         {
             byte firstOctet = Ip.GetAddressBytes()[0];
@@ -99,13 +94,12 @@ namespace Reseau.lib
                 <= 239 => "D",
                 _ => "E",
             };
-
         }
 
         /// <summary>
-        /// Identifie le type d'adresse IP basé sur des plages prédéfinies.
+        /// Identifie le type d'adresse IP basé sur des plages prédéfinies
         /// </summary>
-        /// <returns>Description du type d'adresse IP (privé, public, etc.).</returns>
+        /// <returns>Description du type d'adresse IP (privé, public, etc.)</returns>
         public string GetIPAddressType()
         {
             byte[] ipBytes = Ip.GetAddressBytes();
@@ -117,9 +111,9 @@ namespace Reseau.lib
         }
 
         /// <summary>
-        /// Calcule la première adresse IP utilisable dans le sous-réseau.
+        /// Calcule la première adresse IP utilisable dans le sous-réseau
         /// </summary>
-        /// <returns>La première adresse IP utilisable.</returns>
+        /// <returns>La première adresse IP utilisable</returns>
         public string GetFirstIPAddress()
         {
             if (Mask.ToString() == "255.255.255.255" || Mask.ToString() == "255.255.255.254")
@@ -131,11 +125,10 @@ namespace Reseau.lib
             return new IPAddress(networkBytes).ToString();
         }
 
-
         /// <summary>
-        /// Calcule la dernière adresse IP utilisable dans le sous-réseau.
+        /// Calcule la dernière adresse IP utilisable dans le sous-réseau
         /// </summary>
-        /// <returns>La dernière adresse IP utilisable.</returns>
+        /// <returns>La dernière adresse IP utilisable</returns>
         public string GetLastIPAddress()
         {
             if (Mask.ToString() == "255.255.255.255" || Mask.ToString() == "255.255.255.254")
@@ -149,9 +142,9 @@ namespace Reseau.lib
         }
 
         /// <summary>
-        /// Calcule le nombre total d'adresses IP dans le sous-réseau.
+        /// Calcule le nombre total d'adresses IP dans le sous-réseau
         /// </summary>
-        /// <returns>Nombre total d'adresses IP sous forme de chaîne.</returns>
+        /// <returns>Nombre total d'adresses IP sous forme de chaîne</returns>
         public string GetNumberOfIPAddresses()
         {
             int bits = CountZeroBitsInMask(Mask);
@@ -159,21 +152,20 @@ namespace Reseau.lib
         }
 
         /// <summary>
-        /// Calcule le nombre d'hôtes utilisables dans le sous-réseau.
+        /// Calcule le nombre d'hôtes utilisables dans le sous-réseau
         /// </summary>
-        /// <returns>Nombre d'hôtes utilisables sous forme de chaîne.</returns>
+        /// <returns>Nombre d'hôtes utilisables sous forme de chaîne</returns>
         public string GetNumberOfHosts()
         {
             int totalIPs = (int)Math.Pow(2, CountZeroBitsInMask(Mask));
             return (totalIPs > 2) ? (totalIPs - 2).ToString() : "0";
         }
 
-
         /// <summary>
-        /// Compte le nombre de bits à 0 dans le masque de sous-réseau IP fourni.
+        /// Compte le nombre de bits à 0 dans le masque de sous-réseau IP fourni
         /// </summary>
         /// <param name="mask">L'adresse IP du masque de sous-réseau</param>
-        /// <returns>Le nombre de bits à 0 dans le masque de sous-réseau.</returns>
+        /// <returns>Le nombre de bits à 0 dans le masque de sous-réseau</returns>
         private static int CountZeroBitsInMask(IPAddress mask)
         {
             byte[] maskBytes = mask.GetAddressBytes();
@@ -189,9 +181,9 @@ namespace Reseau.lib
         }
 
         /// <summary>
-        /// Calcule et retourne le masque inverse (wildcard) pour le masque de sous-réseau.
+        /// Calcule et retourne le masque inverse (wildcard) pour le masque de sous-réseau
         /// </summary>
-        /// <returns>Masque inverse sous forme de chaîne.</returns>
+        /// <returns>Masque inverse sous forme de chaîne</returns>
         public string GetWildcardMask()
         {
             byte[] maskBytes = Mask.GetAddressBytes();

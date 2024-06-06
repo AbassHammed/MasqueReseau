@@ -1,7 +1,6 @@
-using Reseau.lib;
 namespace Reseau
 {
-
+using Reseau.lib;
 
     /*
     Groupe D-06
@@ -16,14 +15,26 @@ namespace Reseau
     2023/2024
     */
 
-    public partial class frmHome : Form
+    /// <summary>
+    /// Defines the <see cref="FrmHome" />
+    /// </summary>
+    public partial class FrmHome : Form
     {
-        public frmHome()
+        private FrmNotice frmNotice;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrmHome"/> class.
+        /// </summary>
+        public FrmHome()
         {
             InitializeComponent();
+            frmNotice = new FrmNotice();
         }
 
-
+        /// <summary>
+        /// The TextBox_KeyPress
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="KeyPressEventArgs"/></param>
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Vérifie si le caractère pressé est un chiffre.
@@ -37,6 +48,11 @@ namespace Reseau
             }
         }
 
+        /// <summary>
+        /// The BinTextBox_KeyPress
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="KeyPressEventArgs"/></param>
         private void BinTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permettre uniquement les touches '0', '1' et les touches de contrôle comme Backspace
@@ -47,18 +63,31 @@ namespace Reseau
             }
         }
 
+        /// <summary>
+        /// The textBoxIp_TextChanged
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void textBoxIp_TextChanged(object sender, EventArgs e)
         {
             CheckIpFields();
             VerifyMaskIPMatch();
         }
 
+        /// <summary>
+        /// The textBoxMask_TextChanged
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void textBoxMask_TextChanged(object sender, EventArgs e)
         {
             CheckMaskFields();
             VerifyMaskIPMatch();
         }
 
+        /// <summary>
+        /// The CheckIpFields
+        /// </summary>
         private void CheckIpFields()
         {
             if (!VerifyIpAddress())
@@ -72,6 +101,9 @@ namespace Reseau
             }
         }
 
+        /// <summary>
+        /// The CheckMaskFields
+        /// </summary>
         private void CheckMaskFields()
         {
             if (!VerifyMaskAddress())
@@ -85,6 +117,12 @@ namespace Reseau
             }
         }
 
+        /// <summary>
+        /// The SetMessage
+        /// </summary>
+        /// <param name="message">The message<see cref="string"/></param>
+        /// <param name="color">The color<see cref="Color"/></param>
+        /// <param name="isEnabled">The isEnabled<see cref="bool"/></param>
         private void SetMessage(string message, Color color, bool isEnabled)
         {
             lblMsg.ForeColor = color;
@@ -94,7 +132,7 @@ namespace Reseau
 
         /// <summary>
         /// Déclenche la conversion de l'adresse IP depuis le format spécifié par l'utilisateur.
-        /// Le format peut être décimal, binaire ou hexadécimal.
+        /// Le format peut être décimal, binaire ou hexadécimal
         /// </summary>
         private void ConvertOnVerifyIP()
         {
@@ -108,7 +146,7 @@ namespace Reseau
 
         /// <summary>
         /// Déclenche la conversion de l'adresse IP depuis le format spécifié par l'utilisateur.
-        /// Le format peut être décimal ou CIDR. 
+        /// Le format peut être décimal ou CIDR
         /// </summary>
         private void ConvertOnVerifyMask()
         {
@@ -119,9 +157,9 @@ namespace Reseau
         }
 
         /// <summary>
-        /// Vérifie la validité de l'adresse IP entrée selon le format sélectionné (décimal, binaire, hexadécimal).
+        /// Vérifie la validité de l'adresse IP entrée selon le format sélectionné (décimal, binaire, hexadécimal)
         /// </summary>
-        /// <returns>True si l'adresse IP est valide selon le format spécifié, False sinon.</returns>
+        /// <returns>True si l'adresse IP est valide selon le format spécifié, False sinon</returns>
         private bool VerifyIpAddress()
         {
             if (rdoDecIP.Checked)
@@ -135,9 +173,9 @@ namespace Reseau
         }
 
         /// <summary>
-        /// Vérifie la validité de l'adresse de masque selon le format sélectionné (décimal ou CIDR).
+        /// Vérifie la validité de l'adresse de masque selon le format sélectionné (décimal ou CIDR)
         /// </summary>
-        /// <returns>True si l'adresse de masque est valide selon le format spécifié, False sinon.</returns>
+        /// <returns>True si l'adresse de masque est valide selon le format spécifié, False sinon</returns>
         private bool VerifyMaskAddress()
         {
             if (rdoDecmsq.Checked)
@@ -149,7 +187,7 @@ namespace Reseau
         }
 
         /// <summary>
-        /// Gère les événements de changement d'état des boutons radio pour activer ou désactiver les champs de saisie de l'adresse IP.
+        /// Gère les événements de changement d'état des boutons radio pour activer ou désactiver les champs de saisie de l'adresse IP
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -169,7 +207,7 @@ namespace Reseau
         }
 
         /// <summary>
-        /// Gère les événements de changement d'état des boutons radio pour activer ou désactiver les champs de saisie de masques de sous-réseau.
+        /// Gère les événements de changement d'état des boutons radio pour activer ou désactiver les champs de saisie de masques de sous-réseau
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -214,11 +252,11 @@ namespace Reseau
 
         /// <summary>
         /// Active ou désactive les champs de saisie pour les masques de sous-réseau en format décimal, binaire et CIDR,
-        /// et nettoie leur contenu.
+        /// et nettoie leur contenu
         /// </summary>
-        /// <param name="DecState">État activé/désactivé pour les champs de format décimal.</param>
-        /// <param name="BiState">État activé/désactivé pour les champs de format binaire.</param>
-        /// <param name="CidrState">État activé/désactivé pour le champ de format CIDR.</param>
+        /// <param name="DecState">État activé/désactivé pour les champs de format décimal</param>
+        /// <param name="BiState">État activé/désactivé pour les champs de format binaire</param>
+        /// <param name="CidrState">État activé/désactivé pour le champ de format CIDR</param>
         private void EnableMaskFields(bool DecState, bool BiState, bool CidrState)
         {
             // Vide le contenu de tous les champs liés aux masques de sous-réseau, à la fois en formats décimal et binaire, ainsi que le champ CIDR.
@@ -238,7 +276,7 @@ namespace Reseau
         }
 
         /// <summary>
-        /// Convertit l'adresse IP de décimal en binaire et hexadécimal.
+        /// Convertit l'adresse IP de décimal en binaire et hexadécimal
         /// </summary>
         private void ConvertFromDecimalIP()
         {
@@ -257,6 +295,9 @@ namespace Reseau
             txtHEX4.Text = hexValues[3];
         }
 
+        /// <summary>
+        /// The VerifyMaskIPMatch
+        /// </summary>
         private void VerifyMaskIPMatch()
         {
             if (!Utils.IsEmpty(txtDEC1, txtDEC2, txtDEC3, txtDEC4, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4))
@@ -273,7 +314,7 @@ namespace Reseau
         }
 
         /// <summary>
-        /// Conversion de l'adresse de masque de sous-réseau de décimal en binaire et CIDR.
+        /// Conversion de l'adresse de masque de sous-réseau de décimal en binaire et CIDR
         /// </summary>
         private void ConvertFromDecimalMsq()
         {
@@ -290,7 +331,7 @@ namespace Reseau
         }
 
         /// <summary>
-        /// Convertit l'adresse IP de binaire en décimal et hexadécimal.
+        /// Convertit l'adresse IP de binaire en décimal et hexadécimal
         /// </summary>
         private void ConvertFromBinaryIP()
         {
@@ -310,7 +351,7 @@ namespace Reseau
         }
 
         /// <summary>
-        /// Convertit l'adresse IP de hexadécimal en décimal et binaire.
+        /// Convertit l'adresse IP de hexadécimal en décimal et binaire
         /// </summary>
         private void ConvertFromHexaIP()
         {
@@ -330,7 +371,7 @@ namespace Reseau
         }
 
         /// <summary>
-        /// Convertit le CIDR de masque de sous-réseau en formats décimal et binaire, et met à jour l'interface utilisateur avec ces valeurs.
+        /// Convertit le CIDR de masque de sous-réseau en formats décimal et binaire, et met à jour l'interface utilisateur avec ces valeurs
         /// </summary>
         private void ConvertFromCidr()
         {
@@ -349,11 +390,10 @@ namespace Reseau
             txtMsqBI2.Text = binaryValues[1];
             txtMsqBI3.Text = binaryValues[2];
             txtMsqBI4.Text = binaryValues[3];
-
         }
 
         /// <summary>
-        /// 
+        /// The btnInit_Click
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -370,6 +410,11 @@ namespace Reseau
             SetMessage("", Color.Red, false);
         }
 
+        /// <summary>
+        /// The btnValider_Click
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/></param>
+        /// <param name="e">The e<see cref="EventArgs"/></param>
         private void btnValider_Click(object sender, EventArgs e)
         {
             if (!Utils.IsEmpty(txtDEC1, txtDEC2, txtDEC3, txtDEC4, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4))
@@ -390,5 +435,9 @@ namespace Reseau
             }
         }
 
+        private void pnlNotice_Click(object sender, EventArgs e)
+        {
+            frmNotice.Show(this);
+        }
     }
 }
