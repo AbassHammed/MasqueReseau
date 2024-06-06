@@ -152,6 +152,8 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1097, 836);
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Controls.Add(lblSession);
             Controls.Add(lblCredits);
             Controls.Add(lblContent5);
@@ -163,6 +165,7 @@
             Controls.Add(lblSubContent);
             Controls.Add(lblSubTitle1);
             Controls.Add(lblTitle);
+            KeyPreview = true;
             Name = "FrmNotice";
             Text = "Notice - Calculateur de Masque Réseau IPV4";
             ResumeLayout(false);

@@ -1,7 +1,5 @@
 ﻿namespace Reseau.lib
 {
-    using Markdig;
-
     /*
     Groupe D-06
     ABASS Hammed
@@ -334,58 +332,49 @@
         /// <summary>
         /// Ajuste les valeurs de masque de sous-réseau dans un ensemble de TextBox pour s'assurer qu'elles sont cohérentes et valides
         /// selon les règles du masquage
+        /// Méthode statique pour ajuster les valeurs des champs de texte d'un masque de sous-réseau IPv4.
         /// </summary>
         /// <param name="champs">Les TextBox représentant les octets d'un masque de sous-réseau</param>
         /// <returns>True si tous les masques de sous-réseau sont cohérents et valides, False sinon</returns>
         public static bool adjustMask(params TextBox[] champs)
         {
+            // Tableau contenant les valeurs décimales valides pour un masque de sous-réseau
             int[] validMaskValues = [0, 128, 192, 224, 240, 248, 252, 254, 255];
 
+            // Variable pour stocker la valeur précédente (initialisée à 255 pour le premier octet)
             int previousValue = 255;
 
+            // Parcourt les champs de texte (octets du masque)
             for (int i = 0; i < champs.Length; i++)
             {
+                // Essaie de convertir la valeur du champ en entier
                 if (int.TryParse(champs[i].Text, out int currentValue))
                 {
+                    // Vérifie si la valeur est valide pour un masque
                     if (validMaskValues.Contains(currentValue))
                     {
+                        // Vérifie si la valeur est inférieure ou égale à la valeur précédente
                         if (currentValue <= previousValue)
                         {
+                            // Si la valeur précédente n'est pas 255 et la valeur actuelle n'est pas 0, 
+                            // on remplace la valeur actuelle par 0 pour respecter la règle des masques contigus.
                             if (previousValue != 255 && currentValue != 0)
                                 champs[i].Text = "0";
                             else
-                                previousValue = currentValue;
+                                previousValue = currentValue; // Met à jour la valeur précédente
                         }
-                        else
+                        else // Si la valeur actuelle est supérieure à la valeur précédente, on la remplace par 0
                             champs[i].Text = "0";
                     }
-                    else
+                    else // Si la valeur n'est pas valide, on la remplace par la valeur précédente
                         champs[i].Text = previousValue.ToString();
                 }
-                else
+                else // Si la conversion en entier échoue, on signale une erreur
                     return false;
             }
 
-            return true;
+            return true; // Si tout s'est bien passé, on retourne vrai
         }
 
-        /// <summary>
-        /// The ConvertMarkdownToPlainText
-        /// </summary>
-        /// <param name="markdown">The markdown<see cref="string"/></param>
-        /// <returns>The <see cref="string"/></returns>
-        public static string ConvertMarkdownToPlainText(string markdown)
-        {
-            // Convert markdown to HTML
-            var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
-            string html = Markdown.ToHtml(markdown, pipeline);
-
-            // // Strip HTML tags to get plain text
-            // var htmlDocument = new HtmlAgilityPack.HtmlDocument();
-            // htmlDocument.LoadHtml(html);
-            // string plainText = htmlDocument.DocumentNode.InnerText;
-
-            return html;
-        }
     }
 }

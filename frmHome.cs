@@ -1,6 +1,6 @@
 namespace Reseau
 {
-using Reseau.lib;
+    using Reseau.lib;
 
     /*
     Groupe D-06
@@ -86,39 +86,70 @@ using Reseau.lib;
         }
 
         /// <summary>
-        /// The CheckIpFields
+        /// Vérifie les champs de saisie de l'adresse IP et affiche des messages d'erreur spécifiques.
         /// </summary>
         private void CheckIpFields()
         {
+            // Vérifie si l'adresse IP n'est valide
             if (!VerifyIpAddress())
             {
-                SetMessage("Veuillez remplir les champs correctement", Color.Red, false);
+                // Message d'erreur générique si la validation échoue
+                string errorMessage = "Adresse IP invalide : ";
+
+                // Vérifie le format sélectionné et ajoute des détails spécifiques
+                if (rdoDecIP.Checked && !Utils.adjustTextBoxValuesBaseOnLimits(0, 255, txtDEC1, txtDEC2, txtDEC3, txtDEC4))
+                    errorMessage += "Les octets doivent être entre 0 et 255.";
+                else if (rdoBinaireIP.Checked && Utils.IsEmpty(txtBI1, txtBI2, txtBI3, txtBI4))
+                    errorMessage += "Veuillez remplir tous les champs binaires.";
+                else if (rdohexaIP.Checked && !Utils.ChampsHexadecimaux(txtHEX1, txtHEX2, txtHEX3, txtHEX4))
+                    errorMessage += "Les octets hexadécimaux doivent être entre 00 et FF.";
+
+                // Affiche le message d'erreur spécifique (ou générique si aucun détail n'est disponible)
+                SetMessage(errorMessage, Color.Red, false);
             }
             else
             {
+                // Si l'adresse IP est valide, convertit l'adresse IP dans d'autres formats (selon le bouton radio sélectionné)
                 ConvertOnVerifyIP();
+
+                // Affiche un message de succès
                 SetMessage("Tous les champs IP sont correctement remplis", Color.Green, false);
             }
         }
 
         /// <summary>
-        /// The CheckMaskFields
+        /// Vérifie les champs de saisie du masque de sous-réseau et affiche des messages d'erreur spécifiques.
         /// </summary>
         private void CheckMaskFields()
         {
+            // Vérifie si le masque de sous-réseau n'est pas valide
             if (!VerifyMaskAddress())
             {
-                SetMessage("Veuillez respecter les limites du masque", Color.Red, false);
+                // Message d'erreur générique si la validation échoue
+                string errorMessage = "Masque de sous-réseau invalide : ";
+
+                // Vérifie le format sélectionné et ajoute des détails spécifiques
+                if (rdoDecmsq.Checked && !Utils.adjustMask(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4))
+                    errorMessage += "Les octets doivent être entre 0 et 255, et les bits à 1 doivent être contigus.";
+                else if (rdoCidr.Checked && !Utils.adjustTextBoxValuesBaseOnLimits(0, 32, txtMsqCIDR))
+                    errorMessage += "La valeur CIDR doit être entre 0 et 32.";
+
+                // Affiche le message d'erreur spécifique (ou générique si aucun détail n'est disponible)
+                SetMessage(errorMessage, Color.Red, false);
             }
             else
             {
+                // Si le masque est valide, convertit le masque dans d'autres formats (selon le bouton radio sélectionné)
                 ConvertOnVerifyMask();
+
+                // Affiche un message de succès
                 SetMessage("Tous les champs de masque sont correctement remplis", Color.Green, false);
             }
         }
 
+
         /// <summary>
-        /// The SetMessage
+        /// Affiche un message d'état pour l'utilisateur et active ou désactive le bouton "Calculer".
         /// </summary>
         /// <param name="message">The message<see cref="string"/></param>
         /// <param name="color">The color<see cref="Color"/></param>
@@ -197,6 +228,7 @@ using Reseau.lib;
             RadioButton rdo = (RadioButton)sender;
             if (rdo.Checked)
             {
+                // On verifie ici l'objet qui a génére l'evenement pour savoir quels champs doivent être activés
                 if (rdo == rdoDecIP)
                     EnableIpFields(true, false, false);
                 else if (rdo == rdoBinaireIP)
@@ -217,6 +249,7 @@ using Reseau.lib;
             RadioButton rdo = (RadioButton)sender;
             if (rdo.Checked)
             {
+                // On verifie ici l'objet qui a génére l'evenement pour savoir quels champs doivent être activés
                 if (rdo == rdoDecmsq)
                     EnableMaskFields(true, false, false);
                 else if (rdo == rdoCidr)
@@ -296,22 +329,32 @@ using Reseau.lib;
         }
 
         /// <summary>
-        /// The VerifyMaskIPMatch
+        /// Vérifie la correspondance entre l'adresse IP et le masque de sous-réseau, et met à jour le message d'état.
         /// </summary>
         private void VerifyMaskIPMatch()
         {
+
+            // Vérifie si tous les champs d'adresse IP et de masque sont remplis
             if (!Utils.IsEmpty(txtDEC1, txtDEC2, txtDEC3, txtDEC4, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4))
             {
+                // Formate les valeurs des TextBox en chaînes d'adresse IP et de masque
                 string Ip = string.Format("{0}.{1}.{2}.{3}", txtDEC1.Text, txtDEC2.Text, txtDEC3.Text, txtDEC4.Text);
                 string Mask = string.Format("{0}.{1}.{2}.{3}", txtMsqDEC1.Text, txtMsqDEC2.Text, txtMsqDEC3.Text, txtMsqDEC4.Text);
+
+                // Utilise la méthode 'validateIPAndMask' de la classe Utils pour vérifier la correspondance
                 if (Utils.validateIPAndMask(Ip, Mask))
                 {
+                    // Si la correspondance est valide, affiche un message de succès et active le bouton "Valider"
                     SetMessage("Tous les champs sont corrects", Color.Green, true);
                 }
                 else
+                {
+                    // Si la correspondance n'est pas valide, affiche un message d'erreur et désactive le bouton "Valider"
                     SetMessage("Les adresses IP et masque ne correspondent pas", Color.Red, false);
+                }
             }
         }
+
 
         /// <summary>
         /// Conversion de l'adresse de masque de sous-réseau de décimal en binaire et CIDR
@@ -411,18 +454,23 @@ using Reseau.lib;
         }
 
         /// <summary>
-        /// The btnValider_Click
+        /// Gère le clic sur le bouton "Calculer".
         /// </summary>
         /// <param name="sender">The sender<see cref="object"/></param>
         /// <param name="e">The e<see cref="EventArgs"/></param>
         private void btnValider_Click(object sender, EventArgs e)
         {
+            // Vérifie si les champs d'adresse IP et de masque sont remplis
             if (!Utils.IsEmpty(txtDEC1, txtDEC2, txtDEC3, txtDEC4, txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4))
             {
+                // Récupère l'adresse IP et le masque depuis les champs de texte
                 string Ip = string.Format("{0}.{1}.{2}.{3}", txtDEC1.Text, txtDEC2.Text, txtDEC3.Text, txtDEC4.Text);
                 string Mask = string.Format("{0}.{1}.{2}.{3}", txtMsqDEC1.Text, txtMsqDEC2.Text, txtMsqDEC3.Text, txtMsqDEC4.Text);
 
+                // Crée une instance de la classe IPAddressCalculator pour effectuer les calculs
                 IPAddressCalculator calculator = new(Ip, Mask);
+
+                // Affiche les résultats des calculs dans les champs de texte correspondants
                 txtClassName.Text = calculator.GetIPAddressClass();
                 txtAdrBroad.Text = calculator.GetBroadcastAddress();
                 txtAdrNet.Text = calculator.GetNetworkAddress();
@@ -435,9 +483,24 @@ using Reseau.lib;
             }
         }
 
+        /// <summary>
+        /// Gère le clic sur le panneau d'affichage de la notice.
+        /// </summary>
         private void pnlNotice_Click(object sender, EventArgs e)
         {
-            frmNotice.Show(this);
+            // Affiche la fenêtre de notice (FrmNotice) en tant que boîte de dialogue modale
+            frmNotice.ShowDialog(this);
+        }
+
+        // Correspond à l'événement KeyDown, permet de récupérer les touches appuyées par l'utilisateur
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.P)
+            {
+                frmNotice.ShowDialog(this); // Affiche la fenêtre de notice (FrmNotice) en tant que boîte de dialogue modale
+                return true; // Indique que la touche est bien traitée
+            }
+            return base.ProcessCmdKey(ref msg, keyData); // Indique que la touche n'est pas traitée
         }
     }
 }

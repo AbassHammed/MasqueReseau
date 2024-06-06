@@ -152,33 +152,50 @@
         }
 
         /// <summary>
-        /// Calcule le nombre d'hôtes utilisables dans le sous-réseau
+        /// Calcule et retourne le nombre d'hôtes pouvant être adressés dans le sous-réseau.
         /// </summary>
-        /// <returns>Nombre d'hôtes utilisables sous forme de chaîne</returns>
+        /// <returns>
+        /// Une chaîne de caractères représentant le nombre d'hôtes disponibles, ou "0" si le sous-réseau est invalide ou trop petit.
+        /// </returns>
         public string GetNumberOfHosts()
         {
+            // Calcule le nombre total d'adresses IP possibles dans le sous-réseau
+            // en élevant 2 à la puissance du nombre de bits à zéro dans le masque.
             int totalIPs = (int)Math.Pow(2, CountZeroBitsInMask(Mask));
+
+            // Si le nombre total d'adresses est supérieur à 2 (ce qui est nécessaire pour avoir au moins une adresse hôte),
+            // on soustrait 2 pour exclure l'adresse réseau et l'adresse de diffusion.
+            // Sinon, on retourne "0" pour indiquer qu'il n'y a pas d'hôtes adressables.
             return (totalIPs > 2) ? (totalIPs - 2).ToString() : "0";
         }
 
+
         /// <summary>
-        /// Compte le nombre de bits à 0 dans le masque de sous-réseau IP fourni
+        /// Compte le nombre de bits à 0 dans un masque de sous-réseau IPv4.
         /// </summary>
-        /// <param name="mask">L'adresse IP du masque de sous-réseau</param>
-        /// <returns>Le nombre de bits à 0 dans le masque de sous-réseau</returns>
+        /// <param name="mask">L'adresse IP représentant le masque de sous-réseau.</param>
+        /// <returns>Le nombre de bits à 0 dans le masque.</returns>
         private static int CountZeroBitsInMask(IPAddress mask)
         {
+            // Convertit l'adresse IP en un tableau d'octets
             byte[] maskBytes = mask.GetAddressBytes();
+
+            // Compteur de bits à 0
             int zeroBits = 0;
 
+            // Parcourt chaque octet du masque
             foreach (byte b in maskBytes)
+            {
+                // Parcourt les bits de chaque octet du bit de poids fort au bit de poids faible
                 for (int i = 7; i >= 0; i--)
-                    // Vérifie si le bit en position i est à 0.
+                    // Vérifie si le bit en position i est à 0 en utilisant un masque de bit (1 << i) et un ET logique (&)
                     if ((b & (1 << i)) == 0)
-                        zeroBits++;
+                        zeroBits++; // Incrémente le compteur si le bit est à 0
+            }
 
-            return zeroBits;
+            return zeroBits; // Retourne le nombre total de bits à 0
         }
+
 
         /// <summary>
         /// Calcule et retourne le masque inverse (wildcard) pour le masque de sous-réseau

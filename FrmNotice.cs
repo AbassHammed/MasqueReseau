@@ -12,5 +12,16 @@
         {
             InitializeComponent();
         }
+
+        // Correspond à l'événement KeyDown, permet de récupérer les touches appuyées par l'utilisateur
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape) // Si la touche appuyée est Echap
+            {
+                Close(); // Ferme la fenêtre
+                return true; // Indique que la touche est bien traitée
+            }
+            return base.ProcessCmdKey(ref msg, keyData); // Indique que la touche n'est pas traitée
+        }
     }
 }

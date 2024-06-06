@@ -993,6 +993,7 @@
             lblNotice.TabIndex = 11;
             lblNotice.Text = "Notice";
             lblNotice.Click += pnlNotice_Click;
+            lblNotice.Cursor = Cursors.Hand;
             // 
             // picQuetion
             // 
@@ -1004,6 +1005,7 @@
             picQuetion.TabIndex = 12;
             picQuetion.TabStop = false;
             picQuetion.Click += pnlNotice_Click;
+            picQuetion.Cursor = Cursors.Hand;
             // 
             // pnlNotice
             // 
@@ -1014,6 +1016,7 @@
             pnlNotice.Size = new Size(108, 30);
             pnlNotice.TabIndex = 13;
             pnlNotice.Click += pnlNotice_Click;
+            pnlNotice.Cursor = Cursors.Hand;
             // 
             // FrmHome
             // 
@@ -1035,6 +1038,7 @@
             MaximizeBox = false;
             Name = "FrmHome";
             Text = "Calculateur de Masque Réseau IPV4";
+            KeyPreview = true;
             grpAdrIP.ResumeLayout(false);
             grpAdrIP.PerformLayout();
             grpAdrMasque.ResumeLayout(false);

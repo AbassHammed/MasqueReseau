@@ -125,9 +125,9 @@
                        ▫ Décimale: (ex: 192.168.1.10) 
                           -Les champs binaire et hexadécimal seront désactivés.
                        ▫ Binaire: (ex: 11000000.10101000.00000001.00001010) 
-                          -Les champs hexadécimal et binaire seront désactivés.
+                          -Les champs hexadécimal et décimal seront désactivés.
                        ▫ Hexadécimal: (ex: C0.A8.01.0A) 
-                          -Les champs hexadécimal et binaire seront désactivés.
+                          -Les champs décimal et binaire seront désactivés.
        → Masque de sous-réseau :
                    ▪ Vous pouvez saisir le masque en notation :
                        ▫ Décimale : (ex : 255.255.255.0)
