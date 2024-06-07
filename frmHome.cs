@@ -132,7 +132,7 @@ namespace Reseau
                 if (rdoDecmsq.Checked && !Utils.adjustMask(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4))
                     errorMessage += "Les octets doivent être entre 0 et 255, et les bits à 1 doivent être contigus.";
                 else if (rdoCidr.Checked && !Utils.adjustTextBoxValuesBaseOnLimits(0, 32, txtMsqCIDR))
-                    errorMessage += "La valeur CIDR doit être entre 0 et 32.";
+                    errorMessage += "La valeur CIDR doit être entre 8 et 32.";
 
                 // Affiche le message d'erreur spécifique (ou générique si aucun détail n'est disponible)
                 SetMessage(errorMessage, Color.Red, false);
@@ -212,7 +212,7 @@ namespace Reseau
             if (rdoDecmsq.Checked)
                 return Utils.adjustMask(txtMsqDEC1, txtMsqDEC2, txtMsqDEC3, txtMsqDEC4);
             else if (rdoCidr.Checked)
-                return Utils.adjustTextBoxValuesBaseOnLimits(0, 32, txtMsqCIDR);
+                return Utils.adjustTextBoxValuesBaseOnLimits(8, 32, txtMsqCIDR);
             else
                 return false;
         }

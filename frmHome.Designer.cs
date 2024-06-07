@@ -459,7 +459,7 @@
             txtMsqCIDR.Name = "txtMsqCIDR";
             txtMsqCIDR.Size = new Size(62, 30);
             txtMsqCIDR.TabIndex = 17;
-            txtMsqCIDR.TextChanged += textBoxMask_TextChanged;
+            txtMsqCIDR.Leave += textBoxMask_TextChanged;
             // 
             // lblAdrMsqCIDR
             // 
@@ -917,7 +917,7 @@
             // 
             lblTypeIp.AutoSize = true;
             lblTypeIp.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblTypeIp.ForeColor = Color.Black;
+            lblTypeIp.ForeColor = Color.FromArgb(0, 192, 0);
             lblTypeIp.Location = new Point(19, 276);
             lblTypeIp.Name = "lblTypeIp";
             lblTypeIp.Size = new Size(274, 20);
@@ -987,16 +987,17 @@
             // lblNotice
             // 
             lblNotice.AutoSize = true;
+            lblNotice.Cursor = Cursors.Hand;
             lblNotice.Location = new Point(15, 6);
             lblNotice.Name = "lblNotice";
             lblNotice.Size = new Size(53, 20);
             lblNotice.TabIndex = 11;
             lblNotice.Text = "Notice";
             lblNotice.Click += pnlNotice_Click;
-            lblNotice.Cursor = Cursors.Hand;
             // 
             // picQuetion
             // 
+            picQuetion.Cursor = Cursors.Hand;
             picQuetion.Image = Properties.Resources.question;
             picQuetion.Location = new Point(72, 2);
             picQuetion.Name = "picQuetion";
@@ -1005,18 +1006,17 @@
             picQuetion.TabIndex = 12;
             picQuetion.TabStop = false;
             picQuetion.Click += pnlNotice_Click;
-            picQuetion.Cursor = Cursors.Hand;
             // 
             // pnlNotice
             // 
             pnlNotice.Controls.Add(picQuetion);
             pnlNotice.Controls.Add(lblNotice);
+            pnlNotice.Cursor = Cursors.Hand;
             pnlNotice.Location = new Point(881, 540);
             pnlNotice.Name = "pnlNotice";
             pnlNotice.Size = new Size(108, 30);
             pnlNotice.TabIndex = 13;
             pnlNotice.Click += pnlNotice_Click;
-            pnlNotice.Cursor = Cursors.Hand;
             // 
             // FrmHome
             // 
@@ -1035,10 +1035,10 @@
             Controls.Add(grpAdrMasque);
             Controls.Add(grpAdrIP);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            KeyPreview = true;
             MaximizeBox = false;
             Name = "FrmHome";
             Text = "Calculateur de Masque Réseau IPV4";
-            KeyPreview = true;
             grpAdrIP.ResumeLayout(false);
             grpAdrIP.PerformLayout();
             grpAdrMasque.ResumeLayout(false);
