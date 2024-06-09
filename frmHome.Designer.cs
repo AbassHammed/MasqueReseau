@@ -105,13 +105,10 @@
             lblSession = new Label();
             lblGrp = new Label();
             lblNotice = new Label();
-            picQuetion = new PictureBox();
-            pnlNotice = new Panel();
+            bntNotice = new Button();
             grpAdrIP.SuspendLayout();
             grpAdrMasque.SuspendLayout();
             grpResults.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)picQuetion).BeginInit();
-            pnlNotice.SuspendLayout();
             SuspendLayout();
             // 
             // lblAdrIPDec
@@ -987,43 +984,37 @@
             // lblNotice
             // 
             lblNotice.AutoSize = true;
-            lblNotice.Cursor = Cursors.Hand;
-            lblNotice.Location = new Point(15, 6);
+            lblNotice.ForeColor = Color.Black;
+            lblNotice.Location = new Point(892, 547);
             lblNotice.Name = "lblNotice";
             lblNotice.Size = new Size(53, 20);
             lblNotice.TabIndex = 11;
             lblNotice.Text = "Notice";
-            lblNotice.Click += pnlNotice_Click;
             // 
-            // picQuetion
+            // bntNotice
             // 
-            picQuetion.Cursor = Cursors.Hand;
-            picQuetion.Image = Properties.Resources.question;
-            picQuetion.Location = new Point(72, 2);
-            picQuetion.Name = "picQuetion";
-            picQuetion.Size = new Size(27, 26);
-            picQuetion.SizeMode = PictureBoxSizeMode.Zoom;
-            picQuetion.TabIndex = 12;
-            picQuetion.TabStop = false;
-            picQuetion.Click += pnlNotice_Click;
-            // 
-            // pnlNotice
-            // 
-            pnlNotice.Controls.Add(picQuetion);
-            pnlNotice.Controls.Add(lblNotice);
-            pnlNotice.Cursor = Cursors.Hand;
-            pnlNotice.Location = new Point(881, 540);
-            pnlNotice.Name = "pnlNotice";
-            pnlNotice.Size = new Size(108, 30);
-            pnlNotice.TabIndex = 13;
-            pnlNotice.Click += pnlNotice_Click;
+            bntNotice.BackgroundImage = Properties.Resources.question;
+            bntNotice.BackgroundImageLayout = ImageLayout.Zoom;
+            bntNotice.Cursor = Cursors.Help;
+            bntNotice.FlatAppearance.BorderSize = 0;
+            bntNotice.FlatAppearance.MouseDownBackColor = SystemColors.Control;
+            bntNotice.FlatAppearance.MouseOverBackColor = SystemColors.Control;
+            bntNotice.FlatStyle = FlatStyle.Flat;
+            bntNotice.Location = new Point(940, 544);
+            bntNotice.Name = "bntNotice";
+            bntNotice.Size = new Size(31, 22);
+            bntNotice.TabIndex = 13;
+            bntNotice.TextImageRelation = TextImageRelation.ImageAboveText;
+            bntNotice.UseVisualStyleBackColor = true;
+            bntNotice.Click += bntNotice_Click;
             // 
             // FrmHome
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1001, 713);
-            Controls.Add(pnlNotice);
+            Controls.Add(bntNotice);
+            Controls.Add(lblNotice);
             Controls.Add(lblGrp);
             Controls.Add(lblSession);
             Controls.Add(lblSch);
@@ -1045,9 +1036,6 @@
             grpAdrMasque.PerformLayout();
             grpResults.ResumeLayout(false);
             grpResults.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)picQuetion).EndInit();
-            pnlNotice.ResumeLayout(false);
-            pnlNotice.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1431,7 +1419,6 @@
         /// Defines the lblNotice
         /// </summary>
         private Label lblNotice;
-        private PictureBox picQuetion;
-        private Panel pnlNotice;
+        private Button bntNotice;
     }
 }

@@ -484,9 +484,9 @@ namespace Reseau
         }
 
         /// <summary>
-        /// Gère le clic sur le panneau d'affichage de la notice.
+        /// Gère le clic sur le button de la notice.
         /// </summary>
-        private void pnlNotice_Click(object sender, EventArgs e)
+        private void bntNotice_Click(object sender, EventArgs e)
         {
             // Affiche la fenêtre de notice (FrmNotice) en tant que boîte de dialogue modale
             frmNotice.ShowDialog(this);
