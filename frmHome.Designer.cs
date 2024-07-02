@@ -611,7 +611,7 @@
             // txtMsqDEC2
             // 
             txtMsqDEC2.BorderStyle = BorderStyle.FixedSingle;
-            txtMsqDEC2.Location = new Point(225, 78);
+            txtMsqDEC2.Location = new Point(225, 82);
             txtMsqDEC2.MaxLength = 3;
             txtMsqDEC2.Name = "txtMsqDEC2";
             txtMsqDEC2.Size = new Size(89, 30);
